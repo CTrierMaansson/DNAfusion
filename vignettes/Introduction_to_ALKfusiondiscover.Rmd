@@ -1,0 +1,39 @@
+---
+title: "Introduction to ALKfusiondiscover"
+output: rmarkdown::html_vignette
+date: '2022-07-13'
+vignette: >
+  %\VignetteIndexEntry{Introduction to ALKfusiondiscover}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ALKfusiondiscover)
+```
+
+## Introduction
+
+This is an introduction to the **ALKfusiondiscover** package which can be used to evaluate whether EML4-ALK is present in blood plasma. 
+
+This package was created in order to increase the sensitivity of EML4-ALK detection from commercially available NGS products such the AVENIO (Roche) pipeline. 
+
+Paired-end sequencing of cfDNA generated BAM files can be used as input to
+discover EML4-ALK variants. This package was developed using position deduplicated BAM files generated with the AVENIO Oncology Analysis Software. These files are made using the AVENIO ctDNA surveillance kit and Illumina Nextseq 500 sequencing. This is a targeted hybridization NGS approach and includes ALK-specific but not EML4-specific probes.
+
+The package includes six functions.
+
+The output of first function, `EML4_ALK_detection()`, is used to determine whether EML4-ALK is detected and serves as input for the next four exploratory functions characterizing the EML4-ALK variant. The last function `EML4_ALK_analysis()` combines the output of the exploratory functions. 
+
+This package includes data representing sequencing of the EML4-ALK positive cell line XXX and the EML4-ALK negative cell line, HCC827. BAM files were generated using the AVENIO pipeline and Nextseq 500 sequencing. 
+
+## EML4_ALK_detection
+
+
