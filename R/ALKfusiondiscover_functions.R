@@ -17,7 +17,7 @@ EML4_ALK_detection <- function(file, genome = "hg38", mates = 2){
   }
   what <- c("mpos", "pos", "seq","cigar")
   if (genome =="hg38"){
-    which <- GenomicRanges::GRanges(seqnames="chr2", IRanges(start = 42169353, end = 42332548))
+    which <- GenomicRanges::GRanges(seqnames="chr2", GenomicRanges::IRanges(start = 42169353, end = 42332548))
     param <- Rsamtools::ScanBamParam(which = which, what = what)
     bam <- Rsamtools::scanBam(file = file, param = param)
     reads <- data.frame(sequences = bam$`chr2:42169353-42332548`$seq,
@@ -27,7 +27,7 @@ EML4_ALK_detection <- function(file, genome = "hg38", mates = 2){
     reads <- reads %>% dplyr::filter(mate < 29921586 & mate > 29192774)
   }
   else{
-    which <- GenomicRanges::GRanges(seqnames="chr2", IRanges(start = 42396490, end = 42559688))
+    which <- GenomicRanges::GRanges(seqnames="chr2", GenomicRanges::IRanges(start = 42396490, end = 42559688))
     param <- Rsamtools::ScanBamParam(which = which, what = what)
     bam <- Rsamtools::scanBam(file = file, param = param)
     reads <- data.frame(sequences = bam$`chr2:42396490-42559688`$seq,
