@@ -1,0 +1,7 @@
+{
+    "installOptions": {
+        "installFromRepository": false,
+        "libraryPath": "C:/Users/Christoffer/AppData/Local/R/win-library/4.2",
+        "installDependencies": true
+    }
+}

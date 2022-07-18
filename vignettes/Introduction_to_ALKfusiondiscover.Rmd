@@ -1,7 +1,7 @@
 ---
 title: "Introduction to ALKfusiondiscover"
 output: rmarkdown::html_vignette
-date: '2022-07-13'
+date: '2022-07-18'
 vignette: >
   %\VignetteIndexEntry{Introduction to ALKfusiondiscover}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,9 +15,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(ALKfusiondiscover)
-```
 
 ## Introduction
 
@@ -33,6 +30,19 @@ The package includes six functions.
 The output of first function, `EML4_ALK_detection()`, is used to determine whether EML4-ALK is detected and serves as input for the next four exploratory functions characterizing the EML4-ALK variant. The last function `EML4_ALK_analysis()` combines the output of the exploratory functions. 
 
 This package includes data representing sequencing of the EML4-ALK positive cell line XXX and the EML4-ALK negative cell line, HCC827. BAM files were generated using the AVENIO pipeline and Nextseq 500 sequencing. 
+
+## Installation
+
+Use **devtools** to install **ALKfusiondiscover**.
+
+```{r setup, message=FALSE}
+if (!require(devtools)) install.packages('devtools')
+library(devtools)
+
+install_github("CTrierMaansson/ALKfusiondiscover")
+library(ALKfusiondiscover)
+
+```
 
 ## EML4_ALK_detection
 
