@@ -1,6 +1,7 @@
 ---
 title: "Introduction to ALKfusiondiscover"
-output: rmarkdown::html_vignette
+output: 
+  pdf_document: default
 date: '2022-07-18'
 vignette: >
   %\VignetteIndexEntry{Introduction to ALKfusiondiscover}
@@ -175,7 +176,7 @@ $$\\[0.1in]$$
 **`file`**
 
   The name of the file which the data are to be read from.
-$$\\[0.1in]$$'
+$$\\[0.1in]$$
 
 **`reads`**
 
