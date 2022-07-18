@@ -22,4 +22,5 @@ Imports:
     bamsignals,
     dplyr,
     GenomicRanges,
+    IRanges,
     Rsamtools
