@@ -20,7 +20,8 @@ Suggests:
 VignetteBuilder: knitr
 Imports: 
     bamsignals,
-    dplyr,
     GenomicRanges,
     IRanges,
     Rsamtools
+Depends:
+  dplyr
