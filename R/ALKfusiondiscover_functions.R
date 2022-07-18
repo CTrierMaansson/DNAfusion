@@ -17,32 +17,32 @@ EML4_ALK_detection <- function(file, genome = "hg38", mates = 2){
   }
   what <- c("mpos", "pos", "seq","cigar")
   if (genome =="hg38"){
-    which <- GRanges(seqnames="chr2", IRanges(start = 42169353, end = 42332548))
-    param <- ScanBamParam(which = which, what = what)
-    bam <- scanBam(file = file, param = param)
+    which <- GenomicRanges::GRanges(seqnames="chr2", IRanges(start = 42169353, end = 42332548))
+    param <- Rsamtools::ScanBamParam(which = which, what = what)
+    bam <- Rsamtools::scanBam(file = file, param = param)
     reads <- data.frame(sequences = bam$`chr2:42169353-42332548`$seq,
                         mate = bam$`chr2:42169353-42332548`$mpos,
                         position = bam$`chr2:42169353-42332548`$pos,
                         cigar = bam$`chr2:42169353-42332548`$cigar)
-    reads <- reads %>% filter(mate < 29921586 & mate > 29192774)
+    reads <- reads %>% dplyr::filter(mate < 29921586 & mate > 29192774)
   }
   else{
-    which <- GRanges(seqnames="chr2", IRanges(start = 42396490, end = 42559688))
-    param <- ScanBamParam(which = which, what = what)
-    bam <- scanBam(file = file, param = param)
+    which <- GenomicRanges::GRanges(seqnames="chr2", IRanges(start = 42396490, end = 42559688))
+    param <- Rsamtools::ScanBamParam(which = which, what = what)
+    bam <- Rsamtools::scanBam(file = file, param = param)
     reads <- data.frame(sequences = bam$`chr2:42396490-42559688`$seq,
                         mate = bam$`chr2:42396490-42559688`$mpos,
                         position = bam$`chr2:42396490-42559688`$pos,
                         cigar = bam$`chr2:42396490-42559688`$cigar)
-    reads <- reads %>% filter(mate < 30144477 & mate > 29415640)
+    reads <- reads %>% dplyr::filter(mate < 30144477 & mate > 29415640)
   }
   if (length(reads$mate)<mates){
     res <- "No EML4-ALK was detected"
     return(res)
   }
-  clip_reads <- reads %>% filter(cigar != "96M")
-  clip_reads <- clip_reads %>% filter(!grepl("D",cigar))
-  clip_reads <- clip_reads %>% filter(!grepl("I",cigar))
+  clip_reads <- reads %>% dplyr::filter(cigar != "96M")
+  clip_reads <- clip_reads %>% dplyr::filter(!grepl("D",cigar))
+  clip_reads <- clip_reads %>% dplyr::filter(!grepl("I",cigar))
   if (length(clip_reads$mate)<mates){
     res <- "No EML4-ALK was detected"
     return(res)

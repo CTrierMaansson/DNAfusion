@@ -29,7 +29,7 @@ The package includes six functions.
 
 The output of first function, `EML4_ALK_detection()`, is used to determine whether EML4-ALK is detected and serves as input for the next four exploratory functions characterizing the EML4-ALK variant. The last function `EML4_ALK_analysis()` combines the output of the exploratory functions. 
 
-This package includes data representing sequencing of the EML4-ALK positive cell line XXX and the EML4-ALK negative cell line, HCC827. BAM files were generated using the AVENIO pipeline and Nextseq 500 sequencing. 
+To serve as examples, this package includes BAM files representing the EML4-ALK positive cell line H3122 and the EML4-ALK negative cell line, HCC827.  
 
 ## Installation
 
@@ -41,6 +41,15 @@ library(devtools)
 
 install_github("CTrierMaansson/ALKfusiondiscover")
 library(ALKfusiondiscover)
+
+```
+
+## Package data
+
+BAM files from the cell lines, H3122 and HCC827, are included in the package and can be used as examples to explore the functions. 
+
+```{r setup, message=FALSE}
+
 
 ```
 
