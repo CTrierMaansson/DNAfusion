@@ -48,8 +48,9 @@ library(ALKfusiondiscover)
 
 BAM files from the cell lines, H3122 and HCC827, are included in the package and can be used as examples to explore the functions. 
 
-```{r setup, message=FALSE}
-
+```{r examples}
+H3122_bam <- system.file("extdata", "H3122_EML4.bam", package = "ALKfusiondiscover")
+HCC827_bam <-  system.file("extdata", "HCC827_EML4.bam", package = "ALKfusiondiscover")
 
 ```
 

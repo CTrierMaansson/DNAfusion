@@ -88,7 +88,7 @@ EML4_sequence <- function(reads, basepairs = 20){
   }
   index2 <- sapply(index1,FUN = fun)
   reads$indeces <- index2
-  reads <- reads %>% filter(!is.na(indeces))
+  reads <- reads %>% dplyr::filter(!is.na(indeces))
   EML4_fun <- function(inp){
     return(substring(inp$sequences,(inp$indeces-(basepairs-1)),inp$indeces))
   }
@@ -136,7 +136,7 @@ ALK_sequence <- function(reads, basepairs = 20){
   }
   index2 <- sapply(index1,FUN = fun)
   reads$indeces <- index2
-  reads <- reads %>% filter(!is.na(indeces))
+  reads <- reads %>% dplyr::filter(!is.na(indeces))
   ALK_fun <- function(inp){
     return(substring(inp$sequences,(inp$indeces+1),(inp$indeces+basepairs)))
   }
@@ -183,7 +183,7 @@ break_position <- function(reads){
   }
   index2 <- sapply(index1,FUN = fun)
   reads$indeces <- index2
-  reads <- reads %>% filter(!is.na(indeces))
+  reads <- reads %>% dplyr::filter(!is.na(indeces))
   reads$indeces <- as.numeric(reads$indeces)
   break_pos <- reads$position + reads$indeces-1
   break_pos_tab <- table(break_pos)
@@ -229,13 +229,13 @@ break_position_depth <- function(file, reads){
   }
   index2 <- sapply(index1,FUN = fun)
   reads$indeces <- index2
-  reads <- reads %>% filter(!is.na(indeces))
+  reads <- reads %>% dplyr::filter(!is.na(indeces))
   reads$indeces <- as.numeric(reads$indeces)
   break_pos <- reads$position + reads$indeces-1
   break_pos_tab <- table(break_pos)
   stop_pos <- as.numeric(names(which.max(break_pos_tab)))
-  depth <- bamCoverage(file,GRanges(
-    seqnames = "chr2",IRanges(start=(stop_pos),end=stop_pos+1)),
+  depth <- bamsignals::bamCoverage(file,GRanges(
+    seqnames = "chr2",IRanges::IRanges(start=(stop_pos),end=stop_pos+1)),
     mapqual=0,verbose=F)
   return(max(depth[1]))
 }

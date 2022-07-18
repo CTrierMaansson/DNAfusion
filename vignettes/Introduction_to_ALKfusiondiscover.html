@@ -357,10 +357,9 @@ used to determine whether EML4-ALK is detected and serves as input for
 the next four exploratory functions characterizing the EML4-ALK variant.
 The last function <code>EML4_ALK_analysis()</code> combines the output
 of the exploratory functions.</p>
-<p>This package includes data representing sequencing of the EML4-ALK
-positive cell line XXX and the EML4-ALK negative cell line, HCC827. BAM
-files were generated using the AVENIO pipeline and Nextseq 500
-sequencing.</p>
+<p>To serve as examples, this package includes BAM files representing
+the EML4-ALK positive cell line H3122 and the EML4-ALK negative cell
+line, HCC827.</p>
 </div>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
@@ -371,6 +370,13 @@ sequencing.</p>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;CTrierMaansson/ALKfusiondiscover&quot;</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ALKfusiondiscover)</span></code></pre></div>
+</div>
+<div id="package-data" class="section level2">
+<h2>Package data</h2>
+<p>BAM files from the cell lines, H3122 and HCC827, are included in the
+package and can be used as examples to explore the functions.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>H3122_bam <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;H3122_EML4.bam&quot;</span>, <span class="at">package =</span> <span class="st">&quot;ALKfusiondiscover&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>HCC827_bam <span class="ot">&lt;-</span>  <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;HCC827_EML4.bam&quot;</span>, <span class="at">package =</span> <span class="st">&quot;ALKfusiondiscover&quot;</span>)</span></code></pre></div>
 </div>
 <div id="eml4_alk_detection" class="section level2">
 <h2>EML4_ALK_detection</h2>
