@@ -234,9 +234,9 @@ break_position_depth <- function(file, reads){
   break_pos <- reads$position + reads$indeces-1
   break_pos_tab <- table(break_pos)
   stop_pos <- as.numeric(names(which.max(break_pos_tab)))
-  depth <- bamsignals::bamCoverage(file,GenomicRanges::GRanges(
-    seqnames = "chr2",IRanges::IRanges(start=(stop_pos),end=stop_pos+1)),
-    mapqual=0,verbose=F)
+  depth <- bamsignals::bamCoverage(file,
+                                   GenomicRanges::GRanges(seqnames = "chr2",IRanges::IRanges(start=(stop_pos),end=stop_pos+1)),
+                                   mapqual=0,verbose=F)
   return(max(depth[1]))
 }
 
