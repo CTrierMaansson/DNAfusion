@@ -379,7 +379,228 @@ package and can be used as examples to explore the functions.</p>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>HCC827_bam <span class="ot">&lt;-</span>  <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;HCC827_EML4.bam&quot;</span>, <span class="at">package =</span> <span class="st">&quot;ALKfusiondiscover&quot;</span>)</span></code></pre></div>
 </div>
 <div id="eml4_alk_detection" class="section level2">
-<h2>EML4_ALK_detection</h2>
+<h2><code>EML4_ALK_detection()</code></h2>
+<p>This function looks for EML4-ALK mate pair reads in the BAM file.</p>
+<p><strong>Input:</strong> <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>file</code></strong></p>
+<p>The name of the file which the data are to be read from. <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>genome</code></strong></p>
+<p><code>character</code> representing the reference genome. Can be
+either “hg38” or “hg19”. Default = “hg38”. <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>mates</code></strong></p>
+<p><code>interger</code>, the minimum number EML4-ALK mate pairs needed
+to be detected in order to call a variant. Default = 2. <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong>Output:</strong></p>
+<p>If EML4-ALK is detected a <code>data.frame</code> with soft-clipped
+reads representing EML4-ALK is returned. Otherwise “No EML4-ALK was
+detected” is returned.</p>
+<p><strong>Examples:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                          sequences</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       mate position cigar</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 29223691 42299657 94M2S</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 29223375 42299657 94M2S</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 29223479 42299657 94M2S</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 29223686 42299657 94M2S</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 29223636 42299657 94M2S</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 29223687 42299657 94M2S</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+</div>
+<div id="eml4_sequence" class="section level2">
+<h2><code>EML4_sequence()</code></h2>
+<p>This function identifies the basepairs leading up to the EML4
+breakpoint.</p>
+<p><strong>Input:</strong> <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>reads</code></strong></p>
+<p><code>data.frame</code> returned by EML4_ALK_detection(). <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>basepairs</code></strong></p>
+<p><code>integer</code>, number of basepairs identified from the
+EML4-ALK fusion. Default = 20. <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong>Output:</strong></p>
+<p>If EML4-ALK is detected, returns a <code>table</code> of identified
+EML4 basepairs with the number of corresponding reads for each sequence.
+Otherwise “No EML4-ALK was detected” is returned.</p>
+<p><strong>Examples:</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">EML4_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>), <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EML4_seq</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CCAGGCTGGAGTGCAGTGGT GGAGTGCAGTGGTGTGATTT TCAGGCTGGAGTGCAGTGGT </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  201                    1                    1</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">EML4_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>), <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+</div>
+<div id="alk_sequence" class="section level2">
+<h2><code>ALK_sequence()</code></h2>
+<p>This function identifies the basepairs following the ALK
+breakpoint.</p>
+<p><strong>Input:</strong> <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>reads</code></strong></p>
+<p><code>data.frame</code> returned by EML4_ALK_detection(). <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>basepairs</code></strong></p>
+<p><code>integer</code>, number of basepairs identified from the
+EML4-ALK fusion. Default = 20. <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong>Output:</strong></p>
+<p>If EML4-ALK is detected, returns a <code>table</code> of identified
+ALK basepairs with the number of corresponding reads for each sequence.
+Otherwise “No EML4-ALK was detected” is returned.</p>
+<p><strong>Examples:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ALK_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>), <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ALK_seq</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CAGAATTTTAGCTTTGCAAT      CGGATTTTTAGCTTT CGGATTTTTAGCTTTTCATT </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CGGAATTTTAGCTTTGCATT                   CT                  CTG </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    8                    3 </span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 CTGA                CTGAT             CTGATTTT </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   11                   16                    5 </span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            CTGATTTTT           CTGATTTTTA          CTGATTTTTAG </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    6                    3                    3 </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGATTTGCATT         CTGATTTTTAGC        CTGATTTTTAGCT </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                   14                   10 </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       CTGATTTTTAGCTT      CTGATTTTTAGCTTT     CTGATTTTTAGCTTTG </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   10                    3                    4 </span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    CTGATTTTTAGCTTTGC   CTGATTTTTAGCTTTGCA  CTGATTTTTAGCTTTGCAT </span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    7                    8                    1 </span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTGCATT CTGATTTTTAGCTTTGCAAT     CTGATTTTTAGCTTTT </span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   71                    1                    1 </span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTTCATA          CTGATTTTTAT     CTGATTTTTATCTTTG </span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTATCTTTGCATT CTGATTTTTATCTTTTGATT CTGTGTTTTAGATTTGCATT </span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    2                    1                    1 </span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGTTTTTTATCTTTGCAAT                CTGAA CTTATTTTTATCTTTGCATT </span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    1 </span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            TTAGCTTTG </span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ALK_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>), <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+</div>
+<div id="break_position" class="section level2">
+<h2><code>break_position()</code></h2>
+<p>This function identifies the genomic position in EML4 where the
+breakpoint has happened.</p>
+<p><strong>Input:</strong> <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>reads</code></strong></p>
+<p><code>data.frame</code> returned by EML4_ALK_detection(). <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong>Output:</strong></p>
+<p>If EML4-ALK is detected, returns a <code>table</code> of genomic
+positions with the number of corresponding reads for each sequence.
+Otherwise “No EML4-ALK was detected” is returned.</p>
+<p><strong>Examples:</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; break_pos</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42299750 42299757 </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      202        1</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+</div>
+<div id="break_position_depth" class="section level2">
+<h2><code>break_position_depth()</code></h2>
+<p>This function identifies the read depth at the basepair before the
+breakpoint in EML4.</p>
+<p><strong>Input:</strong> <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>file</code></strong></p>
+<p>The name of the file which the data are to be read from. <span class="math display">\[\\[0.1in]\]</span>’</p>
+<p><strong><code>reads</code></strong></p>
+<p><code>data.frame</code> returned by EML4_ALK_detection(). <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong>Output:</strong></p>
+<p>If EML4-ALK is detected a single <code>integer</code> corresponding
+to the read depth at the breakpoint is returned. Otherwise “No EML4-ALK
+was detected” is returned</p>
+<p><strong>Examples:</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position_depth</span>(H3122_bam, <span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 251</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position_depth</span>(HCC827_bam, <span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+</div>
+<div id="eml4_alk_analysis" class="section level2">
+<h2><code>EML4_ALK_analysis()</code></h2>
+<p>This functions collects the results from the other functions of the
+package.</p>
+<p><strong>Input:</strong> <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>file</code></strong></p>
+<p>The name of the file which the data are to be read from. <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>genome</code></strong></p>
+<p><code>character</code> representing the reference genome. Can be
+either “hg38” or “hg19”. Default = “hg38”. <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>mates</code></strong></p>
+<p><code>interger</code>, the minimum number EML4-ALK mate pairs needed
+to be detected in order to call a variant. Default = 2. <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong><code>basepairs</code></strong></p>
+<p><code>integer</code>, number of basepairs identified from the
+EML4-ALK fusion. Default = 20. <span class="math display">\[\\[0.1in]\]</span></p>
+<p><strong>Output:</strong></p>
+<p>A <code>list</code> object with clipped_reads corresponding to
+<code>EML4_ALK_detection()</code>, last_EML4 corresponding to
+<code>EML4_sequence()</code>, first_ALK corresponding to
+<code>ALK_sequence()</code>, breakpoint corresponding to
+<code>break_position()</code>, and read_depth corresponding to
+<code>break_position_depth()</code>.</p>
+<p><strong>Examples:</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>H3122_results <span class="ot">&lt;-</span> <span class="fu">EML4_ALK_analysis</span>(<span class="at">file =</span> H3122_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>, <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>HCC827_results <span class="ot">&lt;-</span> <span class="fu">EML4_ALK_analysis</span>(<span class="at">file =</span> HCC827_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>, <span class="at">basepairs =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(H3122_results<span class="sc">$</span>clipped_reads)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                          sequences</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       mate position cigar</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 29223691 42299657 94M2S</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 29223375 42299657 94M2S</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 29223479 42299657 94M2S</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 29223686 42299657 94M2S</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 29223636 42299657 94M2S</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 29223687 42299657 94M2S</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>last_EML4</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EML4_seq</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CCAGGCTGGAGTGCAGTGGT GGAGTGCAGTGGTGTGATTT TCAGGCTGGAGTGCAGTGGT </span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  201                    1                    1</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>first_ALK</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ALK_seq</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CAGAATTTTAGCTTTGCAAT      CGGATTTTTAGCTTT CGGATTTTTAGCTTTTCATT </span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CGGAATTTTAGCTTTGCATT                   CT                  CTG </span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    8                    3 </span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 CTGA                CTGAT             CTGATTTT </span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   11                   16                    5 </span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            CTGATTTTT           CTGATTTTTA          CTGATTTTTAG </span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    6                    3                    3 </span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGATTTGCATT         CTGATTTTTAGC        CTGATTTTTAGCT </span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                   14                   10 </span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       CTGATTTTTAGCTT      CTGATTTTTAGCTTT     CTGATTTTTAGCTTTG </span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   10                    3                    4 </span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    CTGATTTTTAGCTTTGC   CTGATTTTTAGCTTTGCA  CTGATTTTTAGCTTTGCAT </span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    7                    8                    1 </span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTGCATT CTGATTTTTAGCTTTGCAAT     CTGATTTTTAGCTTTT </span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   71                    1                    1 </span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTTCATA          CTGATTTTTAT     CTGATTTTTATCTTTG </span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTATCTTTGCATT CTGATTTTTATCTTTTGATT CTGTGTTTTAGATTTGCATT </span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    2                    1                    1 </span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGTTTTTTATCTTTGCAAT                CTGAA CTTATTTTTATCTTTGCATT </span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    1 </span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            TTAGCTTTG </span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>breakpoint</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; break_pos</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42299750 42299757 </span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      202        1</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>read_depth</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 251</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>HCC827_results</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
 </div>
 
 
