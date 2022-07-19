@@ -1,11 +1,10 @@
-# ALKfusiondiscover
-DESCRIPTION
 Package: ALKfusiondiscover
 Title: Identification of EML4-ALK variants using paired-end sequencing
 Version: 0.0.1.1
 Authors@R: 
-    person("Christoffer Trier", "Maansson", , "ctm@clin.au.dk", role = c("aut", "cre"),
+    person("Christoffer Trier", "Maansson", "ctm@clin.au.dk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3071-3437"))
+           person("Emma Roger Anderser", "201907412@post.au.dk", role = "cre")
 Description: Paired-end sequencing of cfDNA generated BAM files can be used as input to
   discover EML4-ALK variants. This package was developed using position deduplicated BAM
   files generated with the AVENIO Oncology Analysis Software. These files are made using
@@ -16,9 +15,18 @@ License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
-Import: GenomicRanges,
-        Rsamtools,
-        dplyr,
-        bamsignals
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Imports: 
+    bamsignals,
+    GenomicRanges,
+    IRanges,
+    Rsamtools
+Depends:
+  dplyr
         
+
 See vignettes for details
+

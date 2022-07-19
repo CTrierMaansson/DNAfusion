@@ -1,12 +1,23 @@
 ---
-title: "Introduction to ALKfusiondiscover"
+title: "ALKfusiondiscover\n \\vspace{0.5in}"
+subtitle: "https://github.com/CTrierMaansson/ALKfusiondiscover\n \\vspace{0.3in}"
 output: 
-  pdf_document: default
-date: '2022-07-18'
+  html_document:
+    toc: true 
+    toc_depth: 3
+    number_sections: true
+    highlight: haddock
+date: "`r format(Sys.time(), '%d %b %Y')`"
+author: 
+- Christoffer Trier Maansson
+- Emma Roger Andersen
+abstract: | 
+  Circulating tumor DNA (ctDNA) containing somatic mutations can be found in blood plasma. 
+  This includes DNA fusions, such as the EML4-ALK, which can be an oncogenic driver in          non-small cell lung cancer.This is an introduction to the **ALKfusiondiscover** package for   R, which can be used to evaluate whether EML4-ALK is present in blood plasma. 
 vignette: >
   %\VignetteIndexEntry{Introduction to ALKfusiondiscover}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}
@@ -15,11 +26,8 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-
-
-## Introduction
-
-This is an introduction to the **ALKfusiondiscover** package which can be used to evaluate whether EML4-ALK is present in blood plasma. 
+\newpage
+# Introduction
 
 This package was created in order to increase the sensitivity of EML4-ALK detection from commercially available NGS products such the AVENIO (Roche) pipeline. 
 
@@ -32,7 +40,7 @@ The output of first function, `EML4_ALK_detection()`, is used to determine wheth
 
 To serve as examples, this package includes BAM files representing the EML4-ALK positive cell line H3122 and the EML4-ALK negative cell line, HCC827.  
 
-## Installation
+# Installation
 
 Use **devtools** to install **ALKfusiondiscover**.
 
@@ -45,7 +53,7 @@ library(ALKfusiondiscover)
 
 ```
 
-## Package data
+# Package data
 
 BAM files from the cell lines, H3122 and HCC827, are included in the package and can be used as examples to explore the functions. 
 
@@ -54,6 +62,8 @@ H3122_bam <- system.file("extdata", "H3122_EML4.bam", package = "ALKfusiondiscov
 HCC827_bam <-  system.file("extdata", "HCC827_EML4.bam", package = "ALKfusiondiscover")
 
 ```
+\newpage
+# Functions
 
 ## `EML4_ALK_detection()`
 This function looks for EML4-ALK mate pair reads in the BAM file.
@@ -81,9 +91,13 @@ $$\\[0.1in]$$
 If EML4-ALK is detected a `data.frame` with soft-clipped reads representing EML4-ALK is returned. Otherwise "No EML4-ALK was detected" is returned.
 
 **Examples:**
-
-```{r EML4_ALK_detection}
+\small
+```{r EML4_ALK_detection2}
 head(EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2))
+
+```
+\normalsize
+```{r EML4_ALK_detection3}
 EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2)
 
 ```
@@ -232,8 +246,13 @@ H3122_results <- EML4_ALK_analysis(file = H3122_bam, genome = "hg38", mates = 2,
 HCC827_results <- EML4_ALK_analysis(file = HCC827_bam, genome = "hg38", mates = 2, basepairs = 20)
 
 ```
-```{r EML4_ALK_analysis_output}
+\small
+```{r EML4_ALK_analysis_output1}
 head(H3122_results$clipped_reads)
+
+```
+\normalsize
+```{r EML4_ALK_analysis_output2}
 
 H3122_results$last_EML4
 
