@@ -484,7 +484,7 @@ Functions</a>
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
 <p>This package was created in order to increase the sensitivity of
-EML4-ALK detection from commercially available NGS products such the
+EML4-ALK detection from commercially available NGS products such as the
 AVENIO (Roche) pipeline.</p>
 <p>Paired-end sequencing of cfDNA generated BAM files can be used as
 input to discover EML4-ALK variants. This package was developed using
@@ -494,11 +494,11 @@ surveillance kit and Illumina Nextseq 500 sequencing. This is a targeted
 hybridization NGS approach and includes ALK-specific but not
 EML4-specific probes.</p>
 <p>The package includes six functions.</p>
-<p>The output of first function, <code>EML4_ALK_detection()</code>, is
-used to determine whether EML4-ALK is detected and serves as input for
-the next four exploratory functions characterizing the EML4-ALK variant.
-The last function <code>EML4_ALK_analysis()</code> combines the output
-of the exploratory functions.</p>
+<p>The output of the first function, <code>EML4_ALK_detection()</code>,
+is used to determine whether EML4-ALK is detected and serves as input
+for the next four exploratory functions characterizing the EML4-ALK
+variant. The last function <code>EML4_ALK_analysis()</code> combines the
+output of the exploratory functions.</p>
 <p>To serve as examples, this package includes BAM files representing
 the EML4-ALK positive cell line H3122 and the EML4-ALK negative cell
 line, HCC827.</p>
@@ -531,13 +531,13 @@ package and can be used as examples to explore the functions.</p>
 <p><strong><code>file</code></strong></p>
 <p>The name of the file which the data are to be read from. <span class="math display">\[\\[0.1in]\]</span></p>
 <p><strong><code>genome</code></strong></p>
-<p><code>character</code> representing the reference genome. Can be
-either “hg38” or “hg19”. Default = “hg38”. <span class="math display">\[\\[0.1in]\]</span></p>
+<p><code>character</code> representing the reference genome. Can either
+be “hg38” or “hg19”. Default = “hg38”. <span class="math display">\[\\[0.1in]\]</span></p>
 <p><strong><code>mates</code></strong></p>
 <p><code>interger</code>, the minimum number EML4-ALK mate pairs needed
 to be detected in order to call a variant. Default = 2. <span class="math display">\[\\[0.1in]\]</span></p>
 <p><strong>Output:</strong></p>
-<p>If EML4-ALK is detected a <code>data.frame</code> with soft-clipped
+<p>If EML4-ALK is detected, a <code>data.frame</code> with soft-clipped
 reads representing EML4-ALK is returned. Otherwise “No EML4-ALK was
 detected” is returned.</p>
 <p><strong>Examples:</strong> </p>
@@ -571,9 +571,9 @@ breakpoint.</p>
 <p><code>integer</code>, number of basepairs identified from the
 EML4-ALK fusion. Default = 20. <span class="math display">\[\\[0.1in]\]</span></p>
 <p><strong>Output:</strong></p>
-<p>If EML4-ALK is detected, returns a <code>table</code> of identified
-EML4 basepairs with the number of corresponding reads for each sequence.
-Otherwise “No EML4-ALK was detected” is returned.</p>
+<p>If EML4-ALK is detected, a <code>table</code> of identified EML4
+basepairs is returned, with the number of corresponding reads for each
+sequence. Otherwise “No EML4-ALK was detected” is returned.</p>
 <p><strong>Examples:</strong></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">EML4_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>), <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EML4_seq</span></span>
@@ -594,9 +594,9 @@ breakpoint.</p>
 <p><code>integer</code>, number of basepairs identified from the
 EML4-ALK fusion. Default = 20. <span class="math display">\[\\[0.1in]\]</span></p>
 <p><strong>Output:</strong></p>
-<p>If EML4-ALK is detected, returns a <code>table</code> of identified
-ALK basepairs with the number of corresponding reads for each sequence.
-Otherwise “No EML4-ALK was detected” is returned.</p>
+<p>If EML4-ALK is detected, a <code>table</code> of identified ALK
+basepairs is returned, with the number of corresponding reads for each
+sequence. Otherwise “No EML4-ALK was detected” is returned.</p>
 <p><strong>Examples:</strong></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ALK_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>), <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ALK_seq</span></span>
@@ -636,8 +636,8 @@ breakpoint has happened.</p>
 <p><strong><code>reads</code></strong></p>
 <p><code>data.frame</code> returned by EML4_ALK_detection(). <span class="math display">\[\\[0.1in]\]</span></p>
 <p><strong>Output:</strong></p>
-<p>If EML4-ALK is detected, returns a <code>table</code> of genomic
-positions with the number of corresponding reads for each sequence.
+<p>If EML4-ALK is detected, a <code>table</code> of genomic positions is
+returned with the number of corresponding reads for each sequence.
 Otherwise “No EML4-ALK was detected” is returned.</p>
 <p><strong>Examples:</strong></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">mates =</span> <span class="dv">2</span>))</span>

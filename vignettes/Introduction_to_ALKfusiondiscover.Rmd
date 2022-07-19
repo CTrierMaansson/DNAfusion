@@ -1,23 +1,27 @@
 ---
-title: "ALKfusiondiscover\n \\vspace{0.5in}"
-subtitle: "https://github.com/CTrierMaansson/ALKfusiondiscover\n \\vspace{0.3in}"
-output: 
-  html_document:
-    toc: true 
-    toc_depth: 3
-    number_sections: true
-    highlight: haddock
-date: "`r format(Sys.time(), '%d %b %Y')`"
-author: 
+title: |-
+  ALKfusiondiscover
+   \vspace{0.5in}
+author:
 - Christoffer Trier Maansson
 - Emma Roger Andersen
-abstract: | 
-  Circulating tumor DNA (ctDNA) containing somatic mutations can be found in blood plasma. 
-  This includes DNA fusions, such as the EML4-ALK, which can be an oncogenic driver in          non-small cell lung cancer.This is an introduction to the **ALKfusiondiscover** package for   R, which can be used to evaluate whether EML4-ALK is present in blood plasma. 
-vignette: >
-  %\VignetteIndexEntry{Introduction to ALKfusiondiscover}
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}
+date: "`r format(Sys.time(), '%d %b %Y')`"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    number_sections: yes
+    highlight: haddock
+subtitle: |-
+  https://github.com/CTrierMaansson/ALKfusiondiscover
+   \vspace{0.3in}
+abstract: "Circulating tumor DNA (ctDNA) containing somatic mutations can be found
+  in blood plasma. \nThis includes DNA fusions, such as the EML4-ALK, which can be
+  an oncogenic driver in          non-small cell lung cancer.This is an introduction
+  to the **ALKfusiondiscover** package for   R, which can be used to evaluate whether
+  EML4-ALK is present in blood plasma. \n"
+vignette: |
+  %\VignetteIndexEntry{Introduction to ALKfusiondiscover} %\VignetteEncoding{UTF-8} %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}
@@ -29,14 +33,14 @@ knitr::opts_chunk$set(
 \newpage
 # Introduction
 
-This package was created in order to increase the sensitivity of EML4-ALK detection from commercially available NGS products such the AVENIO (Roche) pipeline. 
+This package was created in order to increase the sensitivity of EML4-ALK detection from commercially available NGS products such as the AVENIO (Roche) pipeline. 
 
 Paired-end sequencing of cfDNA generated BAM files can be used as input to
 discover EML4-ALK variants. This package was developed using position deduplicated BAM files generated with the AVENIO Oncology Analysis Software. These files are made using the AVENIO ctDNA surveillance kit and Illumina Nextseq 500 sequencing. This is a targeted hybridization NGS approach and includes ALK-specific but not EML4-specific probes.
 
 The package includes six functions.
 
-The output of first function, `EML4_ALK_detection()`, is used to determine whether EML4-ALK is detected and serves as input for the next four exploratory functions characterizing the EML4-ALK variant. The last function `EML4_ALK_analysis()` combines the output of the exploratory functions. 
+The output of the first function, `EML4_ALK_detection()`, is used to determine whether EML4-ALK is detected and serves as input for the next four exploratory functions characterizing the EML4-ALK variant. The last function `EML4_ALK_analysis()` combines the output of the exploratory functions. 
 
 To serve as examples, this package includes BAM files representing the EML4-ALK positive cell line H3122 and the EML4-ALK negative cell line, HCC827.  
 
@@ -78,7 +82,7 @@ $$\\[0.1in]$$
 
 **`genome`**
 
-  `character` representing the reference genome. Can be either "hg38" or "hg19". Default = "hg38".
+  `character` representing the reference genome. Can either be "hg38" or "hg19". Default = "hg38".
 $$\\[0.1in]$$ 
 
 **`mates`**	
@@ -88,7 +92,7 @@ $$\\[0.1in]$$
 
 **Output:**
 
-If EML4-ALK is detected a `data.frame` with soft-clipped reads representing EML4-ALK is returned. Otherwise "No EML4-ALK was detected" is returned.
+If EML4-ALK is detected, a `data.frame` with soft-clipped reads representing EML4-ALK is returned. Otherwise "No EML4-ALK was detected" is returned.
 
 **Examples:**
 \small
@@ -120,7 +124,7 @@ $$\\[0.1in]$$
 
 **Output:**
 
-If EML4-ALK is detected, returns a `table` of identified EML4 basepairs with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
+If EML4-ALK is detected, a `table` of identified EML4 basepairs is returned, with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
 
 **Examples:**
 
@@ -148,7 +152,7 @@ $$\\[0.1in]$$
 
 **Output:**
 
-If EML4-ALK is detected, returns a `table` of identified ALK basepairs with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
+If EML4-ALK is detected, a `table` of identified ALK basepairs is returned, with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
 
 **Examples:**
 
@@ -171,7 +175,7 @@ $$\\[0.1in]$$
 
 **Output:**
 
-If EML4-ALK is detected, returns a `table` of genomic positions with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
+If EML4-ALK is detected, a `table` of genomic positions is returned with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
 
 **Examples:**
 
