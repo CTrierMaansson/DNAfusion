@@ -6,7 +6,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-3071-3437"))
     person(given = "Emma", family = "Andersen", middle = "Roger", email = "201907412@post.au.dk", role = c("ctb, rev"))
     person(given = "Maiken", family = "Ulhoi", middle = "Parm", email = "maiken@oncology.au.dk", role = "dtc")
-    person(given = "Peter", familiy = "Meldgaard", middle = " ", email = "petemeld@rm.dk", role = "dtc")
+    person(given = "Peter", family = "Meldgaard", middle = " ", email = "petemeld@rm.dk", role = "dtc")
     person(given = "Boe", family = "Sorensen", middle = "Sandahl", email = "b.sorensen@clin.au.dk", role = c("rev", "fnd"))
 Description: Paired-end sequencing of cfDNA generated BAM files can be used as input to
   discover EML4-ALK variants. This package was developed using position deduplicated BAM
