@@ -7,7 +7,7 @@ author:
 - Emma Roger Andersen
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output:
-  html_document:
+  pdf_document:
     toc: yes
     toc_depth: 3
     number_sections: yes
@@ -17,7 +17,7 @@ subtitle: |-
    \vspace{0.3in}
 abstract: "Circulating tumor DNA (ctDNA) containing somatic mutations can be found
   in blood plasma. \nThis includes DNA fusions, such as the EML4-ALK, which can be
-  an oncogenic driver in          non-small cell lung cancer.This is an introduction
+  an oncogenic driver in non-small cell lung cancer.This is an introduction
   to the **ALKfusiondiscover** package for   R, which can be used to evaluate whether
   EML4-ALK is present in blood plasma. \n"
 vignette: |
