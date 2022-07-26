@@ -22,7 +22,7 @@ EML4_ALK_detection <- function(file, genome = "hg38", mates = 2){
   if(!isa(mates, "numeric")){
     return("ERROR: mates has to be a numeric")
   }
-  if (genome %ni% c("hg38", "hg19")){
+  if (!(genome %in% c("hg38", "hg19"))){
     return("ERROR: The reference genome has to be hg38 or hg19")
   }
   what <- c("mpos", "pos", "seq","cigar")
@@ -304,7 +304,7 @@ EML4_ALK_analysis <- function(file, genome = "hg38", mates = 2, basepairs = 20){
   if(!isa(mates, "numeric")){
     return("ERROR: mates has to be a numeric")
   }
-  if (genome %ni% c("hg38", "hg19")){
+  if (!(genome %in% c("hg38", "hg19"))){
     return("ERROR: The reference genome has to be hg38 or hg19")
   }
   res <- EML4_ALK_detection(file = file, genome = genome, mates = mates)
