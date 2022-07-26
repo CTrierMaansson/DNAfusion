@@ -22,7 +22,6 @@
 #'   mates = 2)
 #' @export
 EML4_ALK_detection <- function(file, genome = "hg38", mates = 2){
-  `%ni%` <- Negate(`%in%`)
   if(!isa(genome, "character")){
     return("ERROR: genome has to be a character")
   }
@@ -104,9 +103,9 @@ EML4_sequence <- function(reads, basepairs = 20){
   if(!isa(basepairs, "numeric")){
     return("ERROR: basepairs has to be a numeric")
   }
-  fun <- function(str) sub("\\M.*", "",str)
-  index1 <- sapply(reads$cigar,FUN = fun)
-  fun1 <- function(ind1){
+  fun1 <- function(str) sub("\\M.*", "",str)
+  index1 <- sapply(reads$cigar,FUN = fun1)
+  fun2 <- function(ind1){
     if (length(ind1)>1){
       return(NA)
     }
@@ -114,13 +113,13 @@ EML4_sequence <- function(reads, basepairs = 20){
       return(ind1)
     }
   }
-  fun <- function(ind){
+  fun3 <- function(ind){
     splits <- strsplit(ind,split = "S")
     splits <- lapply(splits, as.numeric)
-    splits_ind <- lapply(splits,FUN = fun1)
+    splits_ind <- lapply(splits,FUN = fun2)
     return(splits_ind)
   }
-  index2 <- sapply(index1,FUN = fun)
+  index2 <- sapply(index1,FUN = fun3)
   reads$indeces <- index2
   reads <- reads %>% dplyr::filter(!is.na(indeces))
   EML4_fun <- function(inp){
@@ -169,9 +168,9 @@ ALK_sequence <- function(reads, basepairs = 20){
   if(!isa(basepairs, "numeric")){
     return("ERROR: basepairs has to be a numeric")
   }
-  fun <- function(str) sub("\\M.*", "",str)
-  index1 <- sapply(reads$cigar,FUN = fun)
-  fun1 <- function(ind1){
+  fun1 <- function(str) sub("\\M.*", "",str)
+  index1 <- sapply(reads$cigar,FUN = fun1)
+  fun2 <- function(ind1){
     if (length(ind1)>1){
       return(NA)
     }
@@ -179,13 +178,13 @@ ALK_sequence <- function(reads, basepairs = 20){
       return(ind1)
     }
   }
-  fun <- function(ind){
+  fun3 <- function(ind){
     splits <- strsplit(ind,split = "S")
     splits <- lapply(splits, as.numeric)
-    splits_ind <- lapply(splits,FUN = fun1)
+    splits_ind <- lapply(splits,FUN = fun2)
     return(splits_ind)
   }
-  index2 <- sapply(index1,FUN = fun)
+  index2 <- sapply(index1,FUN = fun3)
   reads$indeces <- index2
   reads <- reads %>% dplyr::filter(!is.na(indeces))
   ALK_fun <- function(inp){
@@ -228,9 +227,9 @@ break_position <- function(reads){
       return("ERROR: reads must be a data.frame")
     }
   }
-  fun <- function(str) sub("\\M.*", "",str)
-  index1 <- sapply(reads$cigar,FUN = fun)
-  fun1 <- function(ind1){
+  fun1 <- function(str) sub("\\M.*", "",str)
+  index1 <- sapply(reads$cigar,FUN = fun1)
+  fun2 <- function(ind1){
     if (length(ind1)>1){
       return(NA)
     }
@@ -238,13 +237,13 @@ break_position <- function(reads){
       return(ind1)
     }
   }
-  fun <- function(ind){
+  fun3 <- function(ind){
     splits <- strsplit(ind,split = "S")
     splits <- lapply(splits, as.numeric)
-    splits_ind <- lapply(splits,FUN = fun1)
+    splits_ind <- lapply(splits,FUN = fun2)
     return(splits_ind)
   }
-  index2 <- sapply(index1,FUN = fun)
+  index2 <- sapply(index1,FUN = fun3)
   reads$indeces <- index2
   reads <- reads %>% dplyr::filter(!is.na(indeces))
   reads$indeces <- as.numeric(reads$indeces)
@@ -288,9 +287,9 @@ break_position_depth <- function(file, reads){
       return("ERROR: reads must be a data.frame")
     }
   }
-  fun <- function(str) sub("\\M.*", "",str)
-  index1 <- sapply(reads$cigar,FUN = fun)
-  fun1 <- function(ind1){
+  fun1 <- function(str) sub("\\M.*", "",str)
+  index1 <- sapply(reads$cigar,FUN = fun1)
+  fun2 <- function(ind1){
     if (length(ind1)>1){
       return(NA)
     }
@@ -298,13 +297,13 @@ break_position_depth <- function(file, reads){
       return(ind1)
     }
   }
-  fun <- function(ind){
+  fun3 <- function(ind){
     splits <- strsplit(ind,split = "S")
     splits <- lapply(splits, as.numeric)
-    splits_ind <- lapply(splits,FUN = fun1)
+    splits_ind <- lapply(splits,FUN = fun2)
     return(splits_ind)
   }
-  index2 <- sapply(index1,FUN = fun)
+  index2 <- sapply(index1,FUN = fun3)
   reads$indeces <- index2
   reads <- reads %>% dplyr::filter(!is.na(indeces))
   reads$indeces <- as.numeric(reads$indeces)
@@ -313,7 +312,7 @@ break_position_depth <- function(file, reads){
   stop_pos <- as.numeric(names(which.max(break_pos_tab)))
   depth <- bamsignals::bamCoverage(file,
                                    GenomicRanges::GRanges(seqnames = "chr2",IRanges::IRanges(start=(stop_pos),end=stop_pos+1)),
-                                   mapqual=0,verbose=F)
+                                   mapqual=0,verbose=FALSE)
   return(max(depth[1]))
 }
 

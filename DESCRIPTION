@@ -1,6 +1,7 @@
 Package: Genefusiondiscover
 Title: Identification of EML4-ALK variants using paired-end sequencing
-Version: 1.2
+Version: 0.99.0
+biocViews: TargetedResequencing, Genetics, GeneFusionDetection
 Authors@R: 
     c(person(given = "Christoffer Trier", family = "Maansson", , email = "ctm@clin.au.dk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3071-3437")),
@@ -28,5 +29,5 @@ Imports:
   Rsamtools
 Depends:
   dplyr,
-  R (>= 4.1.0)
+  R (>= 4.2.0)
  

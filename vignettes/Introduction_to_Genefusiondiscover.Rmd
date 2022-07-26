@@ -271,3 +271,13 @@ H3122_results$read_depth
 HCC827_results
 
 ```
+
+```{r session}
+session_info(
+  pkgs = "attached",
+  include_base = FALSE,
+  dependencies = NA,
+  to_file = FALSE
+)
+
+```
