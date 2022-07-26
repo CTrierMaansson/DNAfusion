@@ -1,6 +1,6 @@
 ---
 title: |-
-  ALKfusiondiscover
+  Genefusiondiscover
    \vspace{0.5in}
 author:
 - Christoffer Trier Maansson
@@ -13,15 +13,15 @@ output:
     number_sections: yes
     highlight: haddock
 subtitle: |-
-  https://github.com/CTrierMaansson/ALKfusiondiscover
+  https://github.com/CTrierMaansson/Genefusiondiscover
    \vspace{0.3in}
 abstract: "Circulating tumor DNA (ctDNA) containing somatic mutations can be found
   in blood plasma. \nThis includes DNA fusions, such as the EML4-ALK, which can be
   an oncogenic driver in non-small cell lung cancer.This is an introduction
-  to the **ALKfusiondiscover** package for   R, which can be used to evaluate whether
+  to the **Genefusiondiscover** package for   R, which can be used to evaluate whether
   EML4-ALK is present in blood plasma. \n"
 vignette: |
-  %\VignetteIndexEntry{Introduction to ALKfusiondiscover} %\VignetteEncoding{UTF-8} %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Introduction to Genefusiondiscover} %\VignetteEncoding{UTF-8} %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}
@@ -46,14 +46,14 @@ To serve as examples, this package includes BAM files representing the EML4-ALK 
 
 # Installation
 
-Use **devtools** to install **ALKfusiondiscover**.
+Use **devtools** to install **Genefusiondiscover**.
 
 ```{r setup, message=FALSE}
 if (!require(devtools)) install.packages('devtools')
 library(devtools)
 
-install_github("CTrierMaansson/ALKfusiondiscover")
-library(ALKfusiondiscover)
+install_github("CTrierMaansson/Genefusiondiscover")
+library(Genefusiondiscover)
 
 ```
 
@@ -62,8 +62,8 @@ library(ALKfusiondiscover)
 BAM files from the cell lines, H3122 and HCC827, are included in the package and can be used as examples to explore the functions. 
 
 ```{r examples}
-H3122_bam <- system.file("extdata", "H3122_EML4.bam", package = "ALKfusiondiscover")
-HCC827_bam <-  system.file("extdata", "HCC827_EML4.bam", package = "ALKfusiondiscover")
+H3122_bam <- system.file("extdata", "H3122_EML4.bam", package = "Genefusiondiscover")
+HCC827_bam <-  system.file("extdata", "HCC827_EML4.bam", package = "Genefusiondiscover")
 
 ```
 \newpage

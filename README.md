@@ -1,10 +1,13 @@
-Package: ALKfusiondiscover
+Package: Genefusiondiscover
 Title: Identification of EML4-ALK variants using paired-end sequencing
 Version: 0.0.1.1
 Authors@R: 
-    person("Christoffer Trier", "Maansson", "ctm@clin.au.dk", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-3071-3437"))
-           person("Emma Roger Anderser", "201907412@post.au.dk", role = "cre")
+    c(person(given = "Christoffer Trier", family = "Maansson", , email = "ctm@clin.au.dk", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-3071-3437")),
+    person(given = "Emma Roger", family = "Andersen", , email = "201907412@post.au.dk", role = c("ctb", "rev")),
+    person(given = "Maiken Parm", family = "Ulhoi", , email = "maiken@oncology.au.dk", role = "dtc"),
+    person(given = "Peter", family = "Meldgaard", , email = "petemeld@rm.dk", role = "dtc"),
+    person(given = "Boe Sandahl", family = "Sorensen", , email = "b.sorensen@clin.au.dk", role = c("rev", "fnd")))
 Description: Paired-end sequencing of cfDNA generated BAM files can be used as input to
   discover EML4-ALK variants. This package was developed using position deduplicated BAM
   files generated with the AVENIO Oncology Analysis Software. These files are made using
