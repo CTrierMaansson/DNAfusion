@@ -1,7 +1,7 @@
 #' Detection of EML4-ALK variants
 #'
 #' This function looks for EML4-ALK mate pair reads in the BAM file.
-#'
+#' @import dplyr
 #' @param file The name of the file which the data are to be read from.
 #' @param genome `Character string` representing the reference genome. Can be either "hg38" or "hg19". Default = "hg38".
 #' @param mates `Interger`, the minimum number EML4-ALK mate pairs needed to be detected in order to call a variant. Default = 2.
@@ -71,6 +71,7 @@ EML4_ALK_detection <- function(file, genome = "hg38", mates = 2){
 #'
 #' This function identifies the basepairs leading up to the EML4 breakpoint.
 #'
+#' @import dplyr
 #' @param reads `Data.frame` returned by EML4_ALK_detection().
 #' @param basepairs `Integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
 #' @return If EML4-ALK is detected, returns a table of identified EML4 basepairs with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
@@ -135,6 +136,7 @@ EML4_sequence <- function(reads, basepairs = 20){
 #'
 #' This function identifies the basepairs following the ALK breakpoint.
 #'
+#' @import dplyr
 #' @param reads `data.frame` returned by EML4_ALK_detection().
 #' @param basepairs `integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
 #' @return If EML4-ALK is detected, returns a `table` of identified ALK basepairs with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
@@ -199,6 +201,7 @@ ALK_sequence <- function(reads, basepairs = 20){
 #'
 #' This function identifies the genomic position in EML4 where the breakpoint has happened.
 #'
+#' @import dplyr
 #' @param reads Data.frame returned by EML4_ALK_detection().
 #' @return If EML4-ALK is detected, returns a `table` of genomic positions with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
 #' @examples
@@ -255,6 +258,7 @@ break_position <- function(reads){
 #'
 #' This function identifies the read depth at the basepair before the breakpoint in EML4.
 #'
+#' @import dplyr
 #' @param file The name of the file which the data are to be read from.
 #' @param reads `data.frame` returned by EML4_ALK_detection().
 #' @return If EML4-ALK is detected a single integer corresponding to the read depth at the breakpoint is returned. Otherwise "No EML4-ALK was detected" is returned
@@ -317,6 +321,7 @@ break_position_depth <- function(file, reads){
 #'
 #' This functions collects the results from the other functions of the package.
 #'
+#' @import dplyr
 #' @param file The name of the file which the data are to be read from.
 #' @param genome `character` representing the reference genome. Can be either "hg38" or "hg19". Default = "hg38".
 #' @param mates `interger`, the minimum number EML4-ALK mate pairs needed to be detected in order to call a variant. Default = 2.
