@@ -6,3 +6,4 @@ export(EML4_ALK_detection)
 export(EML4_sequence)
 export(break_position)
 export(break_position_depth)
+@import dplyr
