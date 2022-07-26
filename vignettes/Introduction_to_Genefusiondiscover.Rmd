@@ -21,7 +21,9 @@ abstract: "Circulating tumor DNA (ctDNA) containing somatic mutations can be fou
   to the **Genefusiondiscover** package for   R, which can be used to evaluate whether
   EML4-ALK is present in blood plasma. \n"
 vignette: |
-  %\VignetteIndexEntry{Introduction to Genefusiondiscover} %\VignetteEncoding{UTF-8} %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Introduction to Genefusiondiscover}
+  %\VignetteEncoding{UTF-8} 
+  %\VignetteEngine{knitr::knitr}
 ---
 
 ```{r, include = FALSE}

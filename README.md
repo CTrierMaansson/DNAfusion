@@ -22,13 +22,13 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-Imports: 
-    bamsignals,
-    GenomicRanges,
-    IRanges,
-    Rsamtools
+Imports:
 Depends:
-  dplyr
+  dplyr,
+  bamsignals,
+  GenomicRanges,
+  IRanges,
+  Rsamtools
         
 
 See vignettes for details

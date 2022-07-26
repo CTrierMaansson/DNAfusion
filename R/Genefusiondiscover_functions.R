@@ -7,11 +7,21 @@
 #' @param mates `Interger`, the minimum number EML4-ALK mate pairs needed to be detected in order to call a variant. Default = 2.
 #' @return If EML4-ALK is detected a `data.frame` with soft-clipped reads representing EML4-ALK is returned. Otherwise "No EML4-ALK was detected" is returned.
 #' @examples
-#' EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2)
-#' EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2)
+#' EML4_ALK_detection(file = H3122_bam,
+#'  genome = "hg38",
+#'   mates = 2)
+#' EML4_ALK_detection(file = HCC827_bam,
+#'  genome = "hg38",
+#'   mates = 2)
 #' @export
 EML4_ALK_detection <- function(file, genome = "hg38", mates = 2){
   `%ni%` <- Negate(`%in%`)
+  if(!isa(genome, "character")){
+    return("ERROR: genome has to be a character")
+  }
+  if(!isa(mates, "numeric")){
+    return("ERROR: mates has to be a numeric")
+  }
   if (genome %ni% c("hg38", "hg19")){
     return("ERROR: The reference genome has to be hg38 or hg19")
   }
@@ -58,17 +68,26 @@ EML4_ALK_detection <- function(file, genome = "hg38", mates = 2){
 #' @param basepairs `Integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
 #' @return If EML4-ALK is detected, returns a table of identified EML4 basepairs with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
 #' @examples
-#' EML4_sequence(EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2), basepairs = 20)
-#' EML4_sequence(EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2), basepairs = 20)
+#' EML4_sequence(EML4_ALK_detection(file = H3122_bam,
+#'  genome = "hg38",
+#'   mates = 2),
+#'    basepairs = 20)
+#' EML4_sequence(EML4_ALK_detection(file = HCC827_bam,
+#'  genome = "hg38",
+#'   mates = 2),
+#'    basepairs = 20)
 #' @export
 EML4_sequence <- function(reads, basepairs = 20){
-  if(class(reads) != "data.frame"){
+  if(!isa(reads, "data.frame")){
     if(reads == "No EML4-ALK was detected"){
       return("No EML4-ALK was detected")
     }
     else{
-      return("reads must be a data.frame")
+      return("ERROR: reads must be a data.frame")
     }
+  }
+  if(!isa(basepairs, "numeric")){
+    return("ERROR: basepairs has to be a numeric")
   }
   fun <- function(str) sub("\\M.*", "",str)
   index1 <- sapply(reads$cigar,FUN = fun)
@@ -104,19 +123,28 @@ EML4_sequence <- function(reads, basepairs = 20){
 #'
 #' @param reads `data.frame` returned by EML4_ALK_detection().
 #' @param basepairs `integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
-#' @returnIf EML4-ALK is detected, returns a `table` of identified ALK basepairs with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
+#' @return If EML4-ALK is detected, returns a `table` of identified ALK basepairs with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
 #' @examples
-#' ALK_sequence(EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2), basepairs = 20)
-#' ALK_sequence(EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2), basepairs = 20)
+#' ALK_sequence(EML4_ALK_detection(file = H3122_bam,
+#'  genome = "hg38",
+#'   mates = 2),
+#'    basepairs = 20)
+#' ALK_sequence(EML4_ALK_detection(file = HCC827_bam,
+#'  genome = "hg38",
+#'   mates = 2),
+#'    basepairs = 20)
 #' @export
 ALK_sequence <- function(reads, basepairs = 20){
-  if(class(reads) != "data.frame"){
+  if(!isa(reads, "data.frame")){
     if(reads == "No EML4-ALK was detected"){
       return("No EML4-ALK was detected")
     }
     else{
-      return("reads must be a data.frame")
+      return("ERROR: reads must be a data.frame")
     }
+  }
+  if(!isa(basepairs, "numeric")){
+    return("ERROR: basepairs has to be a numeric")
   }
   fun <- function(str) sub("\\M.*", "",str)
   index1 <- sapply(reads$cigar,FUN = fun)
@@ -153,16 +181,20 @@ ALK_sequence <- function(reads, basepairs = 20){
 #' @param reads Data.frame returned by EML4_ALK_detection().
 #' @return If EML4-ALK is detected, returns a `table` of genomic positions with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
 #' @examples
-#' break_position(EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2))
-#' break_position(EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2))
+#' break_position(EML4_ALK_detection(file = H3122_bam,
+#'  genome = "hg38",
+#'   mates = 2))
+#' break_position(EML4_ALK_detection(file = HCC827_bam,
+#'  genome = "hg38",
+#'   mates = 2))
 #' @export
 break_position <- function(reads){
-  if(class(reads) != "data.frame"){
+  if(!isa(reads, "data.frame")){
     if(reads == "No EML4-ALK was detected"){
       return("No EML4-ALK was detected")
     }
     else{
-      return("reads must be a data.frame")
+      return("ERROR: reads must be a data.frame")
     }
   }
   fun <- function(str) sub("\\M.*", "",str)
@@ -199,16 +231,22 @@ break_position <- function(reads){
 #' @param reads `data.frame` returned by EML4_ALK_detection().
 #' @return If EML4-ALK is detected a single integer corresponding to the read depth at the breakpoint is returned. Otherwise "No EML4-ALK was detected" is returned
 #' @examples
-#' break_position_depth(file = H3122_bam, EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2))
-#' break_position_depth(file = HCC827_bam, EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2))
+#' break_position_depth(file = H3122_bam,
+#'  EML4_ALK_detection(file = H3122_bam,
+#'   genome = "hg38",
+#'    mates = 2))
+#' break_position_depth(file = HCC827_bam,
+#'  EML4_ALK_detection(file = HCC827_bam,
+#'   genome = "hg38",
+#'    mates = 2))
 #' @export
 break_position_depth <- function(file, reads){
-  if(class(reads) != "data.frame"){
+  if(!isa(reads, "data.frame")){
     if(reads == "No EML4-ALK was detected"){
       return("No EML4-ALK was detected")
     }
     else{
-      return("reads must be a data.frame")
+      return("ERROR: reads must be a data.frame")
     }
   }
   fun <- function(str) sub("\\M.*", "",str)
@@ -250,13 +288,31 @@ break_position_depth <- function(file, reads){
 #' @param basepairs `integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
 #' @return A `list` object with clipped_reads corresponding to `EML4_ALK_detection()`, last_EML4 corresponding to `EML4_sequence()`, first_ALK corresponding to `ALK_sequence()`, breakpoint corresponding to `break_position()`, and read_depth corresponding to `break_position_depth()`.
 #' @examples
-#' EML4_ALK_analysis(file = H3122_bam, genome = "hg38", mates = 2, basepairs = 20)
-#' EML4_ALK_analysis(file = HCC827_bam, genome = "hg38", mates = 2, basepairs = 20)
+#' EML4_ALK_analysis(file = H3122_bam,
+#'  genome = "hg38",
+#'   mates = 2,
+#'    basepairs = 20)
+#' EML4_ALK_analysis(file = HCC827_bam,
+#'  genome = "hg38",
+#'   mates = 2,
+#'    basepairs = 20)
 #' @export
 EML4_ALK_analysis <- function(file, genome = "hg38", mates = 2, basepairs = 20){
+  if(!isa(genome, "character")){
+    return("ERROR: genome has to be a character")
+  }
+  if(!isa(mates, "numeric")){
+    return("ERROR: mates has to be a numeric")
+  }
+  if (genome %ni% c("hg38", "hg19")){
+    return("ERROR: The reference genome has to be hg38 or hg19")
+  }
   res <- EML4_ALK_detection(file = file, genome = genome, mates = mates)
-  if(class(res) != "data.frame"){
+  if(!isa(res, "data.frame")){
     return(res)
+  }
+  if(!isa(basepairs, "numeric")){
+    return("ERROR: basepairs has to be a numeric")
   }
   EML4 <- EML4_sequence(reads = res, basepairs = basepairs)
   ALK <- ALK_sequence(reads = res, basepairs = basepairs)
