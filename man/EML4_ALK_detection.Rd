@@ -20,6 +20,13 @@ If EML4-ALK is detected a \code{data.frame} with soft-clipped reads representing
 This function looks for EML4-ALK mate pair reads in the BAM file.
 }
 \examples{
+H3122_bam <- system.file("extdata",
+"H3122_EML4.bam",
+package = "Genefusiondiscover")
+HCC827_bam <-  system.file("extdata",
+"HCC827_EML4.bam",
+package = "Genefusiondiscover")
+
 EML4_ALK_detection(file = H3122_bam,
  genome = "hg38",
   mates = 2)

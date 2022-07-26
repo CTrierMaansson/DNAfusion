@@ -7,7 +7,7 @@ author:
 - Emma Roger Andersen
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output:
-  html_document:
+  pdf_document:
     toc: yes
     toc_depth: 3
     number_sections: yes
@@ -50,7 +50,7 @@ To serve as examples, this package includes BAM files representing the EML4-ALK 
 
 Use **devtools** to install **Genefusiondiscover**.
 
-```{r setup, message=FALSE}
+```{r setup, message=FALSE, results = 'hide'}
 if (!require(devtools)) install.packages('devtools')
 library(devtools)
 

@@ -7,6 +7,13 @@
 #' @param mates `Interger`, the minimum number EML4-ALK mate pairs needed to be detected in order to call a variant. Default = 2.
 #' @return If EML4-ALK is detected a `data.frame` with soft-clipped reads representing EML4-ALK is returned. Otherwise "No EML4-ALK was detected" is returned.
 #' @examples
+#' H3122_bam <- system.file("extdata",
+#' "H3122_EML4.bam",
+#' package = "Genefusiondiscover")
+#' HCC827_bam <-  system.file("extdata",
+#' "HCC827_EML4.bam",
+#' package = "Genefusiondiscover")
+#'
 #' EML4_ALK_detection(file = H3122_bam,
 #'  genome = "hg38",
 #'   mates = 2)
@@ -68,6 +75,13 @@ EML4_ALK_detection <- function(file, genome = "hg38", mates = 2){
 #' @param basepairs `Integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
 #' @return If EML4-ALK is detected, returns a table of identified EML4 basepairs with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
 #' @examples
+#' H3122_bam <- system.file("extdata",
+#' "H3122_EML4.bam",
+#' package = "Genefusiondiscover")
+#' HCC827_bam <-  system.file("extdata",
+#' "HCC827_EML4.bam",
+#' package = "Genefusiondiscover")
+#'
 #' EML4_sequence(EML4_ALK_detection(file = H3122_bam,
 #'  genome = "hg38",
 #'   mates = 2),
@@ -125,6 +139,13 @@ EML4_sequence <- function(reads, basepairs = 20){
 #' @param basepairs `integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
 #' @return If EML4-ALK is detected, returns a `table` of identified ALK basepairs with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
 #' @examples
+#' H3122_bam <- system.file("extdata",
+#' "H3122_EML4.bam",
+#' package = "Genefusiondiscover")
+#' HCC827_bam <-  system.file("extdata",
+#' "HCC827_EML4.bam",
+#' package = "Genefusiondiscover")
+#'
 #' ALK_sequence(EML4_ALK_detection(file = H3122_bam,
 #'  genome = "hg38",
 #'   mates = 2),
@@ -181,6 +202,13 @@ ALK_sequence <- function(reads, basepairs = 20){
 #' @param reads Data.frame returned by EML4_ALK_detection().
 #' @return If EML4-ALK is detected, returns a `table` of genomic positions with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
 #' @examples
+#' H3122_bam <- system.file("extdata",
+#' "H3122_EML4.bam",
+#' package = "Genefusiondiscover")
+#' HCC827_bam <-  system.file("extdata",
+#' "HCC827_EML4.bam",
+#' package = "Genefusiondiscover")
+#'
 #' break_position(EML4_ALK_detection(file = H3122_bam,
 #'  genome = "hg38",
 #'   mates = 2))
@@ -231,6 +259,13 @@ break_position <- function(reads){
 #' @param reads `data.frame` returned by EML4_ALK_detection().
 #' @return If EML4-ALK is detected a single integer corresponding to the read depth at the breakpoint is returned. Otherwise "No EML4-ALK was detected" is returned
 #' @examples
+#' H3122_bam <- system.file("extdata",
+#' "H3122_EML4.bam",
+#' package = "Genefusiondiscover")
+#' HCC827_bam <-  system.file("extdata",
+#' "HCC827_EML4.bam",
+#' package = "Genefusiondiscover")
+#'
 #' break_position_depth(file = H3122_bam,
 #'  EML4_ALK_detection(file = H3122_bam,
 #'   genome = "hg38",
@@ -288,6 +323,13 @@ break_position_depth <- function(file, reads){
 #' @param basepairs `integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
 #' @return A `list` object with clipped_reads corresponding to `EML4_ALK_detection()`, last_EML4 corresponding to `EML4_sequence()`, first_ALK corresponding to `ALK_sequence()`, breakpoint corresponding to `break_position()`, and read_depth corresponding to `break_position_depth()`.
 #' @examples
+#' H3122_bam <- system.file("extdata",
+#' "H3122_EML4.bam",
+#' package = "Genefusiondiscover")
+#' HCC827_bam <-  system.file("extdata",
+#' "HCC827_EML4.bam",
+#' package = "Genefusiondiscover")
+#'
 #' EML4_ALK_analysis(file = H3122_bam,
 #'  genome = "hg38",
 #'   mates = 2,

@@ -16,6 +16,13 @@ If EML4-ALK is detected, returns a \code{table} of genomic positions with the nu
 This function identifies the genomic position in EML4 where the breakpoint has happened.
 }
 \examples{
+H3122_bam <- system.file("extdata",
+"H3122_EML4.bam",
+package = "Genefusiondiscover")
+HCC827_bam <-  system.file("extdata",
+"HCC827_EML4.bam",
+package = "Genefusiondiscover")
+
 break_position(EML4_ALK_detection(file = H3122_bam,
  genome = "hg38",
   mates = 2))

@@ -22,6 +22,13 @@ A \code{list} object with clipped_reads corresponding to \code{EML4_ALK_detectio
 This functions collects the results from the other functions of the package.
 }
 \examples{
+H3122_bam <- system.file("extdata",
+"H3122_EML4.bam",
+package = "Genefusiondiscover")
+HCC827_bam <-  system.file("extdata",
+"HCC827_EML4.bam",
+package = "Genefusiondiscover")
+
 EML4_ALK_analysis(file = H3122_bam,
  genome = "hg38",
   mates = 2,

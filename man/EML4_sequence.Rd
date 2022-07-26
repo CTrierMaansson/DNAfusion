@@ -18,6 +18,13 @@ If EML4-ALK is detected, returns a table of identified EML4 basepairs with the n
 This function identifies the basepairs leading up to the EML4 breakpoint.
 }
 \examples{
+H3122_bam <- system.file("extdata",
+"H3122_EML4.bam",
+package = "Genefusiondiscover")
+HCC827_bam <-  system.file("extdata",
+"HCC827_EML4.bam",
+package = "Genefusiondiscover")
+
 EML4_sequence(EML4_ALK_detection(file = H3122_bam,
  genome = "hg38",
   mates = 2),
