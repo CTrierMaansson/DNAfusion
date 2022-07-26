@@ -12,9 +12,9 @@
 <meta name="author" content="Christoffer Trier Maansson" />
 <meta name="author" content="Emma Roger Andersen" />
 
-<meta name="date" content="2022-07-19" />
+<meta name="date" content="2022-07-26" />
 
-<title>ALKfusiondiscover </title>
+<title>Genefusiondiscover </title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -435,19 +435,19 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">ALKfusiondiscover </h1>
-<h3 class="subtitle"><a href="https://github.com/CTrierMaansson/ALKfusiondiscover" class="uri">https://github.com/CTrierMaansson/ALKfusiondiscover</a>
+<h1 class="title toc-ignore">Genefusiondiscover </h1>
+<h3 class="subtitle"><a href="https://github.com/CTrierMaansson/Genefusiondiscover" class="uri">https://github.com/CTrierMaansson/Genefusiondiscover</a>
 </h3>
 <h4 class="author">Christoffer Trier Maansson</h4>
 <h4 class="author">Emma Roger Andersen</h4>
-<h4 class="date">19 jul 2022</h4>
+<h4 class="date">26 jul 2022</h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 <p>Circulating tumor DNA (ctDNA) containing somatic mutations can be
 found in blood plasma. This includes DNA fusions, such as the EML4-ALK,
 which can be an oncogenic driver in non-small cell lung cancer.This is
-an introduction to the <strong>ALKfusiondiscover</strong> package for R,
-which can be used to evaluate whether EML4-ALK is present in blood
+an introduction to the <strong>Genefusiondiscover</strong> package for
+R, which can be used to evaluate whether EML4-ALK is present in blood
 plasma.</p>
 </div>
 
@@ -506,27 +506,19 @@ line, HCC827.</p>
 <div id="installation" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Installation</h1>
 <p>Use <strong>devtools</strong> to install
-<strong>ALKfusiondiscover</strong>.</p>
+<strong>Genefusiondiscover</strong>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(devtools)) <span class="fu">install.packages</span>(<span class="st">&#39;devtools&#39;</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;CTrierMaansson/ALKfusiondiscover&quot;</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * checking for file &#39;C:\Users\Christoffer\AppData\Local\Temp\Rtmpu6LSRb\remotes36a473031b8e\CTrierMaansson-ALKfusiondiscover-383cd97/DESCRIPTION&#39; ... OK</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * preparing &#39;ALKfusiondiscover&#39;:</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * checking DESCRIPTION meta-information ... OK</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * checking for LF line-endings in source and make files and shell scripts</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * checking for empty or unneeded directories</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * building &#39;ALKfusiondiscover_0.0.1.1.tar.gz&#39;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ALKfusiondiscover)</span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;CTrierMaansson/Genefusiondiscover&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Genefusiondiscover)</span></code></pre></div>
 </div>
 <div id="package-data" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Package data</h1>
 <p>BAM files from the cell lines, H3122 and HCC827, are included in the
 package and can be used as examples to explore the functions.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>H3122_bam <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;H3122_EML4.bam&quot;</span>, <span class="at">package =</span> <span class="st">&quot;ALKfusiondiscover&quot;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>HCC827_bam <span class="ot">&lt;-</span>  <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;HCC827_EML4.bam&quot;</span>, <span class="at">package =</span> <span class="st">&quot;ALKfusiondiscover&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>H3122_bam <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;H3122_EML4.bam&quot;</span>, <span class="at">package =</span> <span class="st">&quot;Genefusiondiscover&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>HCC827_bam <span class="ot">&lt;-</span>  <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;HCC827_EML4.bam&quot;</span>, <span class="at">package =</span> <span class="st">&quot;Genefusiondiscover&quot;</span>)</span></code></pre></div>
 <div style="page-break-after: always;"></div>
 </div>
 <div id="functions" class="section level1" number="4">
