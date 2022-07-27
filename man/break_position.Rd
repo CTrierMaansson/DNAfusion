@@ -10,10 +10,13 @@ break_position(reads)
 \item{reads}{Data.frame returned by EML4_ALK_detection().}
 }
 \value{
-If EML4-ALK is detected, returns a \code{table} of genomic positions with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
+If EML4-ALK is detected, returns a \code{table} of genomic positions
+with the number of corresponding reads for each sequence.
+Otherwise "No EML4-ALK was detected" is returned.
 }
 \description{
-This function identifies the genomic position in EML4 where the breakpoint has happened.
+This function identifies the genomic position in EML4
+where the breakpoint has happened.
 }
 \examples{
 H3122_bam <- system.file("extdata",
@@ -24,9 +27,9 @@ HCC827_bam <-  system.file("extdata",
 package = "Genefusiondiscover")
 
 break_position(EML4_ALK_detection(file = H3122_bam,
- genome = "hg38",
-  mates = 2))
+                                    genome = "hg38",
+                                    mates = 2))
 break_position(EML4_ALK_detection(file = HCC827_bam,
- genome = "hg38",
-  mates = 2))
+                                    genome = "hg38",
+                                    mates = 2))
 }

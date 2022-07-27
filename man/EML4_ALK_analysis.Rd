@@ -9,14 +9,22 @@ EML4_ALK_analysis(file, genome = "hg38", mates = 2, basepairs = 20)
 \arguments{
 \item{file}{The name of the file which the data are to be read from.}
 
-\item{genome}{\code{character} representing the reference genome. Can be either "hg38" or "hg19". Default = "hg38".}
+\item{genome}{\code{character} representing the reference genome.
+Can be either "hg38" or "hg19". Default = "hg38".}
 
-\item{mates}{\code{interger}, the minimum number EML4-ALK mate pairs needed to be detected in order to call a variant. Default = 2.}
+\item{mates}{\code{interger}, the minimum number EML4-ALK mate pairs needed
+to be detected in order to call a variant. Default = 2.}
 
-\item{basepairs}{\code{integer}, number of basepairs identified from the EML4-ALK fusion. Default = 20.}
+\item{basepairs}{\code{integer}, number of basepairs identified
+from the EML4-ALK fusion. Default = 20.}
 }
 \value{
-A \code{list} object with clipped_reads corresponding to \code{EML4_ALK_detection()}, last_EML4 corresponding to \code{EML4_sequence()}, first_ALK corresponding to \code{ALK_sequence()}, breakpoint corresponding to \code{break_position()}, and read_depth corresponding to \code{break_position_depth()}.
+A \code{list} object with
+clipped_reads corresponding to \code{EML4_ALK_detection()},
+last_EML4 corresponding to \code{EML4_sequence()},
+first_ALK corresponding to \code{ALK_sequence()},
+breakpoint corresponding to \code{break_position()},
+and read_depth corresponding to \code{break_position_depth()}.
 }
 \description{
 This functions collects the results from the other functions of the package.
@@ -30,11 +38,11 @@ HCC827_bam <-  system.file("extdata",
 package = "Genefusiondiscover")
 
 EML4_ALK_analysis(file = H3122_bam,
- genome = "hg38",
-  mates = 2,
-   basepairs = 20)
+                    genome = "hg38",
+                    mates = 2,
+                    basepairs = 20)
 EML4_ALK_analysis(file = HCC827_bam,
- genome = "hg38",
-  mates = 2,
-   basepairs = 20)
+                    genome = "hg38",
+                    mates = 2,
+                    basepairs = 20)
 }

@@ -1,7 +1,7 @@
 Package: Genefusiondiscover
 Title: Identification of EML4-ALK variants using paired-end sequencing
 Version: 0.99.0
-biocViews: TargetedResequencing, Genetics, GeneFusionDetection
+biocViews: TargetedResequencing, Genetics, GeneFusionDetection, Sequencing
 Authors@R: 
     c(person(given = "Christoffer Trier", family = "Maansson", , email = "ctm@clin.au.dk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3071-3437")),
@@ -20,7 +20,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    usethis,
+    devtools,
+    testthat
 VignetteBuilder: knitr
 Imports:
  bamsignals,

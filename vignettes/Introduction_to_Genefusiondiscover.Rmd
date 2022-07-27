@@ -7,7 +7,7 @@ author:
 - Emma Roger Andersen
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output:
-  pdf_document:
+  html_document:
     toc: yes
     toc_depth: 3
     number_sections: yes
@@ -15,11 +15,11 @@ output:
 subtitle: |-
   https://github.com/CTrierMaansson/Genefusiondiscover
    \vspace{0.3in}
-abstract: "Circulating tumor DNA (ctDNA) containing somatic mutations can be found
-  in blood plasma. \nThis includes DNA fusions, such as the EML4-ALK, which can be
-  an oncogenic driver in non-small cell lung cancer.This is an introduction
-  to the **Genefusiondiscover** package for   R, which can be used to evaluate whether
-  EML4-ALK is present in blood plasma. \n"
+abstract: "Circulating tumor DNA (ctDNA) containing somatic mutations 
+  can be found in blood plasma. \nThis includes DNA fusions, 
+  such as the EML4-ALK, which can be an oncogenic driver in non-small cell lung
+  cancer.This is an introduction to the **Genefusiondiscover** package for R,
+  which can be used to evaluate whether EML4-ALK is present in blood plasma. \n"
 vignette: |
   %\VignetteIndexEntry{Introduction to Genefusiondiscover}
   %\VignetteEncoding{UTF-8} 
@@ -28,24 +28,35 @@ vignette: |
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+    collapse = TRUE,
+    comment = "#>"
 )
 ```
 \newpage
 # Introduction
 
-This package was created in order to increase the sensitivity of EML4-ALK detection from commercially available NGS products such as the AVENIO (Roche) pipeline. 
+This package was created in order to increase the sensitivity of EML4-ALK
+detection from commercially available NGS products such as the AVENIO (Roche)
+pipeline. 
 
 Paired-end sequencing of cfDNA generated BAM files can be used as input to
-discover EML4-ALK variants. This package was developed using position deduplicated BAM files generated with the AVENIO Oncology Analysis Software. These files are made using the AVENIO ctDNA surveillance kit and Illumina Nextseq 500 sequencing. This is a targeted hybridization NGS approach and includes ALK-specific but not EML4-specific probes.
+discover EML4-ALK variants. 
+This package was developed using position deduplicated BAM files generated with
+the AVENIO Oncology Analysis Software. 
+These files are made using the AVENIO ctDNA surveillance kit and 
+Illumina Nextseq 500 sequencing. 
+This is a targeted hybridization NGS approach and includes ALK-specific but not
+EML4-specific probes.
 
 The package includes six functions.
 
-The output of the first function, `EML4_ALK_detection()`, is used to determine whether EML4-ALK is detected and serves as input for the next four exploratory functions characterizing the EML4-ALK variant. The last function `EML4_ALK_analysis()` combines the output of the exploratory functions. 
+The output of the first function, `EML4_ALK_detection()`, is used to determine
+whether EML4-ALK is detected and serves as input for the next four exploratory
+functions characterizing the EML4-ALK variant. The last function
+`EML4_ALK_analysis()` combines the output of the exploratory functions. 
 
-To serve as examples, this package includes BAM files representing the EML4-ALK positive cell line H3122 and the EML4-ALK negative cell line, HCC827.  
-
+To serve as examples, this package includes BAM files representing the EML4-ALK
+positive cell line H3122 and the EML4-ALK negative cell line, HCC827.  
 # Installation
 
 Use **devtools** to install **Genefusiondiscover**.
@@ -61,11 +72,16 @@ library(Genefusiondiscover)
 
 # Package data
 
-BAM files from the cell lines, H3122 and HCC827, are included in the package and can be used as examples to explore the functions. 
+BAM files from the cell lines, H3122 and HCC827, are included in the package and
+can be used as examples to explore the functions. 
 
 ```{r examples}
-H3122_bam <- system.file("extdata", "H3122_EML4.bam", package = "Genefusiondiscover")
-HCC827_bam <-  system.file("extdata", "HCC827_EML4.bam", package = "Genefusiondiscover")
+H3122_bam <- system.file("extdata", 
+                            "H3122_EML4.bam",
+                            package = "Genefusiondiscover")
+HCC827_bam <-  system.file("extdata", 
+                            "HCC827_EML4.bam", 
+                            package = "Genefusiondiscover")
 
 ```
 \newpage
@@ -79,32 +95,41 @@ $$\\[0.1in]$$
 
 **`file`**
 
-  The name of the file which the data are to be read from.
+    The name of the file which the data are to be read from.
 $$\\[0.1in]$$
 
 **`genome`**
 
-  `character` representing the reference genome. Can either be "hg38" or "hg19". Default = "hg38".
+    character representing the reference genome. 
+    Can either be "hg38" or "hg19". 
+    Default = "hg38".
 $$\\[0.1in]$$ 
 
-**`mates`**	
+**`mates`**
 
-  `interger`, the minimum number EML4-ALK mate pairs needed to be detected in order to call a variant. Default = 2.
+    integer, the minimum number EML4-ALK mate pairs needed to be
+    detected in order to call a variant. Default = 2.
 $$\\[0.1in]$$ 
 
 **Output:**
 
-If EML4-ALK is detected, a `data.frame` with soft-clipped reads representing EML4-ALK is returned. Otherwise "No EML4-ALK was detected" is returned.
+If EML4-ALK is detected, a `data.frame` with soft-clipped reads
+representing EML4-ALK is returned. 
+Otherwise "No EML4-ALK was detected" is returned.
 
 **Examples:**
 \small
 ```{r EML4_ALK_detection2}
-head(EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2))
+head(EML4_ALK_detection(file = H3122_bam, 
+                        genome = "hg38", 
+                        mates = 2))
 
 ```
 \normalsize
 ```{r EML4_ALK_detection3}
-EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2)
+EML4_ALK_detection(file = HCC827_bam, 
+                    genome = "hg38", 
+                    mates = 2)
 
 ```
 
@@ -116,23 +141,32 @@ $$\\[0.1in]$$
 
 **`reads`**
 
-  `data.frame` returned by EML4_ALK_detection().
+    data.frame returned by EML4_ALK_detection().
 $$\\[0.1in]$$  
 
 **`basepairs`**
 
-  `integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
+    integer, number of basepairs identified from the EML4-ALK fusion.
+    Default = 20.
 $$\\[0.1in]$$  
 
 **Output:**
 
-If EML4-ALK is detected, a `table` of identified EML4 basepairs is returned, with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
+If EML4-ALK is detected, a `table` of identified EML4 basepairs is returned, 
+with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK
+was detected" is returned.
 
 **Examples:**
 
 ```{r EML4_sequence}
-EML4_sequence(EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2), basepairs = 20)
-EML4_sequence(EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2), basepairs = 20)
+EML4_sequence(EML4_ALK_detection(file = H3122_bam, 
+                                    genome = "hg38", 
+                                    mates = 2), 
+                basepairs = 20)
+EML4_sequence(EML4_ALK_detection(file = HCC827_bam, 
+                                    genome = "hg38", 
+                                    mates = 2), 
+                basepairs = 20)
 
 ```
 
@@ -144,74 +178,98 @@ $$\\[0.1in]$$
 
 **`reads`**
 
-  `data.frame` returned by EML4_ALK_detection().
+    data.frame returned by EML4_ALK_detection().
 $$\\[0.1in]$$  
 
 **`basepairs`**
 
-  `integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
+    integer, number of basepairs identified from the EML4-ALK fusion. 
+    Default = 20.
 $$\\[0.1in]$$ 
 
 **Output:**
 
-If EML4-ALK is detected, a `table` of identified ALK basepairs is returned, with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
+If EML4-ALK is detected, a `table` of identified ALK basepairs is returned, with
+the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was
+detected" is returned.
 
 **Examples:**
 
 ```{r ALK_sequence}
-ALK_sequence(EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2), basepairs = 20)
-ALK_sequence(EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2), basepairs = 20)
+ALK_sequence(EML4_ALK_detection(file = H3122_bam, 
+                                genome = "hg38", 
+                                mates = 2), 
+                basepairs = 20)
+ALK_sequence(EML4_ALK_detection(file = HCC827_bam,
+                                genome = "hg38", 
+                                mates = 2), 
+                basepairs = 20)
 
 ```
 
 ## `break_position()`
-This function identifies the genomic position in EML4 where the breakpoint has happened.
+This function identifies the genomic position in EML4 where the breakpoint has
+happened.
 
 **Input:**
 $$\\[0.1in]$$
 
 **`reads`**
 
-  `data.frame` returned by EML4_ALK_detection().
+    data.frame returned by EML4_ALK_detection().
 $$\\[0.1in]$$
 
 **Output:**
 
-If EML4-ALK is detected, a `table` of genomic positions is returned with the number of corresponding reads for each sequence. Otherwise "No EML4-ALK was detected" is returned.
+If EML4-ALK is detected, a `table` of genomic positions is returned with the
+number of corresponding reads for each sequence. Otherwise "No EML4-ALK was
+detected" is returned.
 
 **Examples:**
 
 ```{r break_position}
-break_position(EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2))
-break_position(EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2))
+break_position(EML4_ALK_detection(file = H3122_bam, 
+                                    genome = "hg38", 
+                                    mates = 2))
+break_position(EML4_ALK_detection(file = HCC827_bam, 
+                                    genome = "hg38", 
+                                    mates = 2))
 
 ```
 
 ## `break_position_depth()`
-This function identifies the read depth at the basepair before the breakpoint in EML4.
+This function identifies the read depth at the basepair before the breakpoint in
+EML4.
 
 **Input:**
 $$\\[0.1in]$$
 
 **`file`**
 
-  The name of the file which the data are to be read from.
+    The name of the file which the data are to be read from.
 $$\\[0.1in]$$
 
 **`reads`**
 
-  `data.frame` returned by EML4_ALK_detection().
+    data.frame returned by EML4_ALK_detection().
 $$\\[0.1in]$$
 
 **Output:**
 
-If EML4-ALK is detected a single `integer` corresponding to the read depth at the breakpoint is returned. Otherwise "No EML4-ALK was detected" is returned
+If EML4-ALK is detected a single `integer` corresponding to the read depth at 
+the breakpoint is returned. Otherwise "No EML4-ALK was detected" is returned
 
 **Examples:**
 
 ```{r break_position_depth}
-break_position_depth(H3122_bam, EML4_ALK_detection(file = H3122_bam, genome = "hg38", mates = 2))
-break_position_depth(HCC827_bam, EML4_ALK_detection(file = HCC827_bam, genome = "hg38", mates = 2))
+break_position_depth(H3122_bam, 
+                        EML4_ALK_detection(file = H3122_bam, 
+                                        genome = "hg38", 
+                                        mates = 2))
+break_position_depth(HCC827_bam, 
+                        EML4_ALK_detection(file = HCC827_bam, 
+                                        genome = "hg38", 
+                                        mates = 2))
 
 ```
 
@@ -223,33 +281,47 @@ $$\\[0.1in]$$
 
 **`file`**
 
-  The name of the file which the data are to be read from.
+    The name of the file which the data are to be read from.
 $$\\[0.1in]$$
 
 **`genome`**
 
-  `character` representing the reference genome. Can be either "hg38" or "hg19". Default = "hg38".
+    character representing the reference genome. 
+    Can be either "hg38" or "hg19".
+    Default = "hg38".
 $$\\[0.1in]$$ 
 
-**`mates`**	
+**`mates`**
 
-  `interger`, the minimum number EML4-ALK mate pairs needed to be detected in order to call a variant. Default = 2.
+    integer, the minimum number EML4-ALK mate pairs needed to be detected in
+    order to call a variant. Default = 2.
 $$\\[0.1in]$$
 
 **`basepairs`**
 
-  `integer`, number of basepairs identified from the EML4-ALK fusion. Default = 20.
+    integer, number of basepairs identified from the EML4-ALK fusion. 
+    Default = 20.
 $$\\[0.1in]$$ 
 
 **Output:** 
 
-A `list` object with clipped_reads corresponding to `EML4_ALK_detection()`, last_EML4 corresponding to `EML4_sequence()`, first_ALK corresponding to `ALK_sequence()`, breakpoint corresponding to `break_position()`, and read_depth corresponding to `break_position_depth()`.
+A `list` object with clipped_reads corresponding to `EML4_ALK_detection()`,
+last_EML4 corresponding to `EML4_sequence()`, 
+first_ALK corresponding to `ALK_sequence()`, 
+breakpoint corresponding to `break_position()`, 
+and read_depth corresponding to `break_position_depth()`.
 
 **Examples:**
 
 ```{r EML4_ALK_analysis_results, message=FALSE}
-H3122_results <- EML4_ALK_analysis(file = H3122_bam, genome = "hg38", mates = 2, basepairs = 20)
-HCC827_results <- EML4_ALK_analysis(file = HCC827_bam, genome = "hg38", mates = 2, basepairs = 20)
+H3122_results <- EML4_ALK_analysis(file = H3122_bam, 
+                                    genome = "hg38", 
+                                    mates = 2, 
+                                    basepairs = 20)
+HCC827_results <- EML4_ALK_analysis(file = HCC827_bam, 
+                                    genome = "hg38", 
+                                    mates = 2, 
+                                    basepairs = 20)
 
 ```
 \small
@@ -272,12 +344,12 @@ HCC827_results
 
 ```
 
-```{r session}
+```{r session, echo = FALSE}
 session_info(
-  pkgs = "attached",
-  include_base = FALSE,
-  dependencies = NA,
-  to_file = FALSE
+    pkgs = "attached",
+    include_base = FALSE,
+    dependencies = NA,
+    to_file = FALSE
 )
 
 ```

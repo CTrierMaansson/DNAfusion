@@ -9,12 +9,16 @@ EML4_ALK_detection(file, genome = "hg38", mates = 2)
 \arguments{
 \item{file}{The name of the file which the data are to be read from.}
 
-\item{genome}{\verb{Character string} representing the reference genome. Can be either "hg38" or "hg19". Default = "hg38".}
+\item{genome}{\verb{Character string} representing the reference genome.
+Can be either "hg38" or "hg19". Default = "hg38".}
 
-\item{mates}{\code{Interger}, the minimum number EML4-ALK mate pairs needed to be detected in order to call a variant. Default = 2.}
+\item{mates}{\code{Interger}, the minimum number EML4-ALK mate pairs
+needed to be detected in order to call a variant. Default = 2.}
 }
 \value{
-If EML4-ALK is detected a \code{data.frame} with soft-clipped reads representing EML4-ALK is returned. Otherwise "No EML4-ALK was detected" is returned.
+If EML4-ALK is detected a \code{data.frame} with soft-clipped reads
+representing EML4-ALK is returned.
+Otherwise "No EML4-ALK was detected" is returned.
 }
 \description{
 This function looks for EML4-ALK mate pair reads in the BAM file.
@@ -28,9 +32,9 @@ HCC827_bam <-  system.file("extdata",
 package = "Genefusiondiscover")
 
 EML4_ALK_detection(file = H3122_bam,
- genome = "hg38",
-  mates = 2)
+                    genome = "hg38",
+                    mates = 2)
 EML4_ALK_detection(file = HCC827_bam,
- genome = "hg38",
-  mates = 2)
+                    genome = "hg38",
+                    mates = 2)
 }
