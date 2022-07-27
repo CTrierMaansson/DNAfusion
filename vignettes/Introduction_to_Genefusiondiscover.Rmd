@@ -23,7 +23,7 @@ abstract: "Circulating tumor DNA (ctDNA) containing somatic mutations
 vignette: |
   %\VignetteIndexEntry{Introduction to Genefusiondiscover}
   %\VignetteEncoding{UTF-8} 
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}
