@@ -23,7 +23,8 @@ Suggests:
     rmarkdown,
     usethis,
     devtools,
-    testthat
+    testthat,
+    BiocStyle
 VignetteBuilder: knitr
 Imports:
  bamsignals,
