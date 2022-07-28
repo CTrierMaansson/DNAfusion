@@ -7,7 +7,7 @@ author:
 - Emma Roger Andersen
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output:
-  BiocStyle::html_document:
+  BiocStyle::pdf_document:
     toc: yes
     toc_depth: 3
     number_sections: yes

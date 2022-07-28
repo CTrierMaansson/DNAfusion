@@ -12,7 +12,7 @@
 <meta name="author" content="Christoffer Trier Maansson" />
 <meta name="author" content="Emma Roger Andersen" />
 
-<meta name="date" content="2022-07-27" />
+<meta name="date" content="2022-07-28" />
 
 <title>Genefusiondiscover </title>
 
@@ -780,7 +780,7 @@ function toggle_visibility(id1) {
 <h1 class="title toc-ignore">Genefusiondiscover</h1>
 <h3 class="subtitle"><a href="https://github.com/CTrierMaansson/Genefusiondiscover" class="uri">https://github.com/CTrierMaansson/Genefusiondiscover</a></h3>
 <p class="author-name">Christoffer Trier Maansson and Emma Roger Andersen</p>
-<h4 class="date">27 jul 2022</h4>
+<h4 class="date">28 jul 2022</h4>
 <h4 class="abstract">Abstract</h4>
 <p>Circulating tumor DNA (ctDNA) containing somatic mutations can be found in blood plasma.
 This includes DNA fusions, such as the EML4-ALK, which can be an oncogenic driver in non-small cell lung cancer.This is an introduction to the <strong>Genefusiondiscover</strong> package for R, which can be used to evaluate whether EML4-ALK is present in blood plasma.</p>
@@ -791,17 +791,18 @@ This includes DNA fusions, such as the EML4-ALK, which can be an oncogenic drive
 <div id="TOC">
 <ul>
 <li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a></li>
-<li><a href="#package-data"><span class="toc-section-number">2</span> Package data</a></li>
-<li><a href="#functions"><span class="toc-section-number">3</span> Functions</a>
+<li><a href="#installation"><span class="toc-section-number">2</span> Installation</a></li>
+<li><a href="#package-data"><span class="toc-section-number">3</span> Package data</a></li>
+<li><a href="#functions"><span class="toc-section-number">4</span> Functions</a>
 <ul>
-<li><a href="#eml4_alk_detection"><span class="toc-section-number">3.1</span> <code>EML4_ALK_detection()</code></a></li>
-<li><a href="#eml4_sequence"><span class="toc-section-number">3.2</span> <code>EML4_sequence()</code></a></li>
-<li><a href="#alk_sequence"><span class="toc-section-number">3.3</span> <code>ALK_sequence()</code></a></li>
-<li><a href="#break_position"><span class="toc-section-number">3.4</span> <code>break_position()</code></a></li>
-<li><a href="#break_position_depth"><span class="toc-section-number">3.5</span> <code>break_position_depth()</code></a></li>
-<li><a href="#eml4_alk_analysis"><span class="toc-section-number">3.6</span> <code>EML4_ALK_analysis()</code></a></li>
+<li><a href="#eml4_alk_detection"><span class="toc-section-number">4.1</span> <code>EML4_ALK_detection()</code></a></li>
+<li><a href="#eml4_sequence"><span class="toc-section-number">4.2</span> <code>EML4_sequence()</code></a></li>
+<li><a href="#alk_sequence"><span class="toc-section-number">4.3</span> <code>ALK_sequence()</code></a></li>
+<li><a href="#breakposition"><span class="toc-section-number">4.4</span> <code>breakPosition()</code></a></li>
+<li><a href="#breakpositiondepth"><span class="toc-section-number">4.5</span> <code>breakPositionDepth()</code></a></li>
+<li><a href="#eml4_alk_analysis"><span class="toc-section-number">4.6</span> <code>EML4_ALK_analysis()</code></a></li>
 </ul></li>
-<li><a href="#session-info"><span class="toc-section-number">4</span> Session info</a></li>
+<li><a href="#session-info"><span class="toc-section-number">5</span> Session info</a></li>
 </ul>
 </div>
 
@@ -825,31 +826,41 @@ whether EML4-ALK is detected and serves as input for the next four exploratory
 functions characterizing the EML4-ALK variant. The last function
 <code>EML4_ALK_analysis()</code> combines the output of the exploratory functions.</p>
 <p>To serve as examples, this package includes BAM files representing the EML4-ALK
-positive cell line H3122 and the EML4-ALK negative cell line, HCC827.<br />
-# Installation</p>
-<p>Use <strong>devtools</strong> to install <strong>Genefusiondiscover</strong>.</p>
+positive cell line H3122 and the EML4-ALK negative cell line, HCC827.</p>
+</div>
+<div id="installation" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Installation</h1>
+<p>Use <strong>devtools</strong> to install the most recent version of
+<strong>Genefusiondiscover</strong> from the GitHub repository.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(devtools)) <span class="fu">install.packages</span>(<span class="st">&#39;devtools&#39;</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;CTrierMaansson/Genefusiondiscover&quot;</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Genefusiondiscover)</span></code></pre></div>
+<p>Alternatively, install <strong>Genefusiondiscover</strong> published at
+<strong>Bioconductor</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;Genefusiondiscover&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Genefusiondiscover)</span></code></pre></div>
 </div>
-<div id="package-data" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Package data</h1>
+<div id="package-data" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Package data</h1>
 <p>BAM files from the cell lines, H3122 and HCC827, are included in the package and
 can be used as examples to explore the functions.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>H3122_bam <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;H3122_EML4.bam&quot;</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">package =</span> <span class="st">&quot;Genefusiondiscover&quot;</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>HCC827_bam <span class="ot">&lt;-</span>  <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;HCC827_EML4.bam&quot;</span>, </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">package =</span> <span class="st">&quot;Genefusiondiscover&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>H3122_bam <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;H3122_EML4.bam&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">package =</span> <span class="st">&quot;Genefusiondiscover&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>HCC827_bam <span class="ot">&lt;-</span>  <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;HCC827_EML4.bam&quot;</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">package =</span> <span class="st">&quot;Genefusiondiscover&quot;</span>)</span></code></pre></div>
 <div style="page-break-after: always;"></div>
 </div>
-<div id="functions" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Functions</h1>
-<div id="eml4_alk_detection" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> <code>EML4_ALK_detection()</code></h2>
+<div id="functions" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Functions</h1>
+<div id="eml4_alk_detection" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> <code>EML4_ALK_detection()</code></h2>
 <p>This function looks for EML4-ALK mate pair reads in the BAM file.</p>
 <p><strong>Input:</strong>
 <span class="math display">\[\\[0.1in]\]</span></p>
@@ -871,30 +882,30 @@ representing EML4-ALK is returned.
 Otherwise “No EML4-ALK was detected” is returned.</p>
 <p><strong>Examples:</strong>
 </p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">mates =</span> <span class="dv">2</span>))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                            sequences</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 726 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 727 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 728 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 729 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 731 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 733 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         mate position cigar</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 726 29223691 42299657 94M2S</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 727 29223375 42299657 94M2S</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 728 29223479 42299657 94M2S</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 729 29223686 42299657 94M2S</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 731 29223636 42299657 94M2S</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 733 29223687 42299657 94M2S</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">mates =</span> <span class="dv">2</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">mates =</span> <span class="dv">2</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                            sequences</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 726 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 727 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 728 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 729 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 731 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 733 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         mate position cigar</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 726 29223691 42299657 94M2S</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 727 29223375 42299657 94M2S</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 728 29223479 42299657 94M2S</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 729 29223686 42299657 94M2S</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 731 29223636 42299657 94M2S</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 733 29223687 42299657 94M2S</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">mates =</span> <span class="dv">2</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
 </div>
-<div id="eml4_sequence" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> <code>EML4_sequence()</code></h2>
+<div id="eml4_sequence" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> <code>EML4_sequence()</code></h2>
 <p>This function identifies the basepairs leading up to the EML4 breakpoint.</p>
 <p><strong>Input:</strong>
 <span class="math display">\[\\[0.1in]\]</span></p>
@@ -910,21 +921,21 @@ Default = 20.</code></pre>
 with the number of corresponding reads for each sequence. Otherwise “No EML4-ALK
 was detected” is returned.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">EML4_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>), </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EML4_seq</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CCAGGCTGGAGTGCAGTGGT GGAGTGCAGTGGTGTGATTT TCAGGCTGGAGTGCAGTGGT </span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  201                    1                    1</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">EML4_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>), </span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">EML4_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>), </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EML4_seq</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CCAGGCTGGAGTGCAGTGGT GGAGTGCAGTGGTGTGATTT TCAGGCTGGAGTGCAGTGGT </span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  201                    1                    1</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">EML4_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>), </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
 </div>
-<div id="alk_sequence" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> <code>ALK_sequence()</code></h2>
+<div id="alk_sequence" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> <code>ALK_sequence()</code></h2>
 <p>This function identifies the basepairs following the ALK breakpoint.</p>
 <p><strong>Input:</strong>
 <span class="math display">\[\\[0.1in]\]</span></p>
@@ -940,43 +951,43 @@ Default = 20.</code></pre>
 the number of corresponding reads for each sequence. Otherwise “No EML4-ALK was
 detected” is returned.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ALK_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">mates =</span> <span class="dv">2</span>), </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ALK_seq</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CAGAATTTTAGCTTTGCAAT      CGGATTTTTAGCTTT CGGATTTTTAGCTTTTCATT </span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CGGAATTTTAGCTTTGCATT                   CT                  CTG </span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    8                    3 </span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 CTGA                CTGAT             CTGATTTT </span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   11                   16                    5 </span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            CTGATTTTT           CTGATTTTTA          CTGATTTTTAG </span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    6                    3                    3 </span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGATTTGCATT         CTGATTTTTAGC        CTGATTTTTAGCT </span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                   14                   10 </span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       CTGATTTTTAGCTT      CTGATTTTTAGCTTT     CTGATTTTTAGCTTTG </span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   10                    3                    4 </span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    CTGATTTTTAGCTTTGC   CTGATTTTTAGCTTTGCA  CTGATTTTTAGCTTTGCAT </span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    7                    8                    1 </span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTGCATT CTGATTTTTAGCTTTGCAAT     CTGATTTTTAGCTTTT </span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   71                    1                    1 </span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTTCATA          CTGATTTTTAT     CTGATTTTTATCTTTG </span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTATCTTTGCATT CTGATTTTTATCTTTTGATT CTGTGTTTTAGATTTGCATT </span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    2                    1                    1 </span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGTTTTTTATCTTTGCAAT                CTGAA CTTATTTTTATCTTTGCATT </span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    1 </span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            TTAGCTTTG </span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ALK_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam,</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>                                <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>                                <span class="at">mates =</span> <span class="dv">2</span>), </span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>                <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ALK_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">mates =</span> <span class="dv">2</span>), </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ALK_seq</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CAGAATTTTAGCTTTGCAAT      CGGATTTTTAGCTTT CGGATTTTTAGCTTTTCATT </span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CGGAATTTTAGCTTTGCATT                   CT                  CTG </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    8                    3 </span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 CTGA                CTGAT             CTGATTTT </span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   11                   16                    5 </span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            CTGATTTTT           CTGATTTTTA          CTGATTTTTAG </span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    6                    3                    3 </span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGATTTGCATT         CTGATTTTTAGC        CTGATTTTTAGCT </span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                   14                   10 </span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       CTGATTTTTAGCTT      CTGATTTTTAGCTTT     CTGATTTTTAGCTTTG </span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   10                    3                    4 </span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    CTGATTTTTAGCTTTGC   CTGATTTTTAGCTTTGCA  CTGATTTTTAGCTTTGCAT </span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    7                    8                    1 </span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTGCATT CTGATTTTTAGCTTTGCAAT     CTGATTTTTAGCTTTT </span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   71                    1                    1 </span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTTCATA          CTGATTTTTAT     CTGATTTTTATCTTTG </span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTATCTTTGCATT CTGATTTTTATCTTTTGATT CTGTGTTTTAGATTTGCATT </span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    2                    1                    1 </span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGTTTTTTATCTTTGCAAT                CTGAA CTTATTTTTATCTTTGCATT </span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    1 </span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            TTAGCTTTG </span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ALK_sequence</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>                                <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>                                <span class="at">mates =</span> <span class="dv">2</span>), </span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>                <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
 </div>
-<div id="break_position" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> <code>break_position()</code></h2>
+<div id="breakposition" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> <code>breakPosition()</code></h2>
 <p>This function identifies the genomic position in EML4 where the breakpoint has
 happened.</p>
 <p><strong>Input:</strong>
@@ -989,19 +1000,19 @@ happened.</p>
 number of corresponding reads for each sequence. Otherwise “No EML4-ALK was
 detected” is returned.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>))</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; break_pos</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42299750 42299757 </span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      202        1</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>))</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">breakPosition</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; break_pos</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42299750 42299757 </span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      202        1</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">breakPosition</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>))</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
 </div>
-<div id="break_position_depth" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> <code>break_position_depth()</code></h2>
+<div id="breakpositiondepth" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> <code>breakPositionDepth()</code></h2>
 <p>This function identifies the read depth at the basepair before the breakpoint in
 EML4.</p>
 <p><strong>Input:</strong>
@@ -1016,19 +1027,19 @@ EML4.</p>
 <p>If EML4-ALK is detected a single <code>integer</code> corresponding to the read depth at
 the breakpoint is returned. Otherwise “No EML4-ALK was detected” is returned</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position_depth</span>(H3122_bam, </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">mates =</span> <span class="dv">2</span>))</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 251</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position_depth</span>(HCC827_bam, </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">mates =</span> <span class="dv">2</span>))</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">breakPositionDepth</span>(H3122_bam, </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">mates =</span> <span class="dv">2</span>))</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 251</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">breakPositionDepth</span>(HCC827_bam, </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">mates =</span> <span class="dv">2</span>))</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
 </div>
-<div id="eml4_alk_analysis" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> <code>EML4_ALK_analysis()</code></h2>
+<div id="eml4_alk_analysis" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> <code>EML4_ALK_analysis()</code></h2>
 <p>This functions collects the results from the other functions of the package.</p>
 <p><strong>Input:</strong>
 <span class="math display">\[\\[0.1in]\]</span></p>
@@ -1055,77 +1066,77 @@ first_ALK corresponding to <code>ALK_sequence()</code>,
 breakpoint corresponding to <code>break_position()</code>,
 and read_depth corresponding to <code>break_position_depth()</code>.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>H3122_results <span class="ot">&lt;-</span> <span class="fu">EML4_ALK_analysis</span>(<span class="at">file =</span> H3122_bam, </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>, </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>HCC827_results <span class="ot">&lt;-</span> <span class="fu">EML4_ALK_analysis</span>(<span class="at">file =</span> HCC827_bam, </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>, </span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">basepairs =</span> <span class="dv">20</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(H3122_results<span class="sc">$</span>clipped_reads)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                            sequences</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 726 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 727 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 728 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 729 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 731 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 733 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         mate position cigar</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 726 29223691 42299657 94M2S</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 727 29223375 42299657 94M2S</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 728 29223479 42299657 94M2S</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 729 29223686 42299657 94M2S</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 731 29223636 42299657 94M2S</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 733 29223687 42299657 94M2S</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>last_EML4</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EML4_seq</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CCAGGCTGGAGTGCAGTGGT GGAGTGCAGTGGTGTGATTT TCAGGCTGGAGTGCAGTGGT </span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  201                    1                    1</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>first_ALK</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ALK_seq</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CAGAATTTTAGCTTTGCAAT      CGGATTTTTAGCTTT CGGATTTTTAGCTTTTCATT </span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CGGAATTTTAGCTTTGCATT                   CT                  CTG </span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    8                    3 </span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 CTGA                CTGAT             CTGATTTT </span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   11                   16                    5 </span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            CTGATTTTT           CTGATTTTTA          CTGATTTTTAG </span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    6                    3                    3 </span></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGATTTGCATT         CTGATTTTTAGC        CTGATTTTTAGCT </span></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                   14                   10 </span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       CTGATTTTTAGCTT      CTGATTTTTAGCTTT     CTGATTTTTAGCTTTG </span></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   10                    3                    4 </span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    CTGATTTTTAGCTTTGC   CTGATTTTTAGCTTTGCA  CTGATTTTTAGCTTTGCAT </span></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    7                    8                    1 </span></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTGCATT CTGATTTTTAGCTTTGCAAT     CTGATTTTTAGCTTTT </span></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   71                    1                    1 </span></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTTCATA          CTGATTTTTAT     CTGATTTTTATCTTTG </span></span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTATCTTTGCATT CTGATTTTTATCTTTTGATT CTGTGTTTTAGATTTGCATT </span></span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    2                    1                    1 </span></span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGTTTTTTATCTTTGCAAT                CTGAA CTTATTTTTATCTTTGCATT </span></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    1 </span></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            TTAGCTTTG </span></span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1</span></span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>breakpoint</span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; break_pos</span></span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42299750 42299757 </span></span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      202        1</span></span>
-<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>read_depth</span>
-<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 251</span></span>
-<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>HCC827_results</span>
-<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>H3122_results <span class="ot">&lt;-</span> <span class="fu">EML4_ALK_analysis</span>(<span class="at">file =</span> H3122_bam, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>HCC827_results <span class="ot">&lt;-</span> <span class="fu">EML4_ALK_analysis</span>(<span class="at">file =</span> HCC827_bam, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>, </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">basepairs =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(H3122_results<span class="sc">$</span>clipped_reads)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                            sequences</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 726 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 727 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 728 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 729 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 731 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 733 TTGCTTCTTTCACTTAGTTTTTTTTGTTTTGTTTTGTTTGTTTGTTTTTTGAGATGGGGTTTCACTCTTGTTGCCCAGGCTGGAGTGCAGTGGTCT</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         mate position cigar</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 726 29223691 42299657 94M2S</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 727 29223375 42299657 94M2S</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 728 29223479 42299657 94M2S</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 729 29223686 42299657 94M2S</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 731 29223636 42299657 94M2S</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 733 29223687 42299657 94M2S</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>last_EML4</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; EML4_seq</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CCAGGCTGGAGTGCAGTGGT GGAGTGCAGTGGTGTGATTT TCAGGCTGGAGTGCAGTGGT </span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                  201                    1                    1</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>first_ALK</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ALK_seq</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CAGAATTTTAGCTTTGCAAT      CGGATTTTTAGCTTT CGGATTTTTAGCTTTTCATT </span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CGGAATTTTAGCTTTGCATT                   CT                  CTG </span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    8                    3 </span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 CTGA                CTGAT             CTGATTTT </span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   11                   16                    5 </span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            CTGATTTTT           CTGATTTTTA          CTGATTTTTAG </span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    6                    3                    3 </span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGATTTGCATT         CTGATTTTTAGC        CTGATTTTTAGCT </span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                   14                   10 </span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       CTGATTTTTAGCTT      CTGATTTTTAGCTTT     CTGATTTTTAGCTTTG </span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   10                    3                    4 </span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    CTGATTTTTAGCTTTGC   CTGATTTTTAGCTTTGCA  CTGATTTTTAGCTTTGCAT </span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    7                    8                    1 </span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTGCATT CTGATTTTTAGCTTTGCAAT     CTGATTTTTAGCTTTT </span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                   71                    1                    1 </span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTAGCTTTTCATA          CTGATTTTTAT     CTGATTTTTATCTTTG </span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    2 </span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGATTTTTATCTTTGCATT CTGATTTTTATCTTTTGATT CTGTGTTTTAGATTTGCATT </span></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    2                    1                    1 </span></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; CTGTTTTTTATCTTTGCAAT                CTGAA CTTATTTTTATCTTTGCATT </span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1                    1                    1 </span></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            TTAGCTTTG </span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                    1</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>breakpoint</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; break_pos</span></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42299750 42299757 </span></span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      202        1</span></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>H3122_results<span class="sc">$</span>read_depth</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 251</span></span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>HCC827_results</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
-<div id="session-info" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Session info</h1>
+<div id="session-info" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Session info</h1>
 <pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
 #&gt;  setting  value
 #&gt;  version  R version 4.2.1 (2022-06-23 ucrt)
@@ -1136,7 +1147,7 @@ and read_depth corresponding to <code>break_position_depth()</code>.</p>
 #&gt;  collate  Danish_Denmark.utf8
 #&gt;  ctype    Danish_Denmark.utf8
 #&gt;  tz       Europe/Paris
-#&gt;  date     2022-07-27
+#&gt;  date     2022-07-28
 #&gt;  pandoc   2.17.1.1 @ C:/Program Files/RStudio/bin/quarto/bin/ (via rmarkdown)
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
@@ -1144,7 +1155,7 @@ and read_depth corresponding to <code>break_position_depth()</code>.</p>
 #&gt;  BiocStyle          * 2.25.0  2022-04-28 [1] Bioconductor
 #&gt;  devtools           * 2.4.4   2022-07-20 [1] CRAN (R 4.2.1)
 #&gt;  dplyr              * 1.0.9   2022-04-28 [1] CRAN (R 4.2.0)
-#&gt;  Genefusiondiscover * 0.99.0  2022-07-27 [1] Github (CTrierMaansson/Genefusiondiscover@8e86567)
+#&gt;  Genefusiondiscover * 0.99.0  2022-07-28 [1] Github (CTrierMaansson/Genefusiondiscover@01807ce)
 #&gt;  usethis            * 2.1.6   2022-05-25 [1] CRAN (R 4.2.1)
 #&gt; 
 #&gt;  [1] C:/Users/Christoffer/AppData/Local/R/win-library/4.2
