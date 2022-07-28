@@ -1,5 +1,5 @@
 Package: Genefusiondiscover
-Title: Identification of EML4-ALK variants using paired-end sequencing
+Title: Identification of gene fusions using paired-end sequencing
 Version: 0.99.0
 biocViews: TargetedResequencing, Genetics, GeneFusionDetection, Sequencing
 Authors@R: 
@@ -14,7 +14,7 @@ Description: Paired-end sequencing of cfDNA generated BAM files can be used as i
   files generated with the AVENIO Oncology Analysis Software. These files are made using
   the AVENIO ctDNA surveillance kit and Illumina Nextseq 500 sequencing. This is a targeted 
   hybridization NGS approach and includes ALK-specific but not EML4-specific probes. 
-License: GPL-3
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
@@ -34,4 +34,5 @@ Imports:
 Depends:
   dplyr,
   R (>= 4.2.0)
+BugReports: https://github.com/CTrierMaansson/Genefusiondiscover/issues
  

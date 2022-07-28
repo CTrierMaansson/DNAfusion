@@ -60,15 +60,29 @@ functions characterizing the EML4-ALK variant. The last function
 
 To serve as examples, this package includes BAM files representing the EML4-ALK
 positive cell line H3122 and the EML4-ALK negative cell line, HCC827.  
+
 # Installation
 
-Use **devtools** to install **Genefusiondiscover**.
+Use **devtools** to install the most recent version of
+**Genefusiondiscover** from the GitHub repository.
 
-```{r setup, message=FALSE, results = 'hide'}
+```{r setup_devtools, message=FALSE, results = 'hide'}
 if (!require(devtools)) install.packages('devtools')
 library(devtools)
 
 install_github("CTrierMaansson/Genefusiondiscover")
+library(Genefusiondiscover)
+
+```
+
+Alternatively, install **Genefusiondiscover** published at 
+**Bioconductor**
+
+```{r setup_bioconductor, message=FALSE, results = 'hide', eval = FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("Genefusiondiscover")
 library(Genefusiondiscover)
 
 ```

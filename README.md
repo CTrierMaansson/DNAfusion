@@ -9,13 +9,24 @@ Genefusiondiscover is under active development. In the future the package will i
 
 ## Installation
 
-Latest version can be installed through github
+Use devtools to install the most recent version of Genefusiondiscover from the GitHub repository.
 
-```{r}
+```{R}
 if (!require(devtools)) install.packages('devtools')
 library(devtools)
 
 install_github("CTrierMaansson/Genefusiondiscover", build_vignettes = TRUE)
+library(Genefusiondiscover)
+
+```
+
+Alternatively, install Genefusiondiscover published at Bioconductor.
+
+```{R}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("Genefusiondiscover")
 library(Genefusiondiscover)
 
 ```
