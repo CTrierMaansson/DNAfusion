@@ -238,7 +238,7 @@ ALK_sequence <- function(reads, basepairs = 20){
 #'                                     genome = "hg38",
 #'                                     mates = 2))
 #' @export
-break_position <- function(reads){
+breakPosition <- function(reads){
     if(!isa(reads, "data.frame")){
         if(reads == "No EML4-ALK was detected"){
             return("No EML4-ALK was detected")
@@ -304,7 +304,7 @@ break_position <- function(reads){
 #'                                             genome = "hg38",
 #'                                             mates = 2))
 #' @export
-break_position_depth <- function(file, reads){
+breakPositionDepth <- function(file, reads){
     if(!isa(reads, "data.frame")){
         if(reads == "No EML4-ALK was detected"){
             return("No EML4-ALK was detected")
@@ -313,7 +313,7 @@ break_position_depth <- function(file, reads){
             return("ERROR: reads must be a data.frame")
             }
     }
-    break_pos_tab <- break_position(reads)
+    break_pos_tab <- breakPosition(reads)
     stop_pos <- as.numeric(names(which.max(break_pos_tab)))
     depth <- bamCoverage(file,
                             GRanges(seqnames = "chr2",
@@ -338,8 +338,8 @@ break_position_depth <- function(file, reads){
 #' clipped_reads corresponding to `EML4_ALK_detection()`, 
 #' last_EML4 corresponding to `EML4_sequence()`, 
 #' first_ALK corresponding to `ALK_sequence()`, 
-#' breakpoint corresponding to `break_position()`, 
-#' and read_depth corresponding to `break_position_depth()`.
+#' breakpoint corresponding to `breakPosition()`, 
+#' and read_depth corresponding to `breakPositionDepth()`.
 #' @examples
 #' H3122_bam <- system.file("extdata",
 #' "H3122_EML4.bam",
@@ -376,8 +376,8 @@ EML4_ALK_analysis <- function(file, genome = "hg38", mates = 2, basepairs = 20){
     }
     EML4 <- EML4_sequence(reads = res, basepairs = basepairs)
     ALK <- ALK_sequence(reads = res, basepairs = basepairs)
-    position <- break_position(reads = res)
-    position_depth <- break_position_depth(file = file, reads = res)
+    position <- breakPosition(reads = res)
+    position_depth <- breakPositionDepth(file = file, reads = res)
     return(list(clipped_reads = res,
                 last_EML4 = EML4,
                 first_ALK = ALK,

@@ -224,7 +224,7 @@ ALK_sequence(EML4_ALK_detection(file = HCC827_bam,
 
 ```
 
-## `break_position()`
+## `breakPosition()`
 This function identifies the genomic position in EML4 where the breakpoint has
 happened.
 
@@ -245,16 +245,16 @@ detected" is returned.
 **Examples:**
 
 ```{r break_position}
-break_position(EML4_ALK_detection(file = H3122_bam, 
+breakPosition(EML4_ALK_detection(file = H3122_bam, 
                                     genome = "hg38", 
                                     mates = 2))
-break_position(EML4_ALK_detection(file = HCC827_bam, 
+breakPosition(EML4_ALK_detection(file = HCC827_bam, 
                                     genome = "hg38", 
                                     mates = 2))
 
 ```
 
-## `break_position_depth()`
+## `breakPositionDepth()`
 This function identifies the read depth at the basepair before the breakpoint in
 EML4.
 
@@ -279,11 +279,11 @@ the breakpoint is returned. Otherwise "No EML4-ALK was detected" is returned
 **Examples:**
 
 ```{r break_position_depth}
-break_position_depth(H3122_bam, 
+breakPositionDepth(H3122_bam, 
                         EML4_ALK_detection(file = H3122_bam, 
                                         genome = "hg38", 
                                         mates = 2))
-break_position_depth(HCC827_bam, 
+breakPositionDepth(HCC827_bam, 
                         EML4_ALK_detection(file = HCC827_bam, 
                                         genome = "hg38", 
                                         mates = 2))

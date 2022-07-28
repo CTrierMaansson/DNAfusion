@@ -23,8 +23,8 @@ A \code{list} object with
 clipped_reads corresponding to \code{EML4_ALK_detection()},
 last_EML4 corresponding to \code{EML4_sequence()},
 first_ALK corresponding to \code{ALK_sequence()},
-breakpoint corresponding to \code{break_position()},
-and read_depth corresponding to \code{break_position_depth()}.
+breakpoint corresponding to \code{breakPosition()},
+and read_depth corresponding to \code{breakPositionDepth()}.
 }
 \description{
 This functions collects the results from the other functions of the package.
