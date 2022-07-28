@@ -10,7 +10,7 @@ EML4_sequence(reads, basepairs = 20)
 \item{reads}{\code{Data.frame} returned by EML4_ALK_detection().}
 
 \item{basepairs}{\code{Integer}, number of basepairs identified
-from the EML4-ALK fusion. Default = 20.}
+from the EML4-ALK fusion. Default=20.}
 }
 \value{
 If EML4-ALK is detected, returns a table of identified
@@ -23,17 +23,17 @@ This function identifies the basepairs leading up to the EML4 breakpoint.
 \examples{
 H3122_bam <- system.file("extdata",
 "H3122_EML4.bam",
-package = "Genefusiondiscover")
+package="Genefusiondiscover")
 HCC827_bam <-  system.file("extdata",
 "HCC827_EML4.bam",
-package = "Genefusiondiscover")
+package="Genefusiondiscover")
 
-EML4_sequence(EML4_ALK_detection(file = H3122_bam,
-                                    genome = "hg38",
-                                    mates = 2),
-                basepairs = 20)
-EML4_sequence(EML4_ALK_detection(file = HCC827_bam,
-                                    genome = "hg38",
-                                    mates = 2),
-                basepairs = 20)
+EML4_sequence(EML4_ALK_detection(file=H3122_bam,
+                                    genome="hg38",
+                                    mates=2),
+                basepairs=20)
+EML4_sequence(EML4_ALK_detection(file=HCC827_bam,
+                                    genome="hg38",
+                                    mates=2),
+                basepairs=20)
 }

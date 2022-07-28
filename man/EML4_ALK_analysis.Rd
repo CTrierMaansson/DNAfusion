@@ -10,13 +10,13 @@ EML4_ALK_analysis(file, genome = "hg38", mates = 2, basepairs = 20)
 \item{file}{The name of the file which the data are to be read from.}
 
 \item{genome}{\code{character} representing the reference genome.
-Can be either "hg38" or "hg19". Default = "hg38".}
+Can be either "hg38" or "hg19". Default="hg38".}
 
 \item{mates}{\code{interger}, the minimum number EML4-ALK mate pairs needed
-to be detected in order to call a variant. Default = 2.}
+to be detected in order to call a variant. Default=2.}
 
 \item{basepairs}{\code{integer}, number of basepairs identified
-from the EML4-ALK fusion. Default = 20.}
+from the EML4-ALK fusion. Default=20.}
 }
 \value{
 A \code{list} object with
@@ -32,17 +32,17 @@ This functions collects the results from the other functions of the package.
 \examples{
 H3122_bam <- system.file("extdata",
 "H3122_EML4.bam",
-package = "Genefusiondiscover")
+package="Genefusiondiscover")
 HCC827_bam <-  system.file("extdata",
 "HCC827_EML4.bam",
-package = "Genefusiondiscover")
+package="Genefusiondiscover")
 
-EML4_ALK_analysis(file = H3122_bam,
-                    genome = "hg38",
-                    mates = 2,
-                    basepairs = 20)
-EML4_ALK_analysis(file = HCC827_bam,
-                    genome = "hg38",
-                    mates = 2,
-                    basepairs = 20)
+EML4_ALK_analysis(file=H3122_bam,
+                    genome="hg38",
+                    mates=2,
+                    basepairs=20)
+EML4_ALK_analysis(file=HCC827_bam,
+                    genome="hg38",
+                    mates=2,
+                    basepairs=20)
 }

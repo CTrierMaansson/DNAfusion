@@ -798,8 +798,8 @@ This includes DNA fusions, such as the EML4-ALK, which can be an oncogenic drive
 <li><a href="#eml4_alk_detection"><span class="toc-section-number">4.1</span> <code>EML4_ALK_detection()</code></a></li>
 <li><a href="#eml4_sequence"><span class="toc-section-number">4.2</span> <code>EML4_sequence()</code></a></li>
 <li><a href="#alk_sequence"><span class="toc-section-number">4.3</span> <code>ALK_sequence()</code></a></li>
-<li><a href="#break_position"><span class="toc-section-number">4.4</span> <code>break_position()</code></a></li>
-<li><a href="#break_position_depth"><span class="toc-section-number">4.5</span> <code>break_position_depth()</code></a></li>
+<li><a href="#breakposition"><span class="toc-section-number">4.4</span> <code>breakPosition()</code></a></li>
+<li><a href="#breakpositiondepth"><span class="toc-section-number">4.5</span> <code>breakPositionDepth()</code></a></li>
 <li><a href="#eml4_alk_analysis"><span class="toc-section-number">4.6</span> <code>EML4_ALK_analysis()</code></a></li>
 </ul></li>
 <li><a href="#session-info"><span class="toc-section-number">5</span> Session info</a></li>
@@ -986,8 +986,8 @@ detected” is returned.</p>
 <span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>                <span class="at">basepairs =</span> <span class="dv">20</span>)</span>
 <span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
 </div>
-<div id="break_position" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> <code>break_position()</code></h2>
+<div id="breakposition" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> <code>breakPosition()</code></h2>
 <p>This function identifies the genomic position in EML4 where the breakpoint has
 happened.</p>
 <p><strong>Input:</strong>
@@ -1000,19 +1000,19 @@ happened.</p>
 number of corresponding reads for each sequence. Otherwise “No EML4-ALK was
 detected” is returned.</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">breakPosition</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>))</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; break_pos</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42299750 42299757 </span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      202        1</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">breakPosition</span>(<span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mates =</span> <span class="dv">2</span>))</span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;No EML4-ALK was detected&quot;</span></span></code></pre></div>
 </div>
-<div id="break_position_depth" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> <code>break_position_depth()</code></h2>
+<div id="breakpositiondepth" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> <code>breakPositionDepth()</code></h2>
 <p>This function identifies the read depth at the basepair before the breakpoint in
 EML4.</p>
 <p><strong>Input:</strong>
@@ -1027,12 +1027,12 @@ EML4.</p>
 <p>If EML4-ALK is detected a single <code>integer</code> corresponding to the read depth at
 the breakpoint is returned. Otherwise “No EML4-ALK was detected” is returned</p>
 <p><strong>Examples:</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position_depth</span>(H3122_bam, </span>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">breakPositionDepth</span>(H3122_bam, </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> H3122_bam, </span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">mates =</span> <span class="dv">2</span>))</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 251</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position_depth</span>(HCC827_bam, </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">breakPositionDepth</span>(HCC827_bam, </span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">EML4_ALK_detection</span>(<span class="at">file =</span> HCC827_bam, </span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, </span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">mates =</span> <span class="dv">2</span>))</span>
@@ -1155,7 +1155,7 @@ and read_depth corresponding to <code>break_position_depth()</code>.</p>
 #&gt;  BiocStyle          * 2.25.0  2022-04-28 [1] Bioconductor
 #&gt;  devtools           * 2.4.4   2022-07-20 [1] CRAN (R 4.2.1)
 #&gt;  dplyr              * 1.0.9   2022-04-28 [1] CRAN (R 4.2.0)
-#&gt;  Genefusiondiscover * 0.99.0  2022-07-27 [1] Github (CTrierMaansson/Genefusiondiscover@d3a3986)
+#&gt;  Genefusiondiscover * 0.99.0  2022-07-28 [1] Github (CTrierMaansson/Genefusiondiscover@2ea1a1f)
 #&gt;  usethis            * 2.1.6   2022-05-25 [1] CRAN (R 4.2.1)
 #&gt; 
 #&gt;  [1] C:/Users/Christoffer/AppData/Local/R/win-library/4.2
