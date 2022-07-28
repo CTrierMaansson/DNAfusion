@@ -231,10 +231,10 @@ ALK_sequence <- function(reads, basepairs=20){
 #' "HCC827_EML4.bam",
 #' package="Genefusiondiscover")
 #'
-#' break_position(EML4_ALK_detection(file=H3122_bam,
+#' breakPosition(EML4_ALK_detection(file=H3122_bam,
 #'                                     genome="hg38",
 #'                                     mates=2))
-#' break_position(EML4_ALK_detection(file=HCC827_bam,
+#' breakPosition(EML4_ALK_detection(file=HCC827_bam,
 #'                                     genome="hg38",
 #'                                     mates=2))
 #' @export
@@ -295,11 +295,11 @@ breakPosition <- function(reads){
 #' "HCC827_EML4.bam",
 #' package="Genefusiondiscover")
 #'
-#' break_position_depth(file=H3122_bam,
+#' breakPositionDepth(file=H3122_bam,
 #'                         EML4_ALK_detection(file=H3122_bam,
 #'                                             genome="hg38",
 #'                                             mates=2))
-#' break_position_depth(file=HCC827_bam,
+#' breakPositionDepth(file=HCC827_bam,
 #'                         EML4_ALK_detection(file=HCC827_bam,
 #'                                             genome="hg38",
 #'                                             mates=2))
