@@ -48,5 +48,5 @@ This requires build_vignettes = TRUE during installation with github
 
 Please cite package ‘Genefusiondiscover’ in publications:
 
-Christoffer Trier Maansson, Emma Roger Andersen, Maiken Parm Ulhoi, Peter Meldgaard, Boe Sandahl Sorensen (2022). Genefusiondiscover: An R package to identify gene fusions. R package version 0.99.0 
+Christoffer Trier Maansson, Emma Roger Andersen, Maiken Parm Ulhoi, Peter Meldgaard, Boe Sandahl Sorensen (2022). Genefusiondiscover: An R package to identify gene fusions. R/Bioconductor package version 0.99.0 
 <https://github.com/CTrierMaansson/Genefusiondiscover>
