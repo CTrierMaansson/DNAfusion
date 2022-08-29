@@ -1,5 +1,24 @@
+#' @keywords internal
+index_helper <- function(input){
+    fun <- function(str){
+        result <- sub("\\M.*", "", str)
+        splits <- strsplit(result, split = "S")
+        if(length(splits[[1]]) > 1){
+            splits = NA
+        }
+        else{
+            splits = splits
+        }
+        splits <- lapply(splits, as.numeric)
+        return(splits)
+    }
+    index2 <- vapply(input$cigar, FUN = fun, FUN.VALUE = list(1))
+    input$indeces <- index2
+    input <- input[!is.na(as.numeric(input[,5])),]
+    return(input)
+}
 #' Detection of EML4-ALK variants
-#'
+#' 
 #' This function looks for EML4-ALK mate pair reads in the BAM file.
 #' @import dplyr
 #' @importFrom GenomicRanges GRanges
@@ -41,36 +60,30 @@ EML4_ALK_detection <- function(file, genome="hg38", mates=2){
     what <- c("mpos", "pos", "seq","cigar")
     if (genome =="hg38"){
         which <- GRanges(seqnames="chr2", 
-                            IRanges(start=42169353, end=42332548))
+                         IRanges(start=42169353, end=42332548))
         param <- ScanBamParam(which=which, what=what)
         bam <- scanBam(file=file, param=param)
-        reads <- data.frame(sequences=bam$`chr2:42169353-42332548`$seq,
-                        mate=bam$`chr2:42169353-42332548`$mpos,
-                        position=bam$`chr2:42169353-42332548`$pos,
-                        cigar=bam$`chr2:42169353-42332548`$cigar)
-        reads <- reads[(29192774 < reads[,2] & reads[,2] < 29921586 & 
-                            !is.na(reads[,2])),]
+        reads <- as.data.frame(bam[['chr2:42169353-42332548']])
+        reads <- reads[(29192774 < reads[,3] & reads[,3] < 29921586 & 
+                            !is.na(reads[,3])),]
     }
     else{
         which <- GRanges(seqnames="chr2",
-                            IRanges(start=42396490, end=42559688))
+                         IRanges(start=42396490, end=42559688))
         param <- ScanBamParam(which=which, what=what)
         bam <- scanBam(file=file, param=param)
-        reads <- data.frame(sequences=bam$`chr2:42396490-42559688`$seq,
-                        mate=bam$`chr2:42396490-42559688`$mpos,
-                        position=bam$`chr2:42396490-42559688`$pos,
-                        cigar=bam$`chr2:42396490-42559688`$cigar)
-        reads <- reads[(29415640 < reads[,2] & reads[,2] < 30144477 & 
-                            !is.na(reads[,2])),]
-        }
-    if (length(reads[,1])<mates){
+        reads <- as.data.frame(bam[['chr2:42396490-42559688']])
+        reads <- reads[(29415640 < reads[,3] & reads[,3] < 30144477 & 
+                            !is.na(reads[,3])),]
+    }
+    if (length(reads[,4])<mates){
         res <- "No EML4-ALK was detected"
         return(res)
     }
-    clip_reads <- reads[reads[,4] != "96M",]
-    clip_reads <- clip_reads[!grepl("D", clip_reads[,4]),]
-    clip_reads <- clip_reads[!grepl("I", clip_reads[,4]),]
-    if (length(clip_reads[,1])<mates){
+    clip_reads <- reads[reads[,2] != "96M",]
+    clip_reads <- clip_reads[!grepl("D", clip_reads[,2]),]
+    clip_reads <- clip_reads[!grepl("I", clip_reads[,2]),]
+    if (length(clip_reads[,4])<mates){
         res <- "No EML4-ALK was detected"
         return(res)
     }
@@ -109,36 +122,18 @@ EML4_sequence <- function(reads, basepairs=20){
     if(!isa(reads, "data.frame")){
         if(reads == "No EML4-ALK was detected"){
             return("No EML4-ALK was detected")
-    }
-    else{
-        stop("reads must be a data.frame")
+        }
+        else{
+            stop("reads must be a data.frame")
         }
     }
     if(!isa(basepairs, "numeric")){
         stop("basepairs has to be a numeric")
     }
-    fun1 <- function(str) sub("\\M.*", "", str)
-    index1 <- vapply(reads$cigar, FUN=fun1, FUN.VALUE=character(1))
-    fun2 <- function(ind1){
-    if (length(ind1)>1){
-        return(NA)
-        }
-    else{
-        return(ind1)
-        }
-    }
-    fun3 <- function(ind){
-        splits <- strsplit(ind, split="S")
-        splits <- lapply(splits, as.numeric)
-        splits_ind <- lapply(splits, FUN=fun2)
-        return(splits_ind)
-    }
-    index2 <- vapply(index1, FUN=fun3, FUN.VALUE=list(1))
-    reads$indeces <- index2
-    reads <- reads[!is.na(as.numeric(reads[,5])),]
+    reads <- index_helper(reads)
     EML4_fun <- function(inp){
-        return(substring(inp[1], (as.numeric(inp[5])-(basepairs-1)),
-                        as.numeric(inp[5])))
+        return(substring(inp[4], (as.numeric(inp[5])-(basepairs-1)),
+                         as.numeric(inp[5])))
     }
     EML4_seq <- apply(reads, FUN=EML4_fun, MARGIN=1)
     EML4_tab <- table(EML4_seq)
@@ -178,35 +173,17 @@ ALK_sequence <- function(reads, basepairs=20){
         if(reads == "No EML4-ALK was detected"){
             return("No EML4-ALK was detected")
         }
-    else{
-        stop("reads must be a data.frame")
+        else{
+            stop("reads must be a data.frame")
         }
     }
     if(!isa(basepairs, "numeric")){
         stop("basepairs has to be a numeric")
     }
-    fun1 <- function(str) sub("\\M.*", "", str)
-    index1 <- vapply(reads$cigar, FUN=fun1, FUN.VALUE=character(1))
-    fun2 <- function(ind1){
-        if (length(ind1)>1){
-            return(NA)
-        }
-        else{
-            return(ind1)
-        }
-    }
-    fun3 <- function(ind){
-        splits <- strsplit(ind, split="S")
-        splits <- lapply(splits, as.numeric)
-        splits_ind <- lapply(splits, FUN=fun2)
-        return(splits_ind)
-    }
-    index2 <- vapply(index1, FUN=fun3, FUN.VALUE=list(1))
-    reads$indeces <- index2
-    reads <- reads[!is.na(as.numeric(reads[,5])),]
+    reads <- index_helper(reads)
     ALK_fun <- function(inp){
-        return(substring(inp[1], (as.numeric(inp[5])+1),
-                (as.numeric(inp[5])+basepairs)))
+        return(substring(inp[4], (as.numeric(inp[5])+1),
+                         (as.numeric(inp[5])+basepairs)))
     }
     ALK_seq <- apply(reads, FUN=ALK_fun, MARGIN=1)
     ALK_tab <- table(ALK_seq)
@@ -242,34 +219,16 @@ break_position <- function(reads){
     if(!isa(reads, "data.frame")){
         if(reads == "No EML4-ALK was detected"){
             return("No EML4-ALK was detected")
-            }
+        }
         else{
             stop("reads must be a data.frame")
-            }
-    }
-    fun1 <- function(str) sub("\\M.*", "", str)
-    index1 <- vapply(reads$cigar, FUN=fun1, FUN.VALUE=character(1))
-    fun2 <- function(ind1){
-    if (length(ind1)>1){
-        return(NA)
-        }
-    else{
-        return(ind1)
         }
     }
-    fun3 <- function(ind){
-        splits <- strsplit(ind, split="S")
-        splits <- lapply(splits, as.numeric)
-        splits_ind <- lapply(splits, FUN=fun2)
-        return(splits_ind)
-    }
-    index2 <- vapply(index1, FUN=fun3, FUN.VALUE=list(1))
-    reads$indeces <- index2
-    reads <- reads[!is.na(as.numeric(reads[,5])),]
+    reads <- index_helper(reads)
     reads[,5] <- as.numeric(reads[,5])
-    break_pos <- reads[,3] + (reads[,5]-1)
+    break_pos <- reads[,1] + (reads[,5]-1)
     break_pos_tab <- table(break_pos)
-    return(break_pos_tab)
+    return(break_pos_tab)    
 }
 
 
