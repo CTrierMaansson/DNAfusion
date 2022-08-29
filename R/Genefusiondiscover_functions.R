@@ -4,10 +4,10 @@ index_helper <- function(input){
         result <- sub("\\M.*", "", str)
         splits <- strsplit(result, split = "S")
         if(length(splits[[1]]) > 1){
-            splits = NA
+            splits <- NA
         }
         else{
-            splits = splits
+            splits <- splits
         }
         splits <- lapply(splits, as.numeric)
         return(splits)
@@ -60,7 +60,7 @@ EML4_ALK_detection <- function(file, genome="hg38", mates=2){
     what <- c("mpos", "pos", "seq","cigar")
     if (genome =="hg38"){
         which <- GRanges(seqnames="chr2", 
-                         IRanges(start=42169353, end=42332548))
+                            IRanges(start=42169353, end=42332548))
         param <- ScanBamParam(which=which, what=what)
         bam <- scanBam(file=file, param=param)
         reads <- as.data.frame(bam[['chr2:42169353-42332548']])
@@ -69,7 +69,7 @@ EML4_ALK_detection <- function(file, genome="hg38", mates=2){
     }
     else{
         which <- GRanges(seqnames="chr2",
-                         IRanges(start=42396490, end=42559688))
+                            IRanges(start=42396490, end=42559688))
         param <- ScanBamParam(which=which, what=what)
         bam <- scanBam(file=file, param=param)
         reads <- as.data.frame(bam[['chr2:42396490-42559688']])
@@ -133,7 +133,7 @@ EML4_sequence <- function(reads, basepairs=20){
     reads <- index_helper(reads)
     EML4_fun <- function(inp){
         return(substring(inp[4], (as.numeric(inp[5])-(basepairs-1)),
-                         as.numeric(inp[5])))
+                            as.numeric(inp[5])))
     }
     EML4_seq <- apply(reads, FUN=EML4_fun, MARGIN=1)
     EML4_tab <- table(EML4_seq)
@@ -183,7 +183,7 @@ ALK_sequence <- function(reads, basepairs=20){
     reads <- index_helper(reads)
     ALK_fun <- function(inp){
         return(substring(inp[4], (as.numeric(inp[5])+1),
-                         (as.numeric(inp[5])+basepairs)))
+                            (as.numeric(inp[5])+basepairs)))
     }
     ALK_seq <- apply(reads, FUN=ALK_fun, MARGIN=1)
     ALK_tab <- table(ALK_seq)

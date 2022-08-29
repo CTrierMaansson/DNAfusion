@@ -1,7 +1,8 @@
-# Genefusiondiscover 0.99.3 (29 August 2022)
+# Genefusiondiscover 0.99.3 (30 August 2022)
 * Modified vignette
 * Changed function names
 * Improved functions
+* Added index_helper() as a helper funciton
 * Added URL and sessioninfo to DESCRIPTION
 
 # Genefusiondiscover 0.99.2 (9 August 2022)
