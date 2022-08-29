@@ -7,7 +7,7 @@ author:
 - Emma Roger Andersen
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output:
-  BiocStyle::pdf_document:
+  BiocStyle::html_document:
     toc: yes
     toc_depth: 3
     number_sections: yes
@@ -63,26 +63,15 @@ positive cell line H3122 and the EML4-ALK negative cell line, HCC827.
 
 # Installation
 
-Use **devtools** to install the most recent version of
-**Genefusiondiscover** from the GitHub repository.
+Use **Bioconductor** to install the most recent version of
+**Genefusiondiscover**
 
-```{r setup_devtools, message=FALSE, results = 'hide', eval = FALSE}
-if (!require(devtools)) install.packages('devtools')
-library(devtools)
-
-install_github("CTrierMaansson/Genefusiondiscover")
-library(Genefusiondiscover)
-
-```
 
 ```{r pull_Genefusiondiscover, message=FALSE, results = 'hide', echo = FALSE}
 library(Genefusiondiscover)
 library(devtools)
 
 ```
-
-Alternatively, install **Genefusiondiscover** published at 
-**Bioconductor**
 
 ```{r setup_bioconductor, message=FALSE, results = 'hide', eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -230,7 +219,7 @@ ALK_sequence(EML4_ALK_detection(file = HCC827_bam,
 
 ```
 
-## `breakPosition()`
+## `break_position()`
 This function identifies the genomic position in EML4 where the breakpoint has
 happened.
 
@@ -251,16 +240,16 @@ detected" is returned.
 **Examples:**
 
 ```{r break_position}
-breakPosition(EML4_ALK_detection(file = H3122_bam, 
+break_position(EML4_ALK_detection(file = H3122_bam, 
                                     genome = "hg38", 
                                     mates = 2))
-breakPosition(EML4_ALK_detection(file = HCC827_bam, 
+break_position(EML4_ALK_detection(file = HCC827_bam, 
                                     genome = "hg38", 
                                     mates = 2))
 
 ```
 
-## `breakPositionDepth()`
+## `break_position_depth()`
 This function identifies the read depth at the basepair before the breakpoint in
 EML4.
 
@@ -285,11 +274,11 @@ the breakpoint is returned. Otherwise "No EML4-ALK was detected" is returned
 **Examples:**
 
 ```{r break_position_depth}
-breakPositionDepth(H3122_bam, 
+break_position_depth(H3122_bam, 
                         EML4_ALK_detection(file = H3122_bam, 
                                         genome = "hg38", 
                                         mates = 2))
-breakPositionDepth(HCC827_bam, 
+break_position_depth(HCC827_bam, 
                         EML4_ALK_detection(file = HCC827_bam, 
                                         genome = "hg38", 
                                         mates = 2))

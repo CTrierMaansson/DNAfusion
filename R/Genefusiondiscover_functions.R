@@ -231,14 +231,14 @@ ALK_sequence <- function(reads, basepairs=20){
 #' "HCC827_EML4.bam",
 #' package="Genefusiondiscover")
 #'
-#' breakPosition(EML4_ALK_detection(file=H3122_bam,
+#' break_position(EML4_ALK_detection(file=H3122_bam,
 #'                                     genome="hg38",
 #'                                     mates=2))
-#' breakPosition(EML4_ALK_detection(file=HCC827_bam,
+#' break_position(EML4_ALK_detection(file=HCC827_bam,
 #'                                     genome="hg38",
 #'                                     mates=2))
 #' @export
-breakPosition <- function(reads){
+break_position <- function(reads){
     if(!isa(reads, "data.frame")){
         if(reads == "No EML4-ALK was detected"){
             return("No EML4-ALK was detected")
@@ -295,16 +295,16 @@ breakPosition <- function(reads){
 #' "HCC827_EML4.bam",
 #' package="Genefusiondiscover")
 #'
-#' breakPositionDepth(file=H3122_bam,
+#' break_position_depth(file=H3122_bam,
 #'                         EML4_ALK_detection(file=H3122_bam,
 #'                                             genome="hg38",
 #'                                             mates=2))
-#' breakPositionDepth(file=HCC827_bam,
+#' break_position_depth(file=HCC827_bam,
 #'                         EML4_ALK_detection(file=HCC827_bam,
 #'                                             genome="hg38",
 #'                                             mates=2))
 #' @export
-breakPositionDepth <- function(file, reads){
+break_position_depth <- function(file, reads){
     if(!isa(reads, "data.frame")){
         if(reads == "No EML4-ALK was detected"){
             return("No EML4-ALK was detected")
@@ -313,7 +313,7 @@ breakPositionDepth <- function(file, reads){
             stop("reads must be a data.frame")
             }
     }
-    break_pos_tab <- breakPosition(reads)
+    break_pos_tab <- break_position(reads)
     stop_pos <- as.numeric(names(which.max(break_pos_tab)))
     depth <- bamCoverage(file,
                             GRanges(seqnames="chr2",
@@ -338,8 +338,8 @@ breakPositionDepth <- function(file, reads){
 #' clipped_reads corresponding to `EML4_ALK_detection()`, 
 #' last_EML4 corresponding to `EML4_sequence()`, 
 #' first_ALK corresponding to `ALK_sequence()`, 
-#' breakpoint corresponding to `breakPosition()`, 
-#' and read_depth corresponding to `breakPositionDepth()`.
+#' breakpoint corresponding to `break_position()`, 
+#' and read_depth corresponding to `break_position_depth()`.
 #' @examples
 #' H3122_bam <- system.file("extdata",
 #' "H3122_EML4.bam",
@@ -376,8 +376,8 @@ EML4_ALK_analysis <- function(file, genome="hg38", mates=2, basepairs=20){
     }
     EML4 <- EML4_sequence(reads=res, basepairs=basepairs)
     ALK <- ALK_sequence(reads=res, basepairs=basepairs)
-    position <- breakPosition(reads=res)
-    position_depth <- breakPositionDepth(file=file, reads=res)
+    position <- break_position(reads=res)
+    position_depth <- break_position_depth(file=file, reads=res)
     return(list(clipped_reads=res,
                 last_EML4=EML4,
                 first_ALK=ALK,

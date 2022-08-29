@@ -1,3 +1,15 @@
+# Genefusiondiscover 0.99.3 (29 August 2022)
+* Modified vignette
+* Changed function names
+* Improved functions
+* Added URL and sessioninfo to DESCRIPTION
+
+# Genefusiondiscover 0.99.2 (9 August 2022)
+* Modified vignette
+
+# Genefusiondiscover 0.99.1 (9 August 2022)
+* Modified vignette
+
 # Genefusiondiscover 0.99.0 (26 July 2022)
 * Genefusiondiscover takes BAM file as input and indities EML4-ALK gene fusions
 * Vignette improvements.
