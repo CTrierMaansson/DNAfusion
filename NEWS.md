@@ -5,6 +5,7 @@
 * Added index_helper() as a helper function
 * Added URL and sessioninfo to DESCRIPTION
 * Changed package name to DNAfusion
+* Increased coverage in tests
 
 # Genefusiondiscover 0.99.2 (9 August 2022)
 * Modified vignette
