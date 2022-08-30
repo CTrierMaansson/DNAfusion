@@ -1,6 +1,6 @@
 ---
 title: |-
-  Genefusiondiscover
+  DNAfusion
    \vspace{0.5in}
 author:
 - Christoffer Trier Maansson
@@ -13,15 +13,15 @@ output:
     number_sections: yes
     highlight: haddock
 subtitle: |-
-  https://github.com/CTrierMaansson/Genefusiondiscover
+  https://github.com/CTrierMaansson/DNAfusion
    \vspace{0.3in}
 abstract: "Circulating tumor DNA (ctDNA) containing somatic mutations 
   can be found in blood plasma. \nThis includes DNA fusions, 
   such as the EML4-ALK, which can be an oncogenic driver in non-small cell lung
-  cancer.This is an introduction to the **Genefusiondiscover** package for R,
+  cancer.This is an introduction to the **DNAfusion** package for R,
   which can be used to evaluate whether EML4-ALK is present in blood plasma. \n"
 vignette: |
-  %\VignetteIndexEntry{Introduction to Genefusiondiscover}
+  %\VignetteIndexEntry{Introduction to DNAfusion}
   %\VignetteEncoding{UTF-8} 
   %\VignetteEngine{knitr::rmarkdown}
 ---
@@ -64,11 +64,11 @@ positive cell line H3122 and the EML4-ALK negative cell line, HCC827.
 # Installation
 
 Use **Bioconductor** to install the most recent version of
-**Genefusiondiscover**
+**DNAfusion**
 
 
-```{r pull_Genefusiondiscover, message=FALSE, results = 'hide', echo = FALSE}
-library(Genefusiondiscover)
+```{r pull_DNAfusion, message=FALSE, results = 'hide', echo = FALSE}
+library(DNAfusion)
 library(devtools)
 
 ```
@@ -77,8 +77,8 @@ library(devtools)
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install("Genefusiondiscover")
-library(Genefusiondiscover)
+BiocManager::install("DNAfusion")
+library(DNAfusion)
 
 ```
 
@@ -90,10 +90,10 @@ can be used as examples to explore the functions.
 ```{r examples}
 H3122_bam <- system.file("extdata", 
                             "H3122_EML4.bam",
-                            package = "Genefusiondiscover")
+                            package = "DNAfusion")
 HCC827_bam <-  system.file("extdata", 
                             "HCC827_EML4.bam", 
-                            package = "Genefusiondiscover")
+                            package = "DNAfusion")
 
 ```
 \newpage

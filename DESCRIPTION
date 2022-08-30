@@ -1,4 +1,4 @@
-Package: Genefusiondiscover
+Package: DNAfusion
 Title: Identification of gene fusions using paired-end sequencing
 Version: 0.99.3
 biocViews: TargetedResequencing, Genetics, GeneFusionDetection, Sequencing
@@ -35,6 +35,6 @@ Imports:
 Depends:
   dplyr,
   R (>= 4.2.0)
-BugReports: https://github.com/CTrierMaansson/Genefusiondiscover/issues
-URL: https://github.com/CTrierMaansson/Genefusiondiscover
+BugReports: https://github.com/CTrierMaansson/DNAfusion/issues
+URL: https://github.com/CTrierMaansson/DNAfusion
  

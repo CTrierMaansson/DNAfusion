@@ -1,3 +1,3 @@
-library(Genefusiondiscover)
+library(DNAfusion)
 library(testthat)
-test_check("Genefusiondiscover")
+test_check("DNAfusion")

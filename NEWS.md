@@ -1,9 +1,10 @@
-# Genefusiondiscover 0.99.3 (30 August 2022)
+# DNAfusion 0.99.3 (30 August 2022)
 * Modified vignette
 * Changed function names
 * Improved functions
-* Added index_helper() as a helper funciton
+* Added index_helper() as a helper function
 * Added URL and sessioninfo to DESCRIPTION
+* Changed package name to DNAfusion
 
 # Genefusiondiscover 0.99.2 (9 August 2022)
 * Modified vignette
