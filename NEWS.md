@@ -1,3 +1,5 @@
+# DNAfusion 0.99.4 (31 August 2022)
+
 # DNAfusion 0.99.3 (30 August 2022)
 * Modified vignette
 * Changed function names
