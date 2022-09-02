@@ -3,8 +3,13 @@ title: |-
   DNAfusion
    \vspace{0.5in}
 author:
-- Christoffer Trier Maansson
-- Emma Roger Andersen
+- name: Christoffer Trier Maansson
+  affiliation: 
+    Department of Clinical Biochemistry, Aarhus University Hospital, Denmark
+  email: ctm@clin.au.dk
+- name: Emma Roger Andersen
+  affiliation:
+    Department of Clinical Biochemistry, Aarhus University Hospital, Denmark
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output:
   BiocStyle::html_document:
