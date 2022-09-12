@@ -64,7 +64,7 @@ EML4_ALK_detection <- function(file, genome="hg38", mates=2){
     what <- c("mpos", "seq")
     if (genome =="hg38"){
         which <- GRanges(seqnames="chr2", 
-                         IRanges(start=42169353, end=42332548))
+                            IRanges(start=42169353, end=42332548))
         param <- ScanBamParam(which=which, what=what)
         reads <- readGAlignments(file=file, param=param)
         reads <- reads[(29192774 < mcols(reads)[,1] & 
@@ -73,7 +73,7 @@ EML4_ALK_detection <- function(file, genome="hg38", mates=2){
     }
     else{
         which <- GRanges(seqnames="chr2",
-                         IRanges(start=42396490, end=42559688))
+                            IRanges(start=42396490, end=42559688))
         param <- ScanBamParam(which=which, what=what)
         reads <- readGAlignments(file=file, param=param)
         reads <- reads[(29415640 < mcols(reads)[,1] & 
@@ -137,7 +137,7 @@ EML4_sequence <- function(reads, basepairs=20){
     reads <- index_helper(reads)
     EML4_fun <- function(inp){
         return(substring(inp[10], (as.numeric(inp[11]))-(basepairs-1),
-                         as.numeric(inp[11])))
+                            as.numeric(inp[11])))
     }
     EML4_seq <- apply(as.data.frame(reads), FUN=EML4_fun, MARGIN=1)
     EML4_tab <- table(EML4_seq)
