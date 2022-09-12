@@ -1,5 +1,6 @@
 #' @keywords internal
 #' @importFrom GenomicAlignments cigar
+#' @importFrom S4Vectors mcols
 index_helper <- function(input){
     cigars <- cigar(input)
     result <- sub("\\M.*", "", cigars)
@@ -27,6 +28,7 @@ index_helper <- function(input){
 #' @importFrom GenomicAlignments readGAlignments cigar seqnames
 #' @importFrom Rsamtools ScanBamParam scanBam
 #' @importFrom IRanges IRanges
+#' @importFrom S4Vectors mcols
 #' @param file The name of the file which the data are to be read from.
 #' @param genome `Character string` representing the reference genome. 
 #' Can be either "hg38" or "hg19". Default="hg38".
@@ -199,7 +201,8 @@ ALK_sequence <- function(reads, basepairs=20){
 #' where the breakpoint has happened.
 #'
 #' @import dplyr
-#' @importFrom GenomicAlignments start 
+#' @importFrom GenomicAlignments start
+#' @importFrom S4Vectors mcols 
 #' @param reads `GAlignments` object returned by EML4_ALK_detection().
 #' @return If EML4-ALK is detected, returns a `table` of genomic positions
 #' with the number of corresponding reads for each sequence. 
