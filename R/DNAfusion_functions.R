@@ -87,7 +87,7 @@ EML4_ALK_detection <- function(file, genome="hg38", mates=2){
     clip_reads <- reads[cigar(reads) != "96M",]
     clip_reads <- clip_reads[!grepl("D", cigar(clip_reads)),]
     clip_reads <- clip_reads[!grepl("I", cigar(clip_reads)),]
-    if (length(seqnames(reads))<mates){
+    if (length(seqnames(clip_reads))<mates){
         res <- "No EML4-ALK was detected"
         return(res)
     }
