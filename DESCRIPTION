@@ -32,8 +32,7 @@ Imports:
   GenomicRanges,
   IRanges,
   Rsamtools,
-  GenomicAlignments,
-  S4Vectors
+  GenomicAlignments
 Depends:
   dplyr,
   R (>= 4.2.0)
