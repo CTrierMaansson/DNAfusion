@@ -7,7 +7,7 @@
 break_position(reads)
 }
 \arguments{
-\item{reads}{Data.frame returned by EML4_ALK_detection().}
+\item{reads}{\code{GAlignments} object returned by EML4_ALK_detection().}
 }
 \value{
 If EML4-ALK is detected, returns a \code{table} of genomic positions

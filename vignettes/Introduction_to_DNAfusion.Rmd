@@ -130,7 +130,7 @@ $$\\[0.1in]$$
 
 **Output:**
 
-If EML4-ALK is detected, a `data.frame` with soft-clipped reads
+If EML4-ALK is detected, a `GAlignments` object with soft-clipped reads
 representing EML4-ALK is returned. 
 Otherwise "No EML4-ALK was detected" is returned.
 
@@ -158,7 +158,7 @@ $$\\[0.1in]$$
 
 **`reads`**
 
-    data.frame returned by EML4_ALK_detection().
+    GAlignments object returned by EML4_ALK_detection().
 $$\\[0.1in]$$  
 
 **`basepairs`**
@@ -195,7 +195,7 @@ $$\\[0.1in]$$
 
 **`reads`**
 
-    data.frame returned by EML4_ALK_detection().
+    GAlignments object returned by EML4_ALK_detection().
 $$\\[0.1in]$$  
 
 **`basepairs`**
@@ -233,7 +233,7 @@ $$\\[0.1in]$$
 
 **`reads`**
 
-    data.frame returned by EML4_ALK_detection().
+    GAlignments object returned by EML4_ALK_detection().
 $$\\[0.1in]$$
 
 **Output:**
@@ -268,7 +268,7 @@ $$\\[0.1in]$$
 
 **`reads`**
 
-    data.frame returned by EML4_ALK_detection().
+    GAlignments returned by EML4_ALK_detection().
 $$\\[0.1in]$$
 
 **Output:**

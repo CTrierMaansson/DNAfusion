@@ -16,8 +16,8 @@ Can be either "hg38" or "hg19". Default="hg38".}
 needed to be detected in order to call a variant. Default=2.}
 }
 \value{
-If EML4-ALK is detected a \code{data.frame} with soft-clipped reads
-representing EML4-ALK is returned.
+If EML4-ALK is detected a \code{GAlignments} object with soft-clipped
+reads representing EML4-ALK is returned.
 Otherwise "No EML4-ALK was detected" is returned.
 }
 \description{

@@ -7,7 +7,7 @@
 ALK_sequence(reads, basepairs = 20)
 }
 \arguments{
-\item{reads}{\code{data.frame} returned by EML4_ALK_detection().}
+\item{reads}{\code{GAlignments} returned by EML4_ALK_detection().}
 
 \item{basepairs}{\code{integer}, number of basepairs identified
 from the EML4-ALK fusion. Default=20.}

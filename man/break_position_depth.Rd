@@ -9,7 +9,7 @@ break_position_depth(file, reads)
 \arguments{
 \item{file}{The name of the file which the data are to be read from.}
 
-\item{reads}{\code{data.frame} returned by EML4_ALK_detection().}
+\item{reads}{\code{GAlignments} object returned by EML4_ALK_detection().}
 }
 \value{
 If EML4-ALK is detected a single integer corresponding

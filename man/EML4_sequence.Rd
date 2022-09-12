@@ -7,13 +7,13 @@
 EML4_sequence(reads, basepairs = 20)
 }
 \arguments{
-\item{reads}{\code{Data.frame} returned by EML4_ALK_detection().}
+\item{reads}{\code{GAlignments} object returned by EML4_ALK_detection().}
 
 \item{basepairs}{\code{Integer}, number of basepairs identified
 from the EML4-ALK fusion. Default=20.}
 }
 \value{
-If EML4-ALK is detected, returns a table of identified
+If EML4-ALK is detected, returns a \code{table} of identified
 EML4 basepairs with the number of corresponding reads for each sequence.
 Otherwise "No EML4-ALK was detected" is returned.
 }
