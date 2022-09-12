@@ -16,7 +16,7 @@ index_helper <- function(input){
         return(splits)
     }
     index2 <- vapply(splits, FUN = fun, FUN.VALUE = list(1))
-    mcols(input)[,3] <- unlist(index2)
+    GenomicRanges::mcols(input)[,3] <- unlist(index2)
     input <- input[!is.na(mcols(input[,3]))[,1],]
     return(input)
 }
