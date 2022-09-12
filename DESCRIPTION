@@ -31,7 +31,9 @@ Imports:
  bamsignals,
   GenomicRanges,
   IRanges,
-  Rsamtools
+  Rsamtools,
+  GenomicAlignments,
+  S4Vectors
 Depends:
   dplyr,
   R (>= 4.2.0)
