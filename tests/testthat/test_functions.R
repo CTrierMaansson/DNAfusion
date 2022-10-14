@@ -35,14 +35,14 @@ testthat::expect_true(is.list(analysis) | isa(analysis, "GAlignments"))
 testthat::expect_error(ALK_sequence(detection, basepairs = "20"))
 testthat::expect_error(EML4_sequence(detection, basepairs = "20"))
 
-detection <- EML4_ALK_detection(file = file, genome = "hg19")
-testthat::expect_true(isa(detection, "GAlignments"))
-
 testthat::expect_error(EML4_ALK_dection(file = file, genome = 38))
 testthat::expect_error(EML4_ALK_dection(file = file, mates = "38"))
 testthat::expect_error(EML4_ALK_dection(file = file, genome = "hg37"))
 testthat::expect_true(isa(EML4_ALK_detection(file = file, mates = 300),
                           "GAlignments"))
+
+detection <- EML4_ALK_detection(file = file, genome = "hg19")
+testthat::expect_true(isa(detection, "GAlignments"))
 
 testthat::expect_error(EML4_sequence(file))
 testthat::expect_error(ALK_sequence(file))
