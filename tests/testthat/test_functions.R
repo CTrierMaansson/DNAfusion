@@ -32,6 +32,8 @@ testthat::expect_true(is.table(ALK_seq) | is.character(ALK_seq))
 testthat::expect_true(is.table(pos) | is.character(pos))
 testthat::expect_true(is.integer(pos_depth) | is.character(pos_depth))
 testthat::expect_true(is.list(analysis) | isa(analysis, "GAlignments"))
+testthat::expect_error(ALK_sequence(detection, basepairs = "20"))
+testthat::expect_error(EML4_sequence(detection, basepairs = "20"))
 
 detection <- EML4_ALK_detection(file = file, genome = "hg19")
 testthat::expect_true(isa(detection, "GAlignments"))
@@ -43,9 +45,7 @@ testthat::expect_true(isa(EML4_ALK_detection(file = file, mates = 300),
                           "GAlignments"))
 
 testthat::expect_error(EML4_sequence(file))
-testthat::expect_error(EML4_sequence(detection, basepairs = "20"))
 testthat::expect_error(ALK_sequence(file))
-testthat::expect_error(ALK_sequence(detection, basepairs = "20"))
 testthat::expect_error(break_position(file))
 testthat::expect_error(break_position_depth(reads = file))
 testthat::expect_error(EML4_ALK_analysis(file, genome = 38))
