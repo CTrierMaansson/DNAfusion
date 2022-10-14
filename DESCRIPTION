@@ -31,7 +31,9 @@ Imports:
   GenomicRanges,
   IRanges,
   Rsamtools,
-  GenomicAlignments
+  GenomicAlignments,
+  BiocBaseUtils,
+  S4Vectors
 Depends:
   R (>= 4.2.0)
 BugReports: https://github.com/CTrierMaansson/DNAfusion/issues
