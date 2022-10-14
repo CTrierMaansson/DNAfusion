@@ -1,3 +1,6 @@
+#DNAfusion 0.991.2 (14 Octoboer 2022)
+* Review from Bioconductor
+
 # DNAfusion 0.99.1 (12 September 2022)
 * Changed the output of EML4_ALK_detection() from data.frame to GAlignments
 object
