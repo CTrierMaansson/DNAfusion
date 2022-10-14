@@ -227,7 +227,7 @@ break_position <- function(reads){
         return("No EML4-ALK was detected")
     }
     reads <- index_helper(reads)
-    break_pos <- start(reads) + (mcols(reads)["index"]-1)
+    break_pos <- start(reads) + (mcols(reads)["index"][,1]-1)
     break_pos_tab <- table(break_pos)
     return(break_pos_tab)
 }
