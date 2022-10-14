@@ -74,6 +74,7 @@ Use **Bioconductor** to install the most recent version of
 
 ```{r pull_DNAfusion, message=FALSE, results = 'hide', echo = FALSE}
 library(DNAfusion)
+library(devtools)
 
 ```
 
