@@ -9,12 +9,12 @@ break_position_depth(file, reads)
 \arguments{
 \item{file}{The name of the file which the data are to be read from.}
 
-\item{reads}{\code{GAlignments} object returned by EML4_ALK_detection().}
+\item{reads}{\code{GAlignments} object returned by \code{EML4_ALK_detection()}.}
 }
 \value{
-If EML4-ALK is detected a single integer corresponding
+If EML4-ALK is detected a single \code{integer} corresponding
 to the read depth at the breakpoint is returned.
-Otherwise "No EML4-ALK was detected" is returned
+If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 }
 \description{
 This function identifies the read depth at the basepair

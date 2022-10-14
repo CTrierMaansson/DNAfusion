@@ -16,9 +16,9 @@ Can be either "hg38" or "hg19". Default="hg38".}
 needed to be detected in order to call a variant. Default=2.}
 }
 \value{
-If EML4-ALK is detected a \code{GAlignments} object with soft-clipped
-reads representing EML4-ALK is returned.
-Otherwise "No EML4-ALK was detected" is returned.
+A \code{GAlignments} object with soft-clipped reads representing
+EML4-ALK is returned. If no EML4-ALK is detected the \code{GAlignments}
+is empty.
 }
 \description{
 This function looks for EML4-ALK mate pair reads in the BAM file.

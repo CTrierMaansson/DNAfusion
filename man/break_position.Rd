@@ -7,12 +7,12 @@
 break_position(reads)
 }
 \arguments{
-\item{reads}{\code{GAlignments} object returned by EML4_ALK_detection().}
+\item{reads}{\code{GAlignments} object returned by \code{EML4_ALK_detection()}.}
 }
 \value{
 If EML4-ALK is detected, returns a \code{table} of genomic positions
 with the number of corresponding reads for each sequence.
-Otherwise "No EML4-ALK was detected" is returned.
+If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 }
 \description{
 This function identifies the genomic position in EML4

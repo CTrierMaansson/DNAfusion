@@ -16,26 +16,26 @@ index_helper <- function(input){
         return(splits)
     }
     index2 <- vapply(splits, FUN = fun, FUN.VALUE = list(1))
-    GenomicRanges::mcols(input)[,3] <- unlist(index2)
-    input <- input[!is.na(mcols(input[,3]))[,1],]
+    GenomicRanges::mcols(input)["index"] <- unlist(index2)
+    input <- input[!is.na(mcols(input)["index"])[,1],]
     return(input)
 }
 #' Detection of EML4-ALK variants
-#' 
+#'
 #' This function looks for EML4-ALK mate pair reads in the BAM file.
-#' @import dplyr
 #' @importFrom GenomicRanges GRanges mcols
 #' @importFrom GenomicAlignments readGAlignments cigar seqnames
 #' @importFrom Rsamtools ScanBamParam scanBam
 #' @importFrom IRanges IRanges
+#' @importFrom BiocBaseUtils isScalarNumber isScalarCharacter
 #' @param file The name of the file which the data are to be read from.
-#' @param genome `Character string` representing the reference genome. 
+#' @param genome `Character string` representing the reference genome.
 #' Can be either "hg38" or "hg19". Default="hg38".
 #' @param mates `Interger`, the minimum number EML4-ALK mate pairs
 #' needed to be detected in order to call a variant. Default=2.
-#' @return If EML4-ALK is detected a `GAlignments` object with soft-clipped
-#' reads representing EML4-ALK is returned. 
-#' Otherwise "No EML4-ALK was detected" is returned.
+#' @return A `GAlignments` object with soft-clipped reads representing
+#'  EML4-ALK is returned. If no EML4-ALK is detected the `GAlignments`
+#'  is empty.
 #' @examples
 #' H3122_bam <- system.file("extdata",
 #' "H3122_EML4.bam",
@@ -52,10 +52,10 @@ index_helper <- function(input){
 #'                     mates=2)
 #' @export
 EML4_ALK_detection <- function(file, genome="hg38", mates=2){
-    if(!isa(genome, "character")){
+    if(!isScalarCharacter(genome)){
         stop("genome has to be a character")
     }
-    if(!isa(mates, "numeric")){
+    if(!isScalarNumber(mates)){
         stop("mates has to be a numeric")
     }
     if(!(genome %in% c("hg38", "hg19"))){
@@ -63,12 +63,12 @@ EML4_ALK_detection <- function(file, genome="hg38", mates=2){
     }
     what <- c("mpos", "seq")
     if (genome =="hg38"){
-        which <- GRanges(seqnames="chr2", 
+        which <- GRanges(seqnames="chr2",
                             IRanges(start=42169353, end=42332548))
         param <- ScanBamParam(which=which, what=what)
         reads <- readGAlignments(file=file, param=param)
-        reads <- reads[(29192774 < mcols(reads)[,1] & 
-                            mcols(reads)[,1] < 29921586 & 
+        reads <- reads[(29192774 < mcols(reads)[,1] &
+                            mcols(reads)[,1] < 29921586 &
                             !is.na(mcols(reads)[,1])),]
     }
     else{
@@ -76,19 +76,19 @@ EML4_ALK_detection <- function(file, genome="hg38", mates=2){
                             IRanges(start=42396490, end=42559688))
         param <- ScanBamParam(which=which, what=what)
         reads <- readGAlignments(file=file, param=param)
-        reads <- reads[(29415640 < mcols(reads)[,1] & 
-                            mcols(reads)[,1] < 30144477 & 
+        reads <- reads[(29415640 < mcols(reads)[,1] &
+                            mcols(reads)[,1] < 30144477 &
                             !is.na(mcols(reads)[,1])),]
     }
     if (length(seqnames(reads))<mates){
-        res <- "No EML4-ALK was detected"
+        res <- GenomicAlignments::GAlignments()
         return(res)
     }
     clip_reads <- reads[cigar(reads) != "96M",]
     clip_reads <- clip_reads[!grepl("D", cigar(clip_reads)),]
     clip_reads <- clip_reads[!grepl("I", cigar(clip_reads)),]
     if (length(seqnames(clip_reads))<mates){
-        res <- "No EML4-ALK was detected"
+        res <- GenomicAlignments::GAlignments()
         return(res)
     }
     return(clip_reads)
@@ -98,13 +98,14 @@ EML4_ALK_detection <- function(file, genome="hg38", mates=2){
 #'
 #' This function identifies the basepairs leading up to the EML4 breakpoint.
 #'
-#' @import dplyr
-#' @param reads `GAlignments` object returned by EML4_ALK_detection().
-#' @param basepairs `Integer`, number of basepairs identified 
+#' @importFrom BiocBaseUtils isScalarNumber
+#' @importFrom S4Vectors isEmpty
+#' @param reads `GAlignments` object returned by `EML4_ALK_detection()`.
+#' @param basepairs `Integer`, number of basepairs identified
 #' from the EML4-ALK fusion. Default=20.
 #' @return If EML4-ALK is detected, returns a `table` of identified
 #' EML4 basepairs with the number of corresponding reads for each sequence.
-#' Otherwise "No EML4-ALK was detected" is returned.
+#' If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 #' @examples
 #' H3122_bam <- system.file("extdata",
 #' "H3122_EML4.bam",
@@ -124,20 +125,18 @@ EML4_ALK_detection <- function(file, genome="hg38", mates=2){
 #' @export
 EML4_sequence <- function(reads, basepairs=20){
     if(!isa(reads, "GAlignments")){
-        if(reads == "No EML4-ALK was detected"){
-            return("No EML4-ALK was detected")
-        }
-        else{
-            stop("reads must be a GAlignments object")
-        }
+        stop("reads must be a GAlignments object")
     }
-    if(!isa(basepairs, "numeric")){
+    if(isEmpty(reads)){
+        return("No EML4-ALK was detected")
+    }
+    if(!isScalarNumber(basepairs)){
         stop("basepairs has to be a numeric")
     }
     reads <- index_helper(reads)
     EML4_fun <- function(inp){
-        return(substring(inp[10], (as.numeric(inp[11]))-(basepairs-1),
-                            as.numeric(inp[11])))
+        return(substring(inp["seq"], (as.numeric(inp["index"]))-(basepairs-1),
+                            as.numeric(inp["index"])))
     }
     EML4_seq <- apply(as.data.frame(reads), FUN=EML4_fun, MARGIN=1)
     EML4_tab <- table(EML4_seq)
@@ -148,13 +147,14 @@ EML4_sequence <- function(reads, basepairs=20){
 #'
 #' This function identifies the basepairs following the ALK breakpoint.
 #'
-#' @import dplyr
-#' @param reads `GAlignments` returned by EML4_ALK_detection().
+#' @importFrom BiocBaseUtils isScalarNumber
+#' @importFrom S4Vectors isEmpty
+#' @param reads `GAlignments` returned by `EML4_ALK_detection()`.
 #' @param basepairs `integer`, number of basepairs identified
 #' from the EML4-ALK fusion. Default=20.
 #' @return If EML4-ALK is detected, returns a `table` of identified
 #' ALK basepairs with the number of corresponding reads for each sequence.
-#' Otherwise "No EML4-ALK was detected" is returned.
+#' If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 #' @examples
 #' H3122_bam <- system.file("extdata",
 #' "H3122_EML4.bam",
@@ -174,20 +174,18 @@ EML4_sequence <- function(reads, basepairs=20){
 #' @export
 ALK_sequence <- function(reads, basepairs=20){
     if(!isa(reads, "GAlignments")){
-        if(reads == "No EML4-ALK was detected"){
-            return("No EML4-ALK was detected")
-        }
-        else{
-            stop("reads must be a GAlignments object")
-        }
+        stop("reads must be a GAlignments object")
     }
-    if(!isa(basepairs, "numeric")){
+    if(isEmpty(reads)){
+        return("No EML4-ALK was detected")
+    }
+    if(!isScalarNumber(basepairs)){
         stop("basepairs has to be a numeric")
     }
     reads <- index_helper(reads)
     ALK_fun <- function(inp){
-        return(substring(inp[10], (as.numeric(inp[11])+1),
-                            (as.numeric(inp[11])+basepairs)))
+        return(substring(inp["seq"], (as.numeric(inp["index"])+1),
+                            (as.numeric(inp["index"])+basepairs)))
     }
     ALK_seq <- apply(as.data.frame(reads), FUN=ALK_fun, MARGIN=1)
     ALK_tab <- table(ALK_seq)
@@ -196,16 +194,16 @@ ALK_sequence <- function(reads, basepairs=20){
 
 #' EML4-ALK breakpoint
 #'
-#' This function identifies the genomic position in EML4 
+#' This function identifies the genomic position in EML4
 #' where the breakpoint has happened.
 #'
-#' @import dplyr
 #' @importFrom GenomicAlignments start
-#' @importFrom GenomicRanges mcols 
-#' @param reads `GAlignments` object returned by EML4_ALK_detection().
+#' @importFrom GenomicRanges mcols
+#' @importFrom S4Vectors isEmpty
+#' @param reads `GAlignments` object returned by `EML4_ALK_detection()`.
 #' @return If EML4-ALK is detected, returns a `table` of genomic positions
-#' with the number of corresponding reads for each sequence. 
-#' Otherwise "No EML4-ALK was detected" is returned.
+#' with the number of corresponding reads for each sequence.
+#' If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 #' @examples
 #' H3122_bam <- system.file("extdata",
 #' "H3122_EML4.bam",
@@ -223,17 +221,15 @@ ALK_sequence <- function(reads, basepairs=20){
 #' @export
 break_position <- function(reads){
     if(!isa(reads, "GAlignments")){
-        if(reads == "No EML4-ALK was detected"){
-            return("No EML4-ALK was detected")
-        }
-        else{
-            stop("reads must be a GAlignments object")
-        }
+        stop("reads must be a GAlignments object")
+    }
+    if(isEmpty(reads)){
+        return("No EML4-ALK was detected")
     }
     reads <- index_helper(reads)
-    break_pos <- start(reads) + (mcols(reads)[,3]-1)
+    break_pos <- start(reads) + (mcols(reads)["index"]-1)
     break_pos_tab <- table(break_pos)
-    return(break_pos_tab)    
+    return(break_pos_tab)
 }
 
 
@@ -242,15 +238,15 @@ break_position <- function(reads){
 #' This function identifies the read depth at the basepair
 #' before the breakpoint in EML4.
 #'
-#' @import dplyr
 #' @importFrom bamsignals bamCoverage
 #' @importFrom IRanges IRanges
 #' @importFrom GenomicRanges GRanges
+#' @importFrom S4Vectors isEmpty
 #' @param file The name of the file which the data are to be read from.
-#' @param reads `GAlignments` object returned by EML4_ALK_detection().
-#' @return If EML4-ALK is detected a single integer corresponding
-#' to the read depth at the breakpoint is returned. 
-#' Otherwise "No EML4-ALK was detected" is returned
+#' @param reads `GAlignments` object returned by `EML4_ALK_detection()`.
+#' @return If EML4-ALK is detected a single `integer` corresponding
+#' to the read depth at the breakpoint is returned.
+#' If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 #' @examples
 #' H3122_bam <- system.file("extdata",
 #' "H3122_EML4.bam",
@@ -270,12 +266,10 @@ break_position <- function(reads){
 #' @export
 break_position_depth <- function(file, reads){
     if(!isa(reads, "GAlignments")){
-        if(reads == "No EML4-ALK was detected"){
-            return("No EML4-ALK was detected")
-            }
-        else{
-            stop("reads must be a GAlignments object")
-            }
+        stop("reads must be a GAlignments object")
+    }
+    if(isEmpty(reads)){
+        return("No EML4-ALK was detected")
     }
     break_pos_tab <- break_position(reads)
     stop_pos <- as.numeric(names(which.max(break_pos_tab)))
@@ -289,20 +283,22 @@ break_position_depth <- function(file, reads){
 #'
 #' This functions collects the results from the other functions of the package.
 #'
-#' @import dplyr
+#' @importFrom BiocBaseUtils isScalarNumber isScalarCharacter
+#' @importFrom S4Vectors isEmpty
 #' @param file The name of the file which the data are to be read from.
-#' @param genome `character` representing the reference genome. 
+#' @param genome `character` representing the reference genome.
 #' Can be either "hg38" or "hg19". Default="hg38".
-#' @param mates `interger`, the minimum number EML4-ALK mate pairs needed 
+#' @param mates `interger`, the minimum number EML4-ALK mate pairs needed
 #' to be detected in order to call a variant. Default=2.
-#' @param basepairs `integer`, number of basepairs identified 
+#' @param basepairs `integer`, number of basepairs identified
 #' from the EML4-ALK fusion. Default=20.
-#' @return A `list` object with 
-#' clipped_reads corresponding to `EML4_ALK_detection()`, 
-#' last_EML4 corresponding to `EML4_sequence()`, 
-#' first_ALK corresponding to `ALK_sequence()`, 
-#' breakpoint corresponding to `break_position()`, 
+#' @return A `list` object with
+#' clipped_reads corresponding to `EML4_ALK_detection()`,
+#' last_EML4 corresponding to `EML4_sequence()`,
+#' first_ALK corresponding to `ALK_sequence()`,
+#' breakpoint corresponding to `break_position()`,
 #' and read_depth corresponding to `break_position_depth()`.
+#' If no EML4-ALK is detected an empty `GAlignments` is returned.
 #' @examples
 #' H3122_bam <- system.file("extdata",
 #' "H3122_EML4.bam",
@@ -321,21 +317,21 @@ break_position_depth <- function(file, reads){
 #'                     basepairs=20)
 #' @export
 EML4_ALK_analysis <- function(file, genome="hg38", mates=2, basepairs=20){
-    if(!isa(genome, "character")){
-        return("ERROR: genome has to be a character")
+    if(!isScalarCharacter(genome)){
+        stop("genome has to be a character")
     }
-    if(!isa(mates, "numeric")){
-        return("ERROR: mates has to be a numeric")
+    if(!isScalarNumber(mates)){
+        stop("mates has to be a numeric")
     }
     if (!(genome %in% c("hg38", "hg19"))){
-        return("ERROR: The reference genome has to be hg38 or hg19")
+        stop("the reference genome has to be hg38 or hg19")
     }
     res <- EML4_ALK_detection(file=file, genome=genome, mates=mates)
-    if(!isa(res, "GAlignments")){
+    if(isEmpty(res)){
         return(res)
     }
-    if(!isa(basepairs, "numeric")){
-        return("ERROR: basepairs has to be a numeric")
+    if(!isScalarNumber(basepairs)){
+        stop("basepairs has to be a numeric")
     }
     EML4 <- EML4_sequence(reads=res, basepairs=basepairs)
     ALK <- ALK_sequence(reads=res, basepairs=basepairs)

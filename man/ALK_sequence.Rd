@@ -7,7 +7,7 @@
 ALK_sequence(reads, basepairs = 20)
 }
 \arguments{
-\item{reads}{\code{GAlignments} returned by EML4_ALK_detection().}
+\item{reads}{\code{GAlignments} returned by \code{EML4_ALK_detection()}.}
 
 \item{basepairs}{\code{integer}, number of basepairs identified
 from the EML4-ALK fusion. Default=20.}
@@ -15,7 +15,7 @@ from the EML4-ALK fusion. Default=20.}
 \value{
 If EML4-ALK is detected, returns a \code{table} of identified
 ALK basepairs with the number of corresponding reads for each sequence.
-Otherwise "No EML4-ALK was detected" is returned.
+If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 }
 \description{
 This function identifies the basepairs following the ALK breakpoint.

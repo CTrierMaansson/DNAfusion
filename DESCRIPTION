@@ -21,8 +21,6 @@ RoxygenNote: 7.2.1
 Suggests: 
     knitr,
     rmarkdown,
-    usethis,
-    devtools,
     testthat,
     BiocStyle,
     sessioninfo
@@ -34,7 +32,6 @@ Imports:
   Rsamtools,
   GenomicAlignments
 Depends:
-  dplyr,
   R (>= 4.2.0)
 BugReports: https://github.com/CTrierMaansson/DNAfusion/issues
 URL: https://github.com/CTrierMaansson/DNAfusion
