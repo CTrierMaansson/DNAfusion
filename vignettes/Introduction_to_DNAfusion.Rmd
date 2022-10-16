@@ -346,7 +346,7 @@ HCC827_results
 \newpage
 # Session info
 ```{r session, echo = FALSE}
-session_info(
+sessioninfo::session_info(
     pkgs = "attached",
     include_base = FALSE,
     dependencies = NA,

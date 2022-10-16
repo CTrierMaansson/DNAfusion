@@ -22,7 +22,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    devtools,
+    sessioninfo,
     BiocStyle,
 VignetteBuilder: knitr
 Imports:
