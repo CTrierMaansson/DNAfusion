@@ -42,7 +42,7 @@ Alternatively, the vignettes can be browsed in Rstudio with
  ```{r}
 browseVignettes("DNAfusion")
 ```
-This requires build_vignettes = TRUE during installation with github
+This requires `build_vignettes = TRUE` during installation with github
 
 ## Citation
 
