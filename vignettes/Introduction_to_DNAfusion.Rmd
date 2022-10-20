@@ -42,6 +42,7 @@ knitr::opts_chunk$set(
 ```
 \newpage
 # Introduction
+<img src="logo.png" width="200" align="right">
 
 This package was created in order to increase the sensitivity of EML4-ALK
 detection from commercially available NGS products such as the AVENIO (Roche)

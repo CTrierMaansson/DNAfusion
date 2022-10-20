@@ -1,4 +1,4 @@
-# DNAfusion
+# DNAfusion <img src="vignettes/logo.png" width="150" align="right">
 
 An R/Bioconductor package to evaluate BAM files and identify genefusions, such as EML4-ALK
 
