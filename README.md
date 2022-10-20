@@ -11,7 +11,7 @@ DNAfusion is under active development. In the future the package will include mo
 
 Use devtools to install the most recent version of DNAfusion from the GitHub repository.
 
-```{R}
+```R
 if (!require(devtools)) install.packages('devtools')
 library(devtools)
 
@@ -22,7 +22,7 @@ library(DNAfusion)
 
 Alternatively, install DNAfusion published at Bioconductor.
 
-```{R}
+```R
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
@@ -33,13 +33,11 @@ library(DNAfusion)
 
 ## Vignettes
 
-See the documentation at https://github.com/CTrierMaansson/DNAfusion/tree/main/inst/doc
-
-Both html and pdf vignettes are available
+See the documentation at https://github.com/CTrierMaansson/DNAfusion/tree/main/vignettes
 
 Alternatively, the vignettes can be browsed in Rstudio with 
 
- ```{r}
+ ```R
 browseVignettes("DNAfusion")
 ```
 This requires `build_vignettes = TRUE` during installation with github
