@@ -15,7 +15,7 @@ Use devtools to install the most recent version of DNAfusion from the GitHub rep
 if (!require(devtools)) install.packages('devtools')
 library(devtools)
 
-install_github("CTrierMaansson/DNAfusion", build_vignettes = TRUE)
+devtools::install_github("CTrierMaansson/DNAfusion", build_vignettes = TRUE)
 library(DNAfusion)
 
 ```
