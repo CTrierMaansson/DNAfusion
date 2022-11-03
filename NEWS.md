@@ -1,5 +1,5 @@
 # DNAfusion 1.0.0 (19 October 2022)
-* Bioconductor release 
+* Bioconductor 3.16 release 
 
 # DNAfusion 0.99.3 (16 October 2022)
 * Updated DESCRIPTION
