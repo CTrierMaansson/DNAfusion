@@ -1,6 +1,6 @@
 Package: DNAfusion
 Title: Identification of gene fusions using paired-end sequencing
-Version: 1.0.0
+Version: 1.0.1
 biocViews: TargetedResequencing, Genetics, GeneFusionDetection, Sequencing
 Authors@R: 
     c(person(given = "Christoffer Trier", family = "Maansson", , email = "ctm@clin.au.dk", role = c("aut", "cre"),
