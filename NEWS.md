@@ -1,4 +1,4 @@
-# DNAfusion 1.0.1 (12 December 2022)
+# DNAfusion 1.1.0 (13 December 2022)
 * Updated DESCRIPTION
 
 # DNAfusion 1.0.0 (19 October 2022)
