@@ -344,3 +344,153 @@ EML4_ALK_analysis <- function(file, genome="hg38", mates=2, basepairs=20){
                 read_depth=position_depth))
 }
 
+
+
+#' Detection of ALK breakpoint
+#' This function identifies the genomic position in ALK
+#' where the breakpoint has happened.
+#' This function looks for ALK-EML4 mate pair reads in the BAM file.
+#' @importFrom GenomicRanges GRanges mcols
+#' @importFrom GenomicAlignments readGAlignments cigar seqnames
+#' @importFrom Rsamtools ScanBamParam scanBam
+#' @importFrom IRanges IRanges
+#' @importFrom BiocBaseUtils isScalarNumber isScalarCharacter
+#' @param file The name of the file which the data are to be read from.
+#' @param genome `Character string` representing the reference genome.
+#' Can be either "hg38" or "hg19". Default="hg38".
+#' @param mates `Interger`, the minimum number ALK-EML4 mate pairs
+#' needed to be detected in order to call a variant. Default=2.
+#' @return A `GAlignments` object with soft-clipped reads representing
+#'  ALK-EML4 is returned. If no ALK-EML4 is detected the `GAlignments`
+#'  is empty.
+#' @examples
+#' H3122_bam <- system.file("extdata",
+#' "H3122_EML4.bam",
+#' package="DNAfusion")
+#' HCC827_bam <-  system.file("extdata",
+#' "HCC827_EML4.bam",
+#' package="DNAfusion")
+#'
+#' ALK_EML4_detection(file=H3122_bam,
+#'                     genome="hg38",
+#'                     mates=2)
+#' ALK_EML4_detection(file=HCC827_bam,
+#'                     genome="hg38",
+#'                     mates=2)
+#' @export
+ALK_EML4_detection <- function(file, genome="hg38", mates=2){ 
+  if(!isScalarCharacter(genome)){ 
+    stop("genome has to be a character")
+  }
+  if(!isScalarNumber(mates)){
+    stop("mates has to be a numeric")
+  }
+  if(!(genome %in% c("hg38", "hg19"))){
+    stop("The reference genome has to be hg38 or hg19")
+  }
+  what <- c("mpos", "seq")
+  if (genome =="hg38"){
+    which <- GRanges(seqnames="chr2",
+                     IRanges(start=29192774, end=29921586))
+    param <- ScanBamParam(which=which, what=what)
+    reads <- readGAlignments(file=file, param=param) #reads a file containing aligned reads
+    reads <- reads[(42169353 < mcols(reads)[,1] & 
+                      mcols(reads)[,1] < 42332548 &
+                      !is.na(mcols(reads)[,1])),]
+  }
+  else{ #genome=hg19
+    which <- GRanges(seqnames="chr2",
+                     IRanges(start=29415640, end=30144477))
+    param <- ScanBamParam(which=which, what=what)
+    reads <- readGAlignments(file=file, param=param)
+    reads <- reads[(42396490 < mcols(reads)[,1] &
+                      mcols(reads)[,1] < 42559688 &
+                      !is.na(mcols(reads)[,1])),]
+  }
+  if (length(seqnames(reads))<mates){
+    res <- GenomicAlignments::GAlignments()
+    return(res)
+  }
+  clip_reads <- reads[cigar(reads) != "96M",] #not equal to 96M
+  clip_reads <- clip_reads[!grepl("D", cigar(clip_reads)),]
+  clip_reads <- clip_reads[!grepl("I", cigar(clip_reads)),]
+  if (length(seqnames(clip_reads))<mates){
+    res <- GenomicAlignments::GAlignments()
+    return(res)
+  }
+  return(clip_reads)
+}
+
+
+
+#' Detect ALK and EML4 introns of the breakpoint
+#' This function identifies the introns in ALK and EML4
+#' where the breakpoint has happened.
+#' @importFrom GenomicFeatures
+#' @importFrom TxDb.Hsapiens.UCSC.hg38.knownGene
+#' @importFrom IRanges IRanges
+
+introns_ALK_EML4 <-function(breakpoint_ALK, breakpoint_EML4){
+  txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
+  ALK_txs <- transcriptsBy(txdb_ALK, by="gene")[["238"]]
+  ALK_tx_names <- mcols(ALK_txs)$tx_name
+  ALK_intron <- suppressWarnings(intronsByTranscript(txdb,use.names=TRUE)[ALK_tx_names])
+  EML4_txs <- transcriptsBy(txdb, by="gene")[["27436"]]
+  EML4_tx_names <- mcols(EML4_txs)$tx_name
+  EML4_intron <- suppressWarnings(intronsByTranscript(txdb,use.names=TRUE)[EML4_tx_names])
+  breakpoint_ALK <- as.numeric(names(which.max(breakpoint_ALK)))
+  break_gr_ALK <- GRanges(seqnames="chr2",
+                          IRanges(start = breakpoint_ALK,end = breakpoint_ALK),
+                          strand="*")
+  res_ALK <- findOverlaps(break_gr,rev(ALK_intron$ENST00000389048.8),ignore.strand=TRUE)
+  intron_ALK <- subjectHits(res_ALK)
+  breakpoint_EML4 <- as.numeric(names(which.max(breakpoint_EML4)))
+  break_gr_EML4 <- GRanges(seqnames="chr2",
+                           IRanges(start = breakpoint_EML4,end = breakpoint_EML4),
+                           strand="*")
+  res_EML4 <- findOverlaps(break_gr_EML4,EML4_intron$ENST00000318522.10,ignore.strand=TRUE)
+  intron_EML4 <- subjectHits(res_EML4)
+  df <- data.frame(intron_ALK=intron_ALK, intron_EML4 = intron_EML4)
+  return(df)
+}
+
+
+
+#' Detect the variants of ALK-EML4
+#' This function identifies ALK-EML4 variants using the intron of the breakpoint
+#' of EML4
+#' @importFrom dplyr
+
+find_variants <- function(EML4intron){
+  df <- data.frame(Variant=c('Variant 1 (E13,A20)', 'Variant 2 (E20,A20)','Variant 3a/b(E6,A20)', 'variant 4(E15,A20)','variant 5a/b(E2,A20)','variant 5(E18,A20)','variant 7(E14,A20)','variant 8a/b(E17,A20)'),
+                   Intron_EML4=c(13,20,6,15,2,18,14,17),
+                   Intron_ALK= c(19,19,19,19,19,19,19,19)) 
+  return(df %>% filter_all(any_vars(Intron_EML4 %in% c(EML4intron))))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
