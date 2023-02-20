@@ -6,5 +6,8 @@ This folder contains PosDeduped BAM files and bam.bai files from two separate ce
 These files are made using the AVENIO ctDNA surveillance kit and Illumina Nextseq 500 sequencing.
 The BAM files were generated using the AVENIO Oncology Analysis Software with hg38 as reference genome. 
 In order to reduce the file size, only reads in EML4 are included.
-EML4 reads were filtered with samtools view input.bam "Chr2:42169353-42332548" > output.bam
+EML4 and ALK reads were filtered with samtools view input.bam "chr2:42169353-42332548" > output.bam 
+and
+samtools view input.bam "chr2:29192774-29921586" > output.bam
+followed by merging using samtools merge
 
