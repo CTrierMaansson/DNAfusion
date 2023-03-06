@@ -1,4 +1,4 @@
-# DNAfusion 1.2.0 (20 February 2023)
+# DNAfusion 1.1.1 (6 March 2023)
 * Updated example files to include ALK reads
 
 # DNAfusion 1.1.0 (13 December 2022)
