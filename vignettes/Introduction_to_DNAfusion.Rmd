@@ -170,6 +170,13 @@ $$\\[0.1in]$$
     Default = 20.
 $$\\[0.1in]$$  
 
+**`genome`**
+
+    character representing the reference genome. 
+    Can either be "hg38" or "hg19". 
+    Default = "hg38".
+$$\\[0.1in]$$ 
+
 **Output:**
 
 If EML4-ALK is detected, returns a `table` of identified
@@ -179,8 +186,8 @@ If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 **Examples:**
 
 ```{r EML4_sequence}
-EML4_sequence(H3122_result, basepairs = 20)
-EML4_sequence(HCC827_result, basepairs = 20)
+EML4_sequence(H3122_result, basepairs = 20,genome = "hg38")
+EML4_sequence(HCC827_result, basepairs = 20,genome = "hg38")
 
 ```
 
@@ -201,6 +208,13 @@ $$\\[0.1in]$$
     Default = 20.
 $$\\[0.1in]$$ 
 
+**`genome`**
+
+    character representing the reference genome. 
+    Can either be "hg38" or "hg19". 
+    Default = "hg38".
+$$\\[0.1in]$$ 
+
 **Output:**
 
 If EML4-ALK is detected, returns a `table` of identified
@@ -210,8 +224,8 @@ If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 **Examples:**
 
 ```{r ALK_sequence}
-ALK_sequence(H3122_result, basepairs = 20)
-ALK_sequence(HCC827_result, basepairs = 20)
+ALK_sequence(H3122_result, basepairs = 20,genome = "hg38")
+ALK_sequence(HCC827_result, basepairs = 20,genome = "hg38")
 
 ```
 
@@ -227,6 +241,19 @@ $$\\[0.1in]$$
     GAlignments object returned by EML4_ALK_detection().
 $$\\[0.1in]$$
 
+**`genome`**
+
+    character representing the reference genome. 
+    Can either be "hg38" or "hg19". 
+    Default = "hg38".
+$$\\[0.1in]$$ 
+
+**`gene`**
+
+    character representing the gene. 
+    Can either be "ALK" or "EML4". 
+$$\\[0.1in]$$ 
+
 **Output:**
 
 If EML4-ALK is detected, returns a `table` of genomic positions
@@ -236,8 +263,10 @@ If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 **Examples:**
 
 ```{r break_position}
-break_position(H3122_result)
-break_position(HCC827_result)
+break_position((H3122_result),gene="EML4",genome="hg38")
+break_position((H3122_result),gene="ALK",genome="hg38")
+break_position((HCC827_result),gene="EML4",genome="hg38")
+break_position((HCC827_result),gene="ALK",genome="hg38")
 
 ```
 
@@ -258,6 +287,19 @@ $$\\[0.1in]$$
     GAlignments returned by EML4_ALK_detection().
 $$\\[0.1in]$$
 
+**`genome`**
+
+    character representing the reference genome. 
+    Can either be "hg38" or "hg19". 
+    Default = "hg38".
+$$\\[0.1in]$$ 
+
+**`gene`**
+
+    character representing the gene. 
+    Can either be "ALK" or "EML4". 
+$$\\[0.1in]$$ 
+
 **Output:**
 
 If EML4-ALK is detected a single `integer` corresponding
@@ -267,8 +309,10 @@ If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 **Examples:**
 
 ```{r break_position_depth}
-break_position_depth(H3122_bam, H3122_result)
-break_position_depth(HCC827_bam, HCC827_result)
+break_position_depth(H3122_bam,H3122_result,gene="EML4",genome="hg38")
+break_position_depth(H3122_bam,H3122_result,gene="ALK",genome="hg38")
+break_position_depth(HCC827_bam,HCC827_result,gene="EML4",genome="hg38")
+break_position_depth(HCC827_bam,HCC827_result,gene="ALK",genome="hg38")
 
 ```
 
@@ -355,3 +399,71 @@ sessioninfo::session_info(
 )
 
 ```
+
+## `introns_ALK_EML4()`
+This function identifies the introns of ALK and EML4
+where the breakpoint has happened.
+
+**Input:**
+$$\\[0.1in]$$
+
+**`file`**
+
+    The name of the file which the data are to be read from.
+$$\\[0.1in]$$
+
+**`genome`**
+
+    character representing the reference genome. 
+    Can be either "hg38" or "hg19".
+    Default = "hg38".
+$$\\[0.1in]$$ 
+
+
+**Output:** 
+A`dataframe`of the ALK- and EML4-intron of the breakpoint is returned.
+
+**Examples:**
+
+```{r EML4_ALK_introns_ALK_EML4, message=FALSE}
+H3122_introns <- introns_ALK_EML4(file = H3122_bam, 
+                                    genome = "hg38")
+
+HCC827_introns <- introns_ALK_EML4(file = HCC827_bam, 
+                                    genome = "hg38")
+```
+
+
+## `find_variants()`
+This function identifies ALK-EML4 variants using the intron of the breakpoint 
+of EML4.
+
+**Input:**
+$$\\[0.1in]$$
+
+**`file`**
+
+    The name of the file which the data are to be read from.
+$$\\[0.1in]$$
+
+**`genome`**
+
+    character representing the reference genome. 
+    Can be either "hg38" or "hg19".
+    Default = "hg38".
+$$\\[0.1in]$$ 
+
+
+**Output:** 
+A`dataframe`of the of the ALK-EML4 variant is returned.
+
+**Examples:**
+
+```{r find_variants, message=FALSE}
+H3122_variants <- find_variants(file = H3122_bam, 
+                                    genome = "hg38")
+
+HCC827_variants <- find_variants(file = HCC827_bam, 
+                                    genome = "hg38")
+```
+

@@ -23,8 +23,11 @@ A \code{list} object with
 clipped_reads corresponding to \code{EML4_ALK_detection()},
 last_EML4 corresponding to \code{EML4_sequence()},
 first_ALK corresponding to \code{ALK_sequence()},
-breakpoint corresponding to \code{break_position()},
-and read_depth corresponding to \code{break_position_depth()}.
+breakpoint_ALK corresponding to \code{break_position()}, gene = "ALK",
+breakpoint_EML4 corresponding to \code{break_position()},gene = "EML4",
+read_depth_ALK corresponding to \code{break_position_depth()}.gene = "ALK",
+and read_depth_EML4 corresponding to \code{break_position_depth()}
+,gene = "EML4".
 If no EML4-ALK is detected an empty \code{GAlignments} is returned.
 }
 \description{

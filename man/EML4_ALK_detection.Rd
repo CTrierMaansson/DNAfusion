@@ -2,7 +2,7 @@
 % Please edit documentation in R/DNAfusion_functions.R
 \name{EML4_ALK_detection}
 \alias{EML4_ALK_detection}
-\title{Detection of EML4-ALK variants}
+\title{Detection of ALK and EML4 breakpoint}
 \usage{
 EML4_ALK_detection(file, genome = "hg38", mates = 2)
 }
@@ -12,16 +12,18 @@ EML4_ALK_detection(file, genome = "hg38", mates = 2)
 \item{genome}{\verb{Character string} representing the reference genome.
 Can be either "hg38" or "hg19". Default="hg38".}
 
-\item{mates}{\code{Interger}, the minimum number EML4-ALK mate pairs
+\item{mates}{\code{Interger}, the minimum number ALK-EML4 mate pairs
 needed to be detected in order to call a variant. Default=2.}
 }
 \value{
 A \code{GAlignments} object with soft-clipped reads representing
-EML4-ALK is returned. If no EML4-ALK is detected the \code{GAlignments}
-is empty.
+ALK-EML4/EML4_ALK is returned. If no ALK-EML4 or EML4-ALK is detected the
+\code{GAlignments}is empty.
 }
 \description{
-This function looks for EML4-ALK mate pair reads in the BAM file.
+This function identifies the genomic position in ALK and EML4
+where the breakpoint has happened.
+This function looks for ALK-EML4 mate pair reads in the BAM file.
 }
 \examples{
 H3122_bam <- system.file("extdata",

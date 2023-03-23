@@ -4,13 +4,16 @@
 \alias{EML4_sequence}
 \title{Identification of EML4 breakpoint bases}
 \usage{
-EML4_sequence(reads, basepairs = 20)
+EML4_sequence(reads, basepairs = 20, genome = "hg38")
 }
 \arguments{
 \item{reads}{\code{GAlignments} object returned by \code{EML4_ALK_detection()}.}
 
 \item{basepairs}{\code{Integer}, number of basepairs identified
 from the EML4-ALK fusion. Default=20.}
+
+\item{genome}{\verb{Character string} representing the reference genome.
+Can be either "hg38" or "hg19". Default="hg38".}
 }
 \value{
 If EML4-ALK is detected, returns a \code{table} of identified
@@ -31,9 +34,11 @@ package="DNAfusion")
 EML4_sequence(EML4_ALK_detection(file=H3122_bam,
                                     genome="hg38",
                                     mates=2),
-                basepairs=20)
+                basepairs=20,
+                genome="hg38")
 EML4_sequence(EML4_ALK_detection(file=HCC827_bam,
                                     genome="hg38",
                                     mates=2),
-                basepairs=20)
+                basepairs=20,
+                genome="hg38")
 }

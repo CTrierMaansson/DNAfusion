@@ -18,7 +18,7 @@ Description: DNAfusion can identify gene fusions such as EML4-ALK
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Suggests: 
     knitr,
     rmarkdown,
@@ -33,9 +33,11 @@ Imports:
   Rsamtools,
   GenomicAlignments,
   BiocBaseUtils,
-  S4Vectors
+  S4Vectors,
+  GenomicFeatures,
+  TxDb.Hsapiens.UCSC.hg38.knownGene,
+  BiocGenerics
 Depends:
   R (>= 4.2.0)
 BugReports: https://github.com/CTrierMaansson/DNAfusion/issues
 URL: https://github.com/CTrierMaansson/DNAfusion
- 
