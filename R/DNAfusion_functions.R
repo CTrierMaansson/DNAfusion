@@ -503,6 +503,8 @@ EML4_ALK_analysis <- function(file, genome="hg38", mates=2, basepairs=20){
 #' @param genome `character` representing the reference genome.
 #' Can be either "hg38" or "hg19". Default="hg38".
 #' @return A`dataframe`of the ALK- and EML4-intron of the breakpoint is returned
+#' corresponding to the transcript ENST00000389048.8 for ALK and 
+#' ENST00000318522.10 for EML4.
 #' @examples
 #' H3122_bam <- system.file("extdata",
 #' "H3122_EML4.bam",
