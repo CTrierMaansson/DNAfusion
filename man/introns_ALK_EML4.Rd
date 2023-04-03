@@ -14,6 +14,8 @@ Can be either "hg38" or "hg19". Default="hg38".}
 }
 \value{
 A\code{dataframe}of the ALK- and EML4-intron of the breakpoint is returned
+corresponding to the transcript ENST00000389048.8 for ALK and
+ENST00000318522.10 for EML4.
 }
 \description{
 This function identifies the introns of ALK and EML4

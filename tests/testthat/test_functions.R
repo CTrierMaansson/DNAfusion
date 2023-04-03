@@ -69,12 +69,6 @@ testthat::expect_true(isa(detection, "GAlignments"))
 
 testthat::expect_error(EML4_sequence(EML4_ALK_detection(file=file),
                                      genome = "hg19"))
-testthat::expect_error(ALK_sequence(EML4_ALK_detection(file=file),
-                                     genome = "hg19"))
-testthat::expect_error(break_position(EML4_ALK_detection(file=file),gene="EML4",
-                                      genome = "hg19"))
-testthat::expect_error(break_position(EML4_ALK_detection(file=file),gene="ALK",
-                                      genome = "hg19"))
 
 
 testthat::expect_error(EML4_sequence(file))

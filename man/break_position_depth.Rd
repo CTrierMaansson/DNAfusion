@@ -20,11 +20,12 @@ Can be either "hg38" or "hg19". Default="hg38".}
 \value{
 If EML4-ALK is detected a single \code{integer} corresponding
 to the read depth at the breakpoint is returned.
-If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
+If no spanning reads in EML4 or ALK is detected
+an empty GAlignments object is returned..
 }
 \description{
 This function identifies the read depth at the basepair
-before the breakpoint in EML4.
+before the breakpoint in EML4 or ALK
 }
 \examples{
 H3122_bam <- system.file("extdata",

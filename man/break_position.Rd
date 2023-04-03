@@ -16,12 +16,13 @@ Can be either "ALK" or "EML4".}
 Can be either "hg38" or "hg19". Default="hg38".}
 }
 \value{
-If EML4-ALK is detected, returns a \code{table} of genomic positions
+If EML4-ALK is detected, it returns a \code{table} of genomic positions
 with the number of corresponding reads for each sequence.
-If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
+If no spanning reads in EML4 or ALK is detected
+an empty GAlignments object is returned.
 }
 \description{
-This function identifies the genomic position in EML4
+This function identifies the genomic position in EML4 or ALK,
 where the breakpoint has happened.
 }
 \examples{
