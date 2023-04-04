@@ -476,7 +476,7 @@ EML4_ALK_analysis <- function(file, genome="hg38", mates=2, basepairs=20){
     EML4 <- EML4_sequence(reads=res, basepairs=basepairs,genome)
     ALK <- ALK_sequence(reads=res, basepairs=basepairs,genome)
     if(isEmpty(ALK)){
-        position_ALK <- NA
+        ALK <- NA
     }
     position_ALK <- break_position(reads=res,gene="ALK",genome)
     if(isEmpty(position_ALK)){
