@@ -539,14 +539,15 @@ introns_ALK_EML4 <-function(file, genome="hg38"){
     if(!(genome %in% c("hg38", "hg19"))){
         stop("The reference genome has to be hg38 or hg19")
     }
-    txdb <- TxDb.Hsapiens.UCSC.hg38.knownGene
-    ALK_txs <- transcriptsBy(txdb, by="gene")[["238"]]
+    ALK_txs <- transcriptsBy(TxDb.Hsapiens.UCSC.hg38.knownGene,
+                             by="gene")[["238"]]
     ALK_tx_names <- mcols(ALK_txs)$tx_name
-    ALK_intron <- suppressWarnings(intronsByTranscript(txdb,use.names=TRUE)
+    ALK_intron <- suppressWarnings(intronsByTranscript(TxDb.Hsapiens.UCSC.hg38.knownGene,use.names=TRUE)
                                     [ALK_tx_names])
-    EML4_txs <- transcriptsBy(txdb, by="gene")[["27436"]]
+    EML4_txs <- transcriptsBy(TxDb.Hsapiens.UCSC.hg38.knownGene,
+                              by="gene")[["27436"]]
     EML4_tx_names <- mcols(EML4_txs)$tx_name
-    EML4_intron <- suppressWarnings(intronsByTranscript(txdb, use.names=TRUE)
+    EML4_intron <- suppressWarnings(intronsByTranscript(TxDb.Hsapiens.UCSC.hg38.knownGene, use.names=TRUE)
                                     [EML4_tx_names])
     breakpoint_ALK <-break_position(EML4_ALK_detection(file=file,genome=genome),
                                     gene="ALK",genome=genome)
@@ -556,15 +557,20 @@ introns_ALK_EML4 <-function(file, genome="hg38"){
     if (isScalarCharacter(breakpoint_ALK)){
         return("No ALK-EML4 was detected")
     }
-    breakpoint_ALK <- as.numeric(names(which.max(breakpoint_ALK)))
-    break_gr_ALK <- GRanges(seqnames="chr2",
-                            IRanges(start = breakpoint_ALK,
-                                    end = breakpoint_ALK),strand="*")
-    res_ALK <- findOverlaps(break_gr_ALK,rev(ALK_intron$ENST00000389048.8),
-                            ignore.strand=TRUE)
-    intron_ALK <- subjectHits(res_ALK)
-    if (length(intron_ALK)==0){
-        return("Breakpoint not located in intron of ALK")
+    if(!isEmpty(breakpoint_ALK)){
+        breakpoint_ALK <- as.numeric(names(which.max(breakpoint_ALK)))
+        break_gr_ALK <- GRanges(seqnames="chr2",
+                                IRanges(start = breakpoint_ALK,
+                                        end = breakpoint_ALK),strand="*")
+        res_ALK <- findOverlaps(break_gr_ALK,rev(ALK_intron$ENST00000389048.8),
+                                ignore.strand=TRUE)
+        intron_ALK <- subjectHits(res_ALK)
+        if (length(intron_ALK)==0){
+            return("Breakpoint not located in intron of ALK")
+        }
+    }
+    else{
+        intron_ALK <- NA
     }
     breakpoint_EML4 <- as.numeric(names(which.max(breakpoint_EML4)))
     break_gr_EML4 <- GRanges(seqnames="chr2",IRanges(start = breakpoint_EML4,
@@ -621,6 +627,16 @@ find_variants <- function(file, genome="hg38"){
     }
     EML4intron <-introns_ALK_EML4(file=file,genome=genome)$intron_EML4
     ALKintron <-introns_ALK_EML4(file=file,genome=genome)$intron_ALK
+    if (any(is.na(ALKintron))==TRUE){
+        return(list("Variant is not classified",
+                    EML4_intron = EML4intron,
+                    ALK_intron = ALKintron))
+    }
+    if (any(is.na(ALKintron))==TRUE){
+        return(list("Variant is not classified",
+                    EML4_intron = EML4intron,
+                    ALK_intron = ALKintron))
+    }
     df <- data.frame(Variant=c('Variant 1 (E13,A20)', 'Variant 2 (E20,A20)',
                                 'Variant 3a/b(E6,A20)', 'variant 4(E15,A20)',
                                 'variant 5a/b(E2,A20)','variant 5(E18,A20)',
