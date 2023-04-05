@@ -19,7 +19,8 @@ Can be either "hg38" or "hg19". Default="hg38".}
 If EML4-ALK is detected, it returns a \code{table} of genomic positions
 with the number of corresponding reads for each sequence.
 If no spanning reads in EML4 or ALK is detected
-an empty \code{GAlignments} object is returned.
+an empty \code{GAlignments} object is returned. If no EML4-ALK is detected
+"No EML4-ALK was detected" is returned.
 }
 \description{
 This function identifies the genomic position in EML4 or ALK,

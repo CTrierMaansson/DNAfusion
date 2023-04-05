@@ -222,7 +222,7 @@ $$\\[0.1in]$$
 If EML4-ALK is detected, returns a `table` of identified
 ALK basepairs with the number of corresponding reads for each sequence.
 If no spanning reads in ALK is detected an empty `GAlignments` object 
-is returned.
+is returned. If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 
 **Examples:**
 
@@ -260,7 +260,8 @@ $$\\[0.1in]$$
 
 If EML4-ALK is detected, it returns a `table` of genomic positions
 with the number of corresponding reads for each sequence.
-If no spanning reads in EML4 or ALK is detected an empty `GAlignments` object is returned.
+If no spanning reads in EML4 or ALK is detected an empty `GAlignments` object is
+returned. If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 
 **Examples:**
 
@@ -304,7 +305,7 @@ $$\\[0.1in]$$
 If EML4-ALK is detected a single `integer` corresponding
 to the read depth at the breakpoint is returned.
 If no spanning reads in EML4 or ALK is detected an empty GAlignments object is
-returned.
+returned. If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
 
 **Examples:**
 
@@ -382,9 +383,13 @@ H3122_results$last_EML4
 
 H3122_results$first_ALK
 
-H3122_results$breakpoint
+H3122_results$breakpoint_ALK
 
-H3122_results$read_depth
+H3122_results$breakpoint_EML4
+
+H3122_results$read_depth_ALK
+
+H3122_results$read_depth_EML4
 
 HCC827_results
 

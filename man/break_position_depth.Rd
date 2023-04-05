@@ -21,7 +21,8 @@ Can be either "hg38" or "hg19". Default="hg38".}
 If EML4-ALK is detected a single \code{integer} corresponding
 to the read depth at the breakpoint is returned.
 If no spanning reads in EML4 or ALK is detected
-an empty GAlignments object is returned.
+an empty GAlignments object is returned. If no EML4-ALK is detected
+"No EML4-ALK was detected" is returned.
 }
 \description{
 This function identifies the read depth at the basepair
