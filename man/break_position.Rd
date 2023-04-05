@@ -4,18 +4,25 @@
 \alias{break_position}
 \title{EML4-ALK breakpoint}
 \usage{
-break_position(reads)
+break_position(reads, gene, genome = "hg38")
 }
 \arguments{
 \item{reads}{\code{GAlignments} object returned by \code{EML4_ALK_detection()}.}
+
+\item{gene}{\verb{Character string} representing the gene.
+Can be either "ALK" or "EML4".}
+
+\item{genome}{\verb{Character string} representing the reference genome.
+Can be either "hg38" or "hg19". Default="hg38".}
 }
 \value{
-If EML4-ALK is detected, returns a \code{table} of genomic positions
+If EML4-ALK is detected, it returns a \code{table} of genomic positions
 with the number of corresponding reads for each sequence.
-If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
+If no spanning reads in EML4 or ALK is detected
+an empty \code{GAlignments} object is returned.
 }
 \description{
-This function identifies the genomic position in EML4
+This function identifies the genomic position in EML4 or ALK,
 where the breakpoint has happened.
 }
 \examples{
@@ -28,8 +35,14 @@ package="DNAfusion")
 
 break_position(EML4_ALK_detection(file=H3122_bam,
                                     genome="hg38",
-                                    mates=2))
+                                    mates=2),gene="EML4",genome="hg38")
+break_position(EML4_ALK_detection(file=H3122_bam,
+                                    genome="hg38",
+                                    mates=2),gene="ALK",genome="hg38")
 break_position(EML4_ALK_detection(file=HCC827_bam,
                                     genome="hg38",
-                                    mates=2))
+                                    mates=2),gene="EML4",genome="hg38")
+break_position(EML4_ALK_detection(file=HCC827_bam,
+                                    genome="hg38",
+                                    mates=2),gene="ALK",genome="hg38")
 }

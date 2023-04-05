@@ -4,21 +4,28 @@
 \alias{break_position_depth}
 \title{Read depth at breakpoint}
 \usage{
-break_position_depth(file, reads)
+break_position_depth(file, reads, gene, genome = "hg38")
 }
 \arguments{
 \item{file}{The name of the file which the data are to be read from.}
 
 \item{reads}{\code{GAlignments} object returned by \code{EML4_ALK_detection()}.}
+
+\item{gene}{\verb{Character string} representing the gene.
+Can be either "ALK" or "EML4".}
+
+\item{genome}{\verb{Character string} representing the reference genome.
+Can be either "hg38" or "hg19". Default="hg38".}
 }
 \value{
 If EML4-ALK is detected a single \code{integer} corresponding
 to the read depth at the breakpoint is returned.
-If no EML4-ALK is detected "No EML4-ALK was detected" is returned.
+If no spanning reads in EML4 or ALK is detected
+an empty GAlignments object is returned.
 }
 \description{
 This function identifies the read depth at the basepair
-before the breakpoint in EML4.
+before the breakpoint in EML4 or ALK
 }
 \examples{
 H3122_bam <- system.file("extdata",
@@ -31,9 +38,21 @@ package="DNAfusion")
 break_position_depth(file=H3122_bam,
                         EML4_ALK_detection(file=H3122_bam,
                                             genome="hg38",
-                                            mates=2))
+                                            mates=2),
+                                            gene="ALK",genome="hg38")
+break_position_depth(file=H3122_bam,
+                        EML4_ALK_detection(file=H3122_bam,
+                        genome="hg38",
+                        mates=2),
+                        gene="EML4",genome="hg38")
 break_position_depth(file=HCC827_bam,
                         EML4_ALK_detection(file=HCC827_bam,
                                             genome="hg38",
-                                            mates=2))
+                                            mates=2),
+                                            gene="ALK",genome="hg38")
+break_position_depth(file=H3122_bam,
+                        EML4_ALK_detection(file=H3122_bam,
+                                            genome="hg38",
+                                            mates=2),
+                                            gene="EML4",genome="hg38")
 }
