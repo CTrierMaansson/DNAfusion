@@ -1,3 +1,12 @@
+# DNAfusion 1.2.0 (5 April 2023)
+* Added introns_ALK_EML4()
+* Added find_variants()
+* Updated break_position_depth()
+* Updated break_position()
+* Refined EML4_ALK_detection()
+* Updated vignette to include new functions
+* Cleaned functions for Bioconductor 3.17 release
+
 # DNAfusion 1.1.1 (6 March 2023)
 * Updated example files to include ALK reads
 
