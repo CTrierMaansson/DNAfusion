@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2023-04-05" />
+<meta name="date" content="2023-04-11" />
 
 <title>DNAfusion </title>
 
@@ -776,7 +776,7 @@ function toggle_visibility(id1) {
 <p class="author-name">Christoffer Trier Maansson<span class="affil-mark">1*</span> and Emma Roger Andersen<span class="affil-mark">1</span></p>
 <p class="author-affiliation"><span class="affil-mark">1</span>Department of Clinical Biochemistry, Aarhus University Hospital, Denmark</p>
 <p class="author-email"><span class="affil-mark">*</span><a href="mailto:ctm@clin.au.dk">ctm@clin.au.dk</a></p>
-<h4 class="date">05 apr 2023</h4>
+<h4 class="date">11 apr 2023</h4>
 <h4 class="abstract">Abstract</h4>
 <p>Circulating tumor DNA (ctDNA) containing somatic mutations can be found in blood plasma.
 This includes DNA fusions, such as the EML4-ALK, which can be an oncogenic driver in non-small cell lung cancer. This is an introduction to the <strong>DNAfusion</strong> package for R, which can be used to evaluate whether EML4-ALK is present in blood plasma.</p>
@@ -991,7 +991,8 @@ Default = &quot;hg38&quot;.</code></pre>
 <p><strong>Output:</strong></p>
 <p>If EML4-ALK is detected, it returns a <code>table</code> of genomic positions
 with the number of corresponding reads for each sequence.
-If no spanning reads in EML4 or ALK is detected an empty <code>GAlignments</code> object is returned. If no EML4-ALK is detected “No EML4-ALK was detected” is returned.</p>
+If no spanning reads in EML4 or ALK is detected an empty <code>GAlignments</code> object is
+returned. If no EML4-ALK is detected “No EML4-ALK was detected” is returned.</p>
 <p><strong>Examples:</strong></p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">break_position</span>(H3122_result, <span class="at">genome =</span> <span class="st">&quot;hg38&quot;</span>, <span class="at">gene =</span> <span class="st">&quot;EML4&quot;</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; break_pos</span></span>
@@ -1194,7 +1195,7 @@ with identified introns with breakpoints is returned.</p>
 #&gt;  collate  Danish_Denmark.utf8
 #&gt;  ctype    Danish_Denmark.utf8
 #&gt;  tz       Europe/Paris
-#&gt;  date     2023-04-05
+#&gt;  date     2023-04-11
 #&gt;  pandoc   2.19.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────

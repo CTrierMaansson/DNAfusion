@@ -30,7 +30,7 @@ read_sorter_EML4_ALK <- function(file, genome, gene) {
     if (gene == "EML4") {
         if (genome == "hg38") {
             which <- GRanges(seqnames = "chr2",
-                             IRanges(start = 42169353, end = 42332548))
+                            IRanges(start = 42169353, end = 42332548))
             param <- ScanBamParam(which = which, what = what)
             reads <- readGAlignments(file = file, param = param)
             reads <- reads[(29192774 < mcols(reads)[, 1] &
@@ -39,7 +39,7 @@ read_sorter_EML4_ALK <- function(file, genome, gene) {
         }
         else{
             which <- GRanges(seqnames = "chr2",
-                             IRanges(start = 42396490, end = 42559688))
+                            IRanges(start = 42396490, end = 42559688))
             param <- ScanBamParam(which = which, what = what)
             reads <- readGAlignments(file = file, param = param)
             reads <- reads[(29415640 < mcols(reads)[, 1] &
@@ -50,7 +50,7 @@ read_sorter_EML4_ALK <- function(file, genome, gene) {
     if (gene == "ALK") {
         if (genome == "hg38") {
             which <- GRanges(seqnames = "chr2",
-                             IRanges(start = 29192774, end = 29921586))
+                            IRanges(start = 29192774, end = 29921586))
             param <- ScanBamParam(which = which, what = what)
             reads <- readGAlignments(file = file, param = param)
             reads <- reads[(42169353 < mcols(reads)[, 1] &
@@ -59,7 +59,7 @@ read_sorter_EML4_ALK <- function(file, genome, gene) {
         }
         else{
             which <- GRanges(seqnames = "chr2",
-                             IRanges(start = 29415640, end = 30144477))
+                            IRanges(start = 29415640, end = 30144477))
             param <- ScanBamParam(which = which, what = what)
             reads <- readGAlignments(file = file, param = param)
             reads <- reads[(42396490 < mcols(reads)[, 1] &
@@ -103,8 +103,8 @@ read_sorter_EML4_ALK <- function(file, genome, gene) {
 #'                     mates=2)
 #' @export
 EML4_ALK_detection <- function(file,
-                               genome = "hg38",
-                               mates = 2) {
+                            genome = "hg38",
+                            mates = 2) {
     if (!isScalarCharacter(genome)) {
         stop("genome has to be a character")
     }
@@ -116,8 +116,8 @@ EML4_ALK_detection <- function(file,
     }
     reads <-
         read_sorter_EML4_ALK(file = file,
-                             genome = genome,
-                             gene = "EML4")
+                            genome = genome,
+                            gene = "EML4")
     if (length(seqnames(reads)) < mates) {
         res <- GenomicAlignments::GAlignments()
         return(res)
@@ -133,8 +133,8 @@ EML4_ALK_detection <- function(file,
     }
     reads <-
         read_sorter_EML4_ALK(file = file,
-                             genome = genome,
-                             gene = "ALK")
+                            genome = genome,
+                            gene = "ALK")
     clip_reads_ALK <- reads[cigar(reads) != "96M", ]
     clip_reads_ALK <-
         clip_reads_ALK[!grepl("D", cigar(clip_reads_ALK)), ]
@@ -177,8 +177,8 @@ EML4_ALK_detection <- function(file,
 #'                 genome="hg38")
 #' @export
 EML4_sequence <- function(reads,
-                          basepairs = 20,
-                          genome = "hg38") {
+                        basepairs = 20,
+                        genome = "hg38") {
     if (!isa(reads, "GAlignments")) {
         stop("reads must be a GAlignments object")
     }
@@ -203,7 +203,7 @@ EML4_sequence <- function(reads,
     reads <- index_helper(reads)
     EML4_fun <- function(inp) {
         return(substring(inp["seq"], (as.numeric(inp["index"]))-(basepairs - 1),
-                         as.numeric(inp["index"])))
+                        as.numeric(inp["index"])))
     }
     EML4_seq <- apply(as.data.frame(reads), FUN = EML4_fun, MARGIN = 1)
     EML4_tab <- table(EML4_seq)
@@ -246,8 +246,8 @@ EML4_sequence <- function(reads,
 #'                 genome="hg38")
 #' @export
 ALK_sequence <- function(reads,
-                         basepairs = 20,
-                         genome = "hg38") {
+                        basepairs = 20,
+                        genome = "hg38") {
     if (!isa(reads, "GAlignments")) {
         stop("reads must be a GAlignments object")
     }
@@ -275,7 +275,7 @@ ALK_sequence <- function(reads,
     reads <- index_helper(reads)
     ALK_fun <- function(inp) {
         return(substring(inp["seq"], (as.numeric(inp["index"]))-(basepairs - 1),
-                         as.numeric(inp["index"])))
+                        as.numeric(inp["index"])))
     }
     ALK_seq <- apply(as.data.frame(reads), FUN = ALK_fun, MARGIN = 1)
     ALK_tab <- table(ALK_seq)
@@ -503,8 +503,8 @@ EML4_ALK_analysis <-
             stop("the reference genome has to be hg38 or hg19")
         }
         res <- EML4_ALK_detection(file = file,
-                                  genome = genome,
-                                  mates = mates)
+                                genome = genome,
+                                mates = mates)
         if (isEmpty(res)) {
             return(res)
         }
@@ -523,15 +523,15 @@ EML4_ALK_analysis <-
         position_EML4 <- break_position(reads = res, gene = "EML4", genome)
         position_depth_ALK <-
             break_position_depth(file = file,
-                                 reads = res,
-                                 gene = "ALK", genome)
+                                reads = res,
+                                gene = "ALK", genome)
         if (isEmpty(position_depth_ALK)) {
             position_depth_ALK <- NA
         }
         position_depth_EML4 <-
             break_position_depth(file = file,
-                                 reads = res,
-                                 gene = "EML4", genome)
+                                reads = res,
+                                gene = "EML4", genome)
         return(list(
                 clipped_reads = res,
                 last_EML4 = EML4,
@@ -583,9 +583,9 @@ introns_ALK_EML4 <- function(file, genome = "hg38") {
     ALK_tx_names <- mcols(ALK_txs)$tx_name
     ALK_intron <- suppressWarnings(
         intronsByTranscript(TxDb.Hsapiens.UCSC.hg38.knownGene, use.names =
-                                                           TRUE)[ALK_tx_names])
+                                                        TRUE)[ALK_tx_names])
     EML4_txs <- transcriptsBy(TxDb.Hsapiens.UCSC.hg38.knownGene,
-                              by = "gene")[["27436"]]
+                            by = "gene")[["27436"]]
     EML4_tx_names <- mcols(EML4_txs)$tx_name
     EML4_intron <- suppressWarnings(intronsByTranscript(
         TxDb.Hsapiens.UCSC.hg38.knownGene, use.names =TRUE)[EML4_tx_names])
@@ -603,7 +603,7 @@ introns_ALK_EML4 <- function(file, genome = "hg38") {
             start = breakpoint_ALK,end = breakpoint_ALK),strand = "*")
         res_ALK <-
             findOverlaps(break_gr_ALK,rev(ALK_intron$ENST00000389048.8),
-                         ignore.strand = TRUE)
+                    ignore.strand = TRUE)
         intron_ALK <- subjectHits(res_ALK)
         if (length(intron_ALK) == 0) {
             return("Breakpoint not located in intron of ALK")
@@ -615,8 +615,8 @@ introns_ALK_EML4 <- function(file, genome = "hg38") {
         start = breakpoint_EML4,end = breakpoint_EML4),strand = "*")
     res_EML4 <-
         findOverlaps(break_gr_EML4,
-                     EML4_intron$ENST00000318522.10,
-                     ignore.strand = TRUE)
+                    EML4_intron$ENST00000318522.10,
+                    ignore.strand = TRUE)
     intron_EML4 <- subjectHits(res_EML4)
     if (length(intron_EML4) == 0) {
         return("Breakpoint not located in intron of EML4")}
