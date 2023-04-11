@@ -19,6 +19,7 @@ ENST00000318522.10 for EML4.
 If the breakpoint is not located in introns of ALK or EML4,
 "Breakpoint not located in intron of ALK" or
 "Breakpoint not located in intron of EML4" is returned.
+If no EML4-ALK is detected “No EML4-ALK was detected” is returned.
 }
 \description{
 This function identifies the introns of ALK and EML4
