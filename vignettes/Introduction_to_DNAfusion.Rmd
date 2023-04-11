@@ -233,8 +233,8 @@ ALK_sequence(HCC827_result, genome = "hg38", basepairs = 20)
 ```
 
 ## `break_position()`
-This function identifies the genomic position in EML4 where the breakpoint has
-happened.
+This function identifies the genomic position in EML4 or ALK,
+where the breakpoint has happened.
 
 **Input:**
 $$\\[0.1in]$$
@@ -272,8 +272,8 @@ break_position(HCC827_result, genome = "hg38", gene = "EML4")
 ```
 
 ## `break_position_depth()`
-This function identifies the read depth at the basepair before the breakpoint in
-EML4.
+This function identifies the read depth at the basepair
+before the breakpoint in EML4 or ALK.
 
 **Input:**
 $$\\[0.1in]$$
@@ -421,6 +421,7 @@ ENST00000318522.10 for EML4.
 If the breakpoint is not located in introns of ALK or EML4,
 "Breakpoint not located in intron of ALK" or
 "Breakpoint not located in intron of EML4" is returned.
+If no EML4-ALK is detected “No EML4-ALK was detected” is returned.
 
 
 **Examples:**
@@ -431,6 +432,8 @@ introns_ALK_EML4(file=HCC827_bam,genome="hg38")
 ```
 
 ## `find_variants()`
+This function identifies the EML4-ALK variants as defined by 
+[Zhang et al. 2021](https://doi.org/10.1016/j.lungcan.2021.06.012 )
 
 **Input:**
 $$\\[0.1in]$$
@@ -448,9 +451,9 @@ $$\\[0.1in]$$
 
 **Output:** 
 
-A `dataframe`of the ALK-EML4 variant is returned.
+A `dataframe`of the EML4-ALK variant is returned.
 If no variant is detected, "No ALK-EML4 was detected" is returned.
-If the variant is not classified a `list` with identified introns with
+If the variant is not defined a `list` with identified introns with
 breakpoints is returned.
 If the breakpoint could not be identified in either of the genes a `list`
 with identified introns with breakpoints is returned.

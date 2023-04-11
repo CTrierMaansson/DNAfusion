@@ -563,6 +563,7 @@ EML4_ALK_analysis <-
 #' If the breakpoint is not located in introns of ALK or EML4,
 #' "Breakpoint not located in intron of ALK" or
 #' "Breakpoint not located in intron of EML4" is returned.
+#' If no EML4-ALK is detected “No EML4-ALK was detected” is returned.
 #' @examples
 #' H3122_bam <- system.file("extdata",
 #' "H3122_EML4.bam",
