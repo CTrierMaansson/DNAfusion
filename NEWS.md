@@ -1,5 +1,5 @@
 
-# DNAfusion 1.1.2 (5 April 2023)
+# DNAfusion 1.3.0 (5 April 2023)
 * Added introns_ALK_EML4()
 * Added find_variants()
 * Updated break_position_depth()
