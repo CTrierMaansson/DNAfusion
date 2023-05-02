@@ -48,8 +48,12 @@ This requires `build_vignettes = TRUE` during installation with github
 
 ## Citation
 
-Please cite package ‘DNAfusion’ in publications:
+If you use [DNAfusion](https://bioconductor.org/packages/release/bioc/html/DNAfusion.html) 
+in published research please cite:
 
-Christoffer Trier Maansson, Emma Roger Andersen, Maiken Parm Ulhoi, Peter Meldgaard, Boe Sandahl Sorensen (2022). DNAfusion: An R/Bioconductor package to identify gene fusions. R package version 1.2.0 
+1.  Christoffer Trier Maansson, Emma Roger Andersen, Maiken Parm Ulhoi, Peter Meldgaard, Boe Sandahl Sorensen (2022). DNAfusion: An R/Bioconductor package to identify gene fusions. R package version 1.2.0 <https://github.com/CTrierMaansson/DNAfusion>
 
-<https://github.com/CTrierMaansson/DNAfusion>
+2.  Maansson CT, Andersen ER, Ulhoi MP, Meldgaard P, Sorensen BS. “DNAfusion: an
+R/Bioconductor package for increased sensitivity of detecting gene fusions in liquid
+biopsies.” BMC Bioinformatics, 2023, 24.131,
+[doi:10.1186/s12859-023-05259-3](https://doi.org/10.1186/s12859-023-5259-3).
