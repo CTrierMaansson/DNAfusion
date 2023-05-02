@@ -1,5 +1,6 @@
 # DNAfusion <img src="vignettes/logo.png" width="150" align="right">
 [![platform](http://www.bioconductor.org/shields/availability/devel/DNAfusion.svg)](https://bioconductor.org/packages/release/bioc/html/DNAfusion.html#archives)
+[![](https://img.shields.io/badge/release%20version-3.4.2-green.svg)](https://bioconductor.org/packages/release/bioc/html/DNAfusion.html)
 [![Anaconda-Server Badge](
 https://anaconda.org/bioconda/bioconductor-dnafusion/badges/downloads.svg)](
 https://anaconda.org/bioconda/bioconductor-dnafusion/badges/downloads.svg)
