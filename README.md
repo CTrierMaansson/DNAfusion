@@ -55,5 +55,5 @@ in published research please cite:
 
 2.  Maansson CT, Andersen ER, Ulhoi MP, Meldgaard P, Sorensen BS. “DNAfusion: an
 R/Bioconductor package for increased sensitivity of detecting gene fusions in liquid
-biopsies.” BMC Bioinformatics, 2023, 24.131,
+biopsies.” BMC Bioinformatics, 2023, 24:131,
 [doi:10.1186/s12859-023-05259-3](https://doi.org/10.1186/s12859-023-5259-3).
