@@ -1,4 +1,7 @@
 # DNAfusion <img src="vignettes/logo.png" width="150" align="right">
+[![Anaconda-Server Badge](
+https://anaconda.org/bioconda/bioconductor-dnafusion/badges/downloads.svg)](
+https://anaconda.org/bioconda/bioconductor-dnafusion/badges/downloads.svg)
 
 An R/Bioconductor package to evaluate BAM files and identify genefusions, such as EML4-ALK
 
