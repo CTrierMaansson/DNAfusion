@@ -371,8 +371,8 @@ break_position <- function(reads, gene, genome = "hg38") {
 #' This function identifies the read depth at the basepair
 #' before the breakpoint in EML4 or ALK
 #'
-#' @importFrom bamsignals bamCoverage
 #' @importFrom IRanges IRanges
+#' @importFrom Rsamtools ScanBamParam scanBam
 #' @importFrom GenomicRanges GRanges
 #' @importFrom S4Vectors isEmpty
 #' @param file The name of the file which the data are to be read from.
@@ -439,16 +439,13 @@ break_position_depth <- function(file, reads, gene, genome = "hg38") {
         return(break_pos_tab)
     }
     stop_pos <- as.numeric(names(which.max(break_pos_tab)))
-    depth <- bamCoverage(
-        file,
-        GRanges(seqnames = "chr2",
-                IRanges(
-                    start = (stop_pos), end = stop_pos + 1
-                )),
-        mapqual = 0,
-        verbose = FALSE
-    )
-    return(max(depth[1]))
+    param <- ScanBamParam(what = "mapq",
+                          which = GRanges("chr2", IRanges(stop_pos,
+                                                          stop_pos)))
+    mapq_data <- scanBam(file = file, param = param)[[1]]$mapq
+    mapq_data <- mapq_data[!is.na(mapq_data)]
+    depth <- sum(mapq_data >= 0)
+    return(depth)
 }
 
 #' Complete EML4-ALK analysis
