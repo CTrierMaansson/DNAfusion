@@ -37,6 +37,6 @@ Imports:
     TxDb.Hsapiens.UCSC.hg38.knownGene,
     BiocGenerics
 Depends:
-  R (>= 4.2.0)
+  R (>= 4.4.0)
 BugReports: https://github.com/CTrierMaansson/DNAfusion/issues
 URL: https://github.com/CTrierMaansson/DNAfusion
