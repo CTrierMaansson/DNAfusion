@@ -440,8 +440,8 @@ break_position_depth <- function(file, reads, gene, genome = "hg38") {
     }
     stop_pos <- as.numeric(names(which.max(break_pos_tab)))
     param <- ScanBamParam(what = "mapq",
-                          which = GRanges("chr2", IRanges(stop_pos,
-                                                          stop_pos)))
+                            which = GRanges("chr2", IRanges(stop_pos,
+                                                            stop_pos)))
     mapq_data <- scanBam(file = file, param = param)[[1]]$mapq
     mapq_data <- mapq_data[!is.na(mapq_data)]
     depth <- sum(mapq_data >= 0)
