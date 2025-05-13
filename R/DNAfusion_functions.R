@@ -658,8 +658,8 @@ find_variants <- function(file, genome = "hg38") {
             return("No ALK-EML4 was detected")}
         else{
             return("Breakpoint not located in intron of ALK or EML4")}}
-    EML4intron <- introns_ALK_EML4(file = file, genome = genome)$intron_EML4
-    ALKintron <- introns_ALK_EML4(file = file, genome = genome)$intron_ALK
+    EML4intron <- introns$intron_EML4
+    ALKintron <- introns$intron_ALK
     if (any(is.na(ALKintron)) == TRUE) {
         return(list("Variant is not classified",EML4_intron = EML4intron,
                 ALK_intron = ALKintron))}
